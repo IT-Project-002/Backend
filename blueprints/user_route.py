@@ -3,8 +3,8 @@ import string
 
 from flask import Blueprint, request, redirect, render_template, url_for
 from DB_operation import db_operation
-from connect_db import user_db
-from connect_mail import mail
+from connections import user_db
+from connections import mail
 from instance import User
 from forms import RegistrationForm
 from flask_mail import Message
@@ -32,6 +32,7 @@ def login():
     return render_template('login.html')
 
 
+# not yet ready for connect
 @bp.route("/captcha")
 def get_captcha():
     letters = string.ascii_letters + string.digits

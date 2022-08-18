@@ -1,12 +1,13 @@
 from flask import Flask, render_template
 import config
 from blueprints import user_bp
-from connect_mail import mail
+from connections import mail
 
 app = Flask(__name__)
 app.config.from_object(config)
 app.register_blueprint(user_bp)
 mail.init_app(app)
+
 
 @app.route('/')
 def hello():
@@ -19,4 +20,4 @@ def user(name):
 
 
 if __name__ == '__main__':
-    app.run(debug=True,port=9000)
+    app.run(debug=True, port=9000)

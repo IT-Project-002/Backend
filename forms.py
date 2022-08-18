@@ -1,6 +1,6 @@
 from wtforms import Form, StringField, PasswordField, validators
 
-from connect_db import user_db
+from connections import user_db
 
 
 class RegistrationForm(Form):
