@@ -18,3 +18,11 @@
     check list
         - ensure your branch is ahead of the main branch
         - ensure squash your commit, make the git history clean
+
+### Create, Update Database Table
+
+    migrate = Migrate(app, db)
+    based on the models created, run command in terminal:
+        - flask db init
+        - flask db migrate
+        - flask db upgrade
