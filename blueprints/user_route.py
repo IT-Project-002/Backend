@@ -15,12 +15,6 @@ def register():
         return render_template("register.html")
     else:
         form = RegistrationForm(request.form)
-        db.session.execute('CREATE TABLE IF NOT EXISTS users ('
-                           'id SERIAL PRIMARY KEY,'
-                           'username varchar (150) NOT NULL,'
-                           'email varchar (50) NOT NULL,'
-                           'password varchar(50) NOT NULL,'
-                           'join_time timestamp NOT NULL);')
         if form.validate():
             email = form.email.data
             username = form.username.data
