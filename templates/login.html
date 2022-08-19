@@ -5,6 +5,7 @@
     <title>User Login</title>
 </head>
 <body>
+    {% if not user %}
         <form action="/user/login" method="post">
         <table>
             <tr>
@@ -20,11 +21,21 @@
                 </td>
             </tr>
             <tr>
+                {% for message in get_flashed_messages() %}
+                <div>{{ message }}</div>
+                {% endfor %}
+            </tr>
+
+            <tr>
                 <td>
                     <button type="submit">Log IN</button>
                 </td>
             </tr>
         </table>
     </form>
+    {% else %}
+            <h1>logged in</h1>
+    {% endif %}
+
 </body>
 </html>

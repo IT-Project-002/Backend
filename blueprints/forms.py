@@ -20,7 +20,7 @@ class RegistrationForm(wtforms.Form):
     #     email = self.email.data
     #     captcha_model = EmailCaptchaModel.query.filter_by(email=email).first()
     #     if not captcha_model or captcha_model.captcha.lower() != captcha.lower():
-    #         raise wtforms.ValidationError("邮箱验证码错误！")
+    #         raise wtforms.ValidationError("email verification failed！")
 
     def validate(self, **kwargs):
         check_validate = super(RegistrationForm, self).validate()
