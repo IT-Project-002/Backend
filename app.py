@@ -1,4 +1,6 @@
-from flask import Flask, render_template, session, g
+from datetime import timedelta
+
+from flask import Flask, session, g
 import config
 from blueprints import user_bp
 from connections import mail, db
@@ -23,6 +25,8 @@ def before_request():
         try:
             user = UserModel.query.get(user_id)
             setattr(g, "user", user)
+            session.permanent = True
+            app.permanent_session_lifetime = timedelta(minutes=1)
         except:
             g.user = None
 
