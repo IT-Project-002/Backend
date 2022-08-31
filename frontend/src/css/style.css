@@ -1,0 +1,72 @@
+/* Overall */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+/* Navigation bar */
+.navbar {
+  background-color: rgba(255, 255, 255, 0.3);
+  display: flex;
+  justify-content: space-between;
+  height: 70px;
+  box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.1);
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  margin: 10px 50px 75px 100px;
+}
+
+.navbar li:hover {
+  background-color: #f7f1e2;
+}
+
+/* Home */
+.img-list {
+  margin-left: 10rem;
+}
+
+.home {
+  width: 39px;
+  height: 39px;
+  margin-left: 18px;
+  margin-top: 0.5rem;
+}
+
+.icon {
+  width: 25px;
+  height: 24px;
+  margin-top: 0.8rem;
+  margin-left: 10px;
+}
+
+/* 旧版css
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #E6DED0;
+}
+
+.navbar li {
+    float: right;
+}
+
+.navbar li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navbar li a:hover {
+    background-color: #F7F1E2;
+} */

@@ -17,6 +17,7 @@
     check list
         - ensure your branch is ahead of the main branch
         - ensure squash your commit, make the git history clean
+        - python3 -m pyflakes (check python code quality)
 
 ### Create, Update Database Table
 

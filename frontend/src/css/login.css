@@ -1,0 +1,31 @@
+.container {
+  margin-top: 25%;
+  width: 550px;
+  max-width: 100%;
+  max-height: fit-content;
+}
+
+.link-wrapper {
+  left: 0%;
+  margin-top: 10%;
+  position: center;
+  width: 550px;
+  max-width: 100%;
+  min-height: 300px;
+}
+
+.title-wrapper {
+  margin-top: 20px;
+  line-height: 6px;
+  font-size: 30px;
+  margin-bottom: 5%;
+}
+
+a {
+  color: black;
+  line-height: 30px;
+}
+
+a:active {
+  color: darkred;
+}
