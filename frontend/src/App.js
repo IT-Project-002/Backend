@@ -16,10 +16,10 @@ function App() {
         <div>
           <Routes>
             <Route path="/" element={<Landing />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/like" element={<Likes />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/user/register" element={<Register />} />
+            <Route path="/user/login" element={<Login />} />
+            <Route path="/user/like" element={<Likes />} />
+            <Route path="/user/profile" element={<Profile />} />
           </Routes>
         </div>
         {/* <Navbar />
