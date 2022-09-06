@@ -5,7 +5,7 @@ import userIcon from "../icon/userIcon.png";
 
 function Registration() {
   const userRef = useRef();
-  const [name, setName] = useState("");
+  const [username, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [matchPwd, setMatchPwd] = useState("");
@@ -30,37 +30,46 @@ function Registration() {
   }, [password, matchPwd]);
 
   const handleSubmit = (e) => {
+    const userInfo = { username, email, password, matchPwd};
+
+    fetch('http://localhost:9000/user/register', {
+       headers : {
+            'Content-Type':'application/json'
+      },
+      method: 'POST',
+      mode: 'no-cors',
+      body: JSON.stringify(userInfo),
+    })
+    .then(response => response.json())
+    .then(userInfo => {
+      console.log('Success:', userInfo);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
     // prevent page being refresh
     e.preventDefault();
-    const userInfo = { name, email, password, matchPwd, bio };
-    console.log(userInfo);
   };
   // console.log(matchFocus,validMatch)
   return (
-    // <>
-    // {success ?(
-    //     <section>
-    //         <p>
-    //             <a href="#">Sign In</a>
-    //         </p>
-    //     </section>
-    // ):(
     <div className="x">
       <section className="register-container">
         <h1>New to this site?</h1>
         <h1>Let's get you started!</h1>
-        <form>
+        <form  method='post' onSubmit = {handleSubmit}>
           <input
             type="text"
+            htmlFor="name"
             className="form-control"
             ref={userRef}
             placeholder="Name"
-            value={name}
+            value={username}
             // save the input to userState
             onChange={(e) => setName(e.target.value)}
             required
           />
           <input
+            htmlFor="email"
             className="form-control"
             placeholder="Email"
             value={email}
@@ -68,6 +77,7 @@ function Registration() {
             required
           />
           <input
+            htmlFor="password"
             className="form-control"
             placeholder="Password"
             value={password}
@@ -75,6 +85,7 @@ function Registration() {
             required
           />
           <input
+            htmlFor="psssword_confirm"
             className="form-control"
             placeholder="Comfirmed Password"
             id="confirmPassword"
@@ -84,25 +95,8 @@ function Registration() {
             onFocus={() => setMatchFocus(true)}
             onBlur={() => setMatchFocus(false)}
           />
-          <textarea
-            type="text"
-            className="form-bio"
-            placeholder="Tell us a bit more about you…"
-            value={bio}
-            onChange={(e) => setBio(e.target.value)}
-          />
-        </form>
-        <button
-          disabled={
-            !name || !email || !password || !matchPwd || !validMatch
-              ? true
-              : false
-          }
-          onClick={handleSubmit}
-        >
-          {" "}
-          Sign me Up!{" "}
-        </button>
+        <button  type='submit'>  Sign me Up!  </button>
+      </form>
         <p>
           Already registered?
           <br />
