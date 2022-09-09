@@ -9,7 +9,7 @@ MAIL_PASSWORD = "pfrzxaqryvrvbncg"
 MAIL_DEFAULT_SENDER = "dilu0828@gmail.com"
 
 # DATABASE CONNECTION
-HOST_NAME = 'dev1-a.cja5xrvxpkbq.ap-southeast-2.rds.amazonaws.com'
+HOST_NAME = 'dev1-b.cja5xrvxpkbq.ap-southeast-2.rds.amazonaws.com'
 PORT = '5432'
 DATABASE = 'WebServ'
 USER_NAME = 'postgres'
