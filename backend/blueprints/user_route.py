@@ -25,9 +25,9 @@ def register():
             username = form.username.data
             password = form.password.data
             hash_password = generate_password_hash(password)
-            # user = UserModel(email=email, username=username, password=hash_password)
-            # db.session.add(user)
-            # db.session.commit()
+            user = UserModel(email=email, username=username, password=hash_password)
+            db.session.add(user)
+            db.session.commit()
             return redirect(url_for("user.login"))
         else:
             return redirect(url_for("user.register"))
