@@ -19,6 +19,16 @@ function Registration() {
 
   useEffect(() => {
     userRef.current.focus();
+    // fetch('http://localhost:9000/user/register', {
+    //   headers : {
+    //         'Content-Type':'application/json'
+    //   },
+    //   method: 'GET',
+    // })
+    // .then(response => JSON.stringify(response))
+    // .catch((error) => {
+    //   console.error('Error:', error);
+    // });
   }, []);
 
   useEffect(() => {
@@ -32,15 +42,15 @@ function Registration() {
   const handleSubmit = (e) => {
     const userInfo = { username, email, password, matchPwd};
 
-    fetch('http://localhost:9000/user/register', {
-       headers : {
+    fetch('http://localhost:9000/user/register',{
+      headers : {
             'Content-Type':'application/json'
       },
       method: 'POST',
       mode: 'no-cors',
-      body: JSON.stringify(userInfo),
+      body: JSON.stringify(userInfo)
     })
-    .then(response => response.json())
+    .then(response => JSON.stringify(response))
     .then(userInfo => {
       console.log('Success:', userInfo);
     })
@@ -101,7 +111,7 @@ function Registration() {
           Already registered?
           <br />
           <span className="line">
-            <a href="/login">Sign In</a>
+            <a href="/user/login">Sign In</a>
           </span>
         </p>
       </section>

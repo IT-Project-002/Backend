@@ -7,7 +7,7 @@ function Landing() {
         Haven't Sign Up?
         <br />
         <span className="line">
-          <a href="/register">Sign Up</a>
+          <a href="/user/register">Sign Up</a>
         </span>
       </p>
     </div>

@@ -23,3 +23,4 @@ SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 # session and cookie
 SECRET_KEY = "sdfsadfskrwerfj1233453345"
+CORS_HEADERS = 'Content-Type'
