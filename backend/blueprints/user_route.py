@@ -12,22 +12,23 @@ bp = Blueprint("user", __name__, url_prefix='/user')
 @bp.route("/register", methods=['GET', 'POST'])
 def register():
     if request.method == 'GET':
-        return {}
+        return {1:'register'}
     else:
         print(json.loads(request.data))
         print(type(json.loads(request.data)))
         print(type(request.data))
         form = RegistrationForm.from_json(json.loads(request.data))
         if True:
-        # if form.validate():
+            # if form.validate():
             print("form validate")
             email = form.email.data
             username = form.username.data
             password = form.password.data
             hash_password = generate_password_hash(password)
-            user = UserModel(email=email, username=username, password=hash_password)
-            db.session.add(user)
-            db.session.commit()
+            # user = UserModel(email=email, username=username, password=hash_password)
+            # db.session.add(user)
+            # db.session.commit()
+            # print("done")
             return redirect(url_for("user.login"))
         else:
             return redirect(url_for("user.register"))
@@ -36,7 +37,7 @@ def register():
 @bp.route("/login", methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
-        return {}
+        return {1:'login'}
     else:
         print(request)
         form = LoginForm(request.form)

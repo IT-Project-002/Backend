@@ -2,9 +2,11 @@ import React, { useRef, useState, useEffect } from "react";
 import "../css/register.css";
 import "../css/form.css";
 import userIcon from "../icon/userIcon.png";
+import {useNavigate} from "react-router-dom";
 
 function Registration() {
   const userRef = useRef();
+  const history = useNavigate();
   const [username, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -44,13 +46,17 @@ function Registration() {
 
     fetch('http://localhost:9000/user/register',{
       headers : {
-            'Content-Type':'application/json'
+            'Content-Type':'application/json',
+            'Access-Control-Allow-Origin': '*'
       },
       method: 'POST',
-      mode: 'no-cors',
+      mode: 'cors',
       body: JSON.stringify(userInfo)
     })
-    .then(response => JSON.stringify(response))
+    .then(response => {
+      console.log('hi:', response);
+      history('/user/login');
+    })
     .then(userInfo => {
       console.log('Success:', userInfo);
     })
