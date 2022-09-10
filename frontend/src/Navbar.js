@@ -7,8 +7,8 @@ import "./css/style.css";
 export default function Navbar() {
   return (
     <nav className="navbar">
-      <Link to="/" className="home">
-        <img className="home" src={home} alt="home"></img>
+      <Link to="/">
+        <img className="home-icon" src={home} alt="home"></img>
       </Link>
       <ul>
         <CustomLink to="/profile">

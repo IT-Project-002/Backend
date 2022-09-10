@@ -1,38 +1,52 @@
-body {
-  background-color: #fcf8f4;
-  background-image: url(../image/background.png);
-  min-width: 100%;
-  min-height: 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
+/* ===================================================== */
+/* Grid template */
+
+.main {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-areas:
+    "left right";
+  grid-gap: 10px;
+  padding: 10px;
+  text-align: left;
 }
 
-.container {
-  display: grid;
-  grid-template-columns: 30% 70%;
+/* ===================================================== */
+/* Responsive design */
+
+@media screen and (max-width:800px) {
+  .main {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "left";
+    grid-gap: 10px;
+    padding: 10px;
+    text-align: left;
+  }
 }
+
+/* ===================================================== */
+/* Left section: Register */
 
 .register-container {
-  left: 0%;
-  margin-top: 11%;
-  position: center;
-  width: 550px;
-  max-width: 100%;
-  min-height: 480px;
+  grid-area: left;
+  text-align: center;
 }
 
-.tag-container {
-  float: right;
-  border: solid black;
-  width: 70%;
-  height: 280px;
-  /* background-image: url(../image/tagbubbles.png); */
+.register-container ul {
+  list-style: none;
 }
 
-h1 {
-  margin-left: 15%;
-  line-height: 6px;
-  text-align: left;
-  font-size: 30px;
-  margin-bottom: 5%;
+.register-container li {
+  margin: 4vh;
+}
+
+/* ===================================================== */
+/* Right section: Bubble */
+
+.bubble-container {
+  grid-area: right;
 }

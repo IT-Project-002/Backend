@@ -41,3 +41,10 @@ input::-webkit-input-placeholder {
 .form-control {
   text-indent: 40px;
 }
+
+.instructions {
+  font-size: 0.75rem;
+  position: relative;
+  color: firebrick;
+  font-weight: bold;
+}
