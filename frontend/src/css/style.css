@@ -18,12 +18,10 @@ body {
   background-image: url(../image/background.png);
   background-size: cover;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   font-family: Ariel;
   text-align: left;
 }
-
-/* ===================================================== */
-
 
 /* ===================================================== */
 /* Navigation bar & Icons */
@@ -52,16 +50,16 @@ body {
 /* Icon */
 .icon {
   width: 25px;
-  height: 24px;
+  height: 25px;
   margin-top: 0.8rem;
-  margin-left: 10px;
+  margin-left: 1.3rem;
 }
 
 .home-icon {
-  width: 39px;
-  height: 39px;
-  margin-left: 18px;
-  margin-top: 0.5rem;
+  width: 25px;
+  height: 25px;
+  margin-top: 1.3rem;
+  margin-left: 1.8rem;
 }
 
 /* ===================================================== */
