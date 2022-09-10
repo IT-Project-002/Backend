@@ -1,0 +1,58 @@
+/* ===================================================== */
+/* Grid template */
+
+.main {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-areas:
+    "left right";
+  grid-gap: 10px;
+  padding: 10px;
+  text-align: left;
+}
+
+/* ===================================================== */
+/* Responsive design */
+
+@media screen and (max-width:800px) {
+  .main {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "left"
+      "right";
+    grid-gap: 10px;
+    padding: 10px;
+    text-align: left;
+  }
+}
+
+/* ===================================================== */
+/* Left section: Login */
+
+.login-container {
+  grid-area: left;
+  text-align: center;
+}
+
+.login-container ul {
+  list-style-type: none;
+}
+
+.login-container li {
+  margin: 5vh;
+}
+
+/* ===================================================== */
+/* Right section: Today */
+
+.today-container {
+  grid-area: right;
+  text-align: center;
+}
+
+.today-container img {
+  max-width: 65%;
+}

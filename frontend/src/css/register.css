@@ -1,0 +1,52 @@
+/* ===================================================== */
+/* Grid template */
+
+.main {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-areas:
+    "left right";
+  grid-gap: 10px;
+  padding: 10px;
+  text-align: left;
+}
+
+/* ===================================================== */
+/* Responsive design */
+
+@media screen and (max-width:800px) {
+  .main {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "left";
+    grid-gap: 10px;
+    padding: 10px;
+    text-align: left;
+  }
+}
+
+/* ===================================================== */
+/* Left section: Register */
+
+.register-container {
+  grid-area: left;
+  text-align: center;
+}
+
+.register-container ul {
+  list-style: none;
+}
+
+.register-container li {
+  margin: 4vh;
+}
+
+/* ===================================================== */
+/* Right section: Bubble */
+
+.bubble-container {
+  grid-area: right;
+}

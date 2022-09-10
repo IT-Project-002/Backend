@@ -9,9 +9,9 @@ MAIL_PASSWORD = "pfrzxaqryvrvbncg"
 MAIL_DEFAULT_SENDER = "dilu0828@gmail.com"
 
 # DATABASE CONNECTION
-HOST_NAME = 'it-project-002.cja5xrvxpkbq.ap-southeast-2.rds.amazonaws.com'
+HOST_NAME = 'dev1-b.cja5xrvxpkbq.ap-southeast-2.rds.amazonaws.com'
 PORT = '5432'
-DATABASE = 'user_db'
+DATABASE = 'WebServ'
 USER_NAME = 'postgres'
 PASSWORD = 'ld20010828'
 
@@ -23,3 +23,4 @@ SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 # session and cookie
 SECRET_KEY = "sdfsadfskrwerfj1233453345"
+CORS_HEADERS = 'Content-Type'

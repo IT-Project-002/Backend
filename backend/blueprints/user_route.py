@@ -1,21 +1,26 @@
 from flask import Blueprint, render_template, redirect, url_for, request, session, flash
-
 from blueprints.forms import RegistrationForm, LoginForm
 from connections import mail, db
 from flask_mail import Message
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import UserModel
-
+import json
+import wtforms_json
 bp = Blueprint("user", __name__, url_prefix='/user')
 
 
 @bp.route("/register", methods=['GET', 'POST'])
 def register():
     if request.method == 'GET':
-        return render_template("register.html")
+        return {1:'register'}
     else:
-        form = RegistrationForm(request.form)
-        if form.validate():
+        print(json.loads(request.data))
+        print(type(json.loads(request.data)))
+        print(type(request.data))
+        form = RegistrationForm.from_json(json.loads(request.data))
+        if True:
+            # if form.validate():
+            print("form validate")
             email = form.email.data
             username = form.username.data
             password = form.password.data
@@ -23,6 +28,7 @@ def register():
             user = UserModel(email=email, username=username, password=hash_password)
             db.session.add(user)
             db.session.commit()
+            # print("done")
             return redirect(url_for("user.login"))
         else:
             return redirect(url_for("user.register"))
@@ -31,8 +37,9 @@ def register():
 @bp.route("/login", methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
-        return render_template("login.html")
+        return {1:'login'}
     else:
+        print(request)
         form = LoginForm(request.form)
         if form.validate():
             email = form.email.data

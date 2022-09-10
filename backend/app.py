@@ -1,6 +1,6 @@
 from datetime import timedelta
-
 from flask import Flask, session, g
+from flask_cors import CORS
 import config
 from blueprints import user_bp
 from connections import mail, db
@@ -9,6 +9,7 @@ from flask_migrate import Migrate
 from models import UserModel
 
 app = Flask(__name__)
+cors = CORS(app)
 app.config.from_object(config)
 db.init_app(app)
 mail.init_app(app)
