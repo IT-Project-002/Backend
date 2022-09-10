@@ -1,8 +1,10 @@
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
+import "./css/style.css";
 import home from "./icon/Home.png";
 import heart from "./icon/Heart.png";
 import profile from "./icon/Profile.png";
-import "./css/style.css";
+import market from "./icon/market.png";
+
 
 export default function Navbar() {
   return (
@@ -16,6 +18,9 @@ export default function Navbar() {
         </CustomLink>
         <CustomLink to="/like">
           <img className="icon" src={heart} alt="heart"></img>
+        </CustomLink>
+        <CustomLink to="/market">
+          <img className="icon" src={market} alt="market"></img>
         </CustomLink>
       </ul>
     </nav>

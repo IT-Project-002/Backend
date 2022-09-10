@@ -41,7 +41,7 @@
 }
 
 .register-container li {
-  margin: 4vh;
+  margin: 1vh;
 }
 
 /* ===================================================== */
@@ -50,3 +50,7 @@
 .bubble-container {
   grid-area: right;
 }
+
+/* .bubble-container img {
+  max-width: 100px;
+} */

@@ -44,28 +44,23 @@ function Login(){
         <ul>
           <li><h2>Welcome Back!</h2></li>
             <form>
-                <input
+              <li><input
                     className="form-control"
                     placeholder="Email"
                     value={email}
                     onChange = {(e) => setEmail(e.target.value)}
                     required
-                />
-                <input
+              /></li>
+              <li>{!isShown ? <AiFillEye className="eye-icon" onClick={togglePassword}/> :<AiFillEyeInvisible className="eye-icon" onClick={togglePassword}/>}<input
                     type={isShown ? "text" : "password"}
                     className="form-control"
                     placeholder="Password"
                     value={password}
                     onChange = {(e) => setPassword(e.target.value)}
                     required
-                />
-                {/* eye icon */}
-                <div className="icon-pwd" >
-                    {
-                      !isShown ? <AiFillEye onClick={togglePassword}/> :<AiFillEyeInvisible onClick={togglePassword}/>
-                    }                    
-                </div>
-                <button onClick={handleSubmit}> Log in </button>
+              />
+              </li>                 
+                <li><button onClick={handleSubmit}> Log in </button></li>
             </form>
             <li><a href="/register">Haven't Sign up?</a></li>
             <li><a href="/profile">Log in</a></li>  
