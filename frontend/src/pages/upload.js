@@ -1,7 +1,31 @@
 import "../css/upload.css";
 import sample from "../image/item-sample.png";
+import Select from "react-select";
+import React, {useState} from "react";
 
 export default function Upload() {
+    const options = [
+        { value: "textiles", label: "Textiles" }, 
+        { value: "ceramics", label: "Ceramics" },
+        { value: "glass", label: "Glass" },
+        { value: "woodwork", label: "Woodwork" },
+        { value: "jewelry", label: "Jewelry" },
+        { value: "leather", label: "Leather" },
+        { value: "painting", label: "Painting" },
+        { value: "others", label: "Others" },
+    ]
+
+    const [itemName, setItemName] = useState("");
+    const [price, setPrice] = useState("");
+    const [describtion, setDescribtion] = useState("");
+    const [tags, setTags] = useState([]);
+
+    const handleSubmit = (e) => {
+        // prevent page being refresh
+        e.preventDefault();
+        const itemInfo = {itemName, price, describtion, tags}
+        console.log(itemInfo)
+    }
     return (
         <div className="main">
             <div className="preview-container">
@@ -14,19 +38,40 @@ export default function Upload() {
                 <button className="button">Upload more photos</button>
             </div>
             <div className="fillin-container">
-                <form>
+                <form method='post' onSubmit = {handleSubmit}>
                     <h2>Name your cute work?</h2>
-                    <input type="text"></input>
-                    <h2>Price your work if you want :)</h2>
-                    <input type="text"></input>
+                    <input type="text"
+                        value={itemName}
+                        onChange={(e) => setItemName(e.target.value)}
+                        required
+                    />
+                    <h2>Price your work?</h2>
+                    <input type="number"
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
+                        required
+                    />                    
                     <h2>Can you precisely describe your work?</h2>
-                    <input type="text"></input>
-                    <h2>What’s your journey creating this work?</h2>
-                    <input type="text"></input>
+                    <input type="text"
+                        value={describtion}
+                        onChange={(e) => setDescribtion(e.target.value)}
+                        required
+                    />
+                    {/* tag selection */}
                     <h2>Tag your work with its category.</h2>
-                    <button className="tag">Mug</button>
-                    <button className="tag">Clothing</button>
-                    <button className="button">Save Changes</button>
+                    <Select className="tag"
+                        isMulti
+                        placeholder="Tell us what you interested in…"
+                        options={options}
+                        onChange={(item) => setTags(item)}
+                        isClearable={true}
+                        isSearchable={true}
+                        isDisabled={false}
+                        isLoading={false}
+                        isRtl={false}
+                        closeMenuOnSelect={false}
+                    />  
+                    <button className="button" type='submit'>Save Changes</button>
                 </form>
             </div>
         </div>
