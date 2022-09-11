@@ -20,6 +20,13 @@ export default function Upload() {
     const [describtion, setDescribtion] = useState("");
     const [tags, setTags] = useState([]);
 
+    /* Image */
+    const [file, setFile] = useState();
+    function handleChange(e) {
+        console.log(e.target.files);
+        setFile(URL.createObjectURL(e.target.files[0]));
+    }
+
     const handleSubmit = (e) => {
         // prevent page being refresh
         e.preventDefault();
@@ -34,7 +41,8 @@ export default function Upload() {
                 <img src={sample} alt="sample"></img>
             </div>
             <div className="upload-container">
-                <img src={sample} alt="sample"></img>
+                <input type="file" onChange={handleChange} multiple=""/>
+                <img src={file} alt="file"/>
                 <button className="button">Upload more photos</button>
             </div>
             <div className="fillin-container">
