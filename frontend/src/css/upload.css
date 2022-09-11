@@ -1,0 +1,61 @@
+/* ===================================================== */
+/* Grid template */
+
+.main {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    grid-template-areas:
+      "left middle right";
+    grid-gap: 0px;
+    padding: 10px;
+    text-align: left;
+  }
+
+
+/* ===================================================== */
+/* Left section: Preview images */
+
+.preview-container {
+    grid-area: left;
+}
+
+.preview-container img {
+    max-width: 70%;
+}
+
+/* ===================================================== */
+/* Middle section: Upload image */
+
+.upload-container {
+    grid-area: middle;
+}
+
+.upload-container img {
+    max-width: 70%;
+}
+
+
+/* ===================================================== */
+/* Right section: Fill in information */
+
+.fillin-container {
+    grid-area: right;
+}
+
+.fillin-container input {
+    width: 80%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #000000;
+}
+
+.fillin-container input[text] {
+    text-align: center;
+}
+
+.tag {
+    border: none;
+    border-radius: 5px;
+    background-color: #BCB4A7;   
+}

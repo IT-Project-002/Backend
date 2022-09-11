@@ -5,6 +5,7 @@ import Login from "../src/pages/login";
 import Profile from "./pages/profile";
 import Likes from "./pages/like";
 import Market from "./pages/market";
+import Upload from "./pages/upload";
 import Navbar from "./Navbar";
 import Footer from "./footer";
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
@@ -21,6 +22,7 @@ function App() {
             <Route path="/user/like" element={<Likes />} />
             <Route path="/user/profile" element={<Profile />} />
             <Route path="/user/market" element={<Market />} />
+            <Route path="/user/upload" element={<Upload />} />
           </Routes>
         </div>
         {/* <Footer /> */}

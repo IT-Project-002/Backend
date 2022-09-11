@@ -36,6 +36,12 @@ export default function Navbar() {
         <CustomLink to="/user/market">
           <img className="icon" src={market} alt="market"></img>
         </CustomLink>
+        <CustomLink to="/user/upload">
+          <p>Upload</p>
+        </CustomLink>
+        <CustomLink to="/">
+          <p>Log Out</p>
+        </CustomLink>
       </ul>
       {/* menu */}
       {/* <ul className={isShown? "menu-list" : "offscreen"}>
