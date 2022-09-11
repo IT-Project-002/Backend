@@ -23,6 +23,11 @@ body {
   text-align: left;
 }
 
+/* redirect link */
+a {
+  color: black;
+}
+
 /* ===================================================== */
 /* Navigation bar & Icons */
 
@@ -60,6 +65,18 @@ body {
   height: 25px;
   margin-top: 1.3rem;
   margin-left: 1.8rem;
+}
+
+/* menu */
+.menu {
+  /* background-color: white; */
+  left: 0;
+}
+
+.menu-list {
+  height: 100px;
+  flex-flow: column;
+  place-items: left;
 }
 
 /* ===================================================== */

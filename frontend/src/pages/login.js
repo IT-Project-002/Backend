@@ -1,13 +1,21 @@
-import {useState} from 'react'
+import {useState, useEffect, useRef} from 'react'
+import {useNavigate} from "react-router-dom";
 import "../css/login.css";
 import "../css/form.css";
 import d1 from "../image/drawing.png";
-import {AiFillEyeInvisible, AiFillEye} from "react-icons/ai";
+import {AiFillEyeInvisible, AiFillEye, AiTwotoneMail} from "react-icons/ai";
 
 function Login(){
+  const history = useNavigate();
+  const userRef = useRef();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isShown, setIsSHown] = useState(false);
+
+  // setting a focus on Email input when the component loads
+  useEffect(() => {
+    userRef.current.focus();
+  }, [])
 
   // show password or not
   const togglePassword = () => {
@@ -16,8 +24,12 @@ function Login(){
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const userInfo = {email, password};
-    console.log(userInfo)
+    if (email && password){
+      const userInfo = {email, password};
+      history("/user/market")
+      console.log(userInfo)
+    }
+
 
     // fetch('http://localhost:9000/user/login', {
     //     headers : {
@@ -37,15 +49,16 @@ function Login(){
     // prevent page being refresh
   };  
 
-
   return(
     <div className="main">
       <div className="login-container">
         <ul>
           <li><h2>Welcome Back!</h2></li>
             <form>
-              <li><input
+              <li>< AiTwotoneMail className="eye-icon"/><input
+                    type="email"
                     className="form-control"
+                    ref={userRef}
                     placeholder="Email"
                     value={email}
                     onChange = {(e) => setEmail(e.target.value)}
@@ -60,10 +73,9 @@ function Login(){
                     required
               />
               </li>                 
-                <li><button onClick={handleSubmit}> Log in </button></li>
+                <li><button className='button' onClick={handleSubmit}> Log in </button></li>
             </form>
-            <li><a href="/register">Haven't Sign up?</a></li>
-            <li><a href="/profile">Log in</a></li>  
+            <li><a href="/user/register">Haven't Sign up?</a></li>
           </ul> 
       </div>
       <div className="today-container">

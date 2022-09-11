@@ -4,10 +4,10 @@ import "../css/register.css";
 import "../css/form.css";
 import female1 from "../profile/female1.png";
 import female2 from "../profile/female2.png";
+import female3 from "../profile/female3.png";
 import male1 from "../profile/male1.png";
 import male2 from "../profile/male2.png";
 import male3 from "../profile/male3.png";
-import male4 from "../profile/male4.png";
 
 const NAME_REG = new RegExp(/^[A-Z0-9][A-z0-9-_]{3,14}$/i);
 const EMAIL_REG = new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i);
@@ -31,10 +31,13 @@ function Registration() {
   
   const [bio, setBio] = useState("");
 
+  const [avatar, setAvatar] = useState("")
+
   // setting a focus on username input when the component loads
   useEffect(() => {
     userRef.current.focus();
   }, [])
+
   // Username validation
   useEffect(() => {
     setvalidName(NAME_REG.test(username))
@@ -51,52 +54,41 @@ function Registration() {
     setValidMatch(password === matchPwd);
   }, [password, matchPwd])
 
+  // Avatar selection
+  const handleClick = event => {
+    //refers to the image element
+    // console.log(event.target);
+    setAvatar(event.target.alt);
+  };
 
   const handleSubmit = (e) => {
-    const userInfo = { username, email, password, matchPwd};
-
-    fetch('http://localhost:9000/user/register',{
-      headers : {
-            'Content-Type':'application/json',
-            'Access-Control-Allow-Origin': '*'
-      },
-      method: 'POST',
-      mode: 'cors',
-      body: JSON.stringify(userInfo)
-    })
-    .then(response => {
-      console.log('hi:', response);
-      history('/user/login');
-    })
-    .then(userInfo => {
-      console.log('Success:', userInfo);
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
     // prevent page being refresh
     e.preventDefault();
-
+    
     // check form validation
     if(validName && validEmail && validPwd && validPwd){
-      const userInfo = { username, email, password, matchPwd, bio};
+      const userInfo = { username, email, password, matchPwd, bio, avatar};
       console.log(userInfo);
-      history('/login');
-      // fetch('http://localhost:9000/user/register', {
-      //   headers : {
-      //        'Content-Type':'application/json'
-      //  },
-      //  method: 'POST',
-      //  mode: 'no-cors',
-      //  body: JSON.stringify(userInfo),
-      // })
-      // .then(response => response.json())
-      // .then(userInfo => {
-      //   console.log('Success:', userInfo);
-      // })
-      // .catch((error) => {
-      //  console.error('Error:', error);
-      // });
+      history('/user/login');
+      fetch('http://localhost:9000/user/register',{
+        headers : {
+              'Content-Type':'application/json',
+              'Access-Control-Allow-Origin': '*'
+        },
+        method: 'POST',
+        mode: 'cors',
+        body: JSON.stringify(userInfo)
+      })
+      .then(response => {
+        console.log('hi:', response);
+        history('/user/login');
+      })
+      .then(userInfo => {
+        console.log('Success:', userInfo);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
     };
   }
 
@@ -146,6 +138,7 @@ function Registration() {
               Must include uppercase, lowercase letters and a number.<br />            
             </p>   
             <li><input
+              type = "password"
               className="form-control"
               placeholder="Comfirmed Password"
               value={matchPwd}
@@ -162,24 +155,21 @@ function Registration() {
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
             /></li>
-
-            {/* Avatar selection */}
-            <img className="avatar" scr={female1} alt=""/>
-            {/* Load avatar images from backend */}
-
-            <li><button type='submit'>  Sign me Up!  </button></li>
+            <li><button className="button" type='submit'>  Sign me Up!  </button></li>
           </form>
-          <li><p>Already registered?</p></li>
-          <li><a href="/login">Sign In</a></li>
+          <li><a href="/user/login" className="button">Already registered?</a></li>
         </ul>
       </div>
+      {/* Avatar selection */}
       <div className="bubble-container">
-        <img src={male1} alt="male1"></img>
-        <img src={female2} alt="female2"></img>
-        <img src={female1} alt="female1"></img>
-        <img src={male2} alt="male2"></img>
-        <img src={male3} alt="male3"></img>
-        <img src={male4} alt="male4"></img>
+        <h2>Pick your profile picture…</h2>
+        <img src={female1} alt="female1" className = "avatar2" onClick={handleClick}></img>
+        <img src={female2} alt="female2" className="avatar1" onClick={handleClick}></img>
+        <img src={female3} alt="female3" className = "avatar2" onClick={handleClick}></img>
+        <img src={male1} alt="male1" className = "avatar1" onClick={handleClick}></img>
+        <img src={male2} alt="male2" className = "avatar2" onClick={handleClick}></img>
+        <img src={male3} alt="male3" className = "avatar1" onClick={handleClick}></img>
+        <h2>Now…Let's set up your own space!</h2>
       </div>
     </div>
   );
