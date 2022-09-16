@@ -1,5 +1,4 @@
 import "../css/upload.css";
-import sample from "../image/item-sample.png";
 import Select from "react-select";
 import React, {useState} from "react";
 
@@ -21,29 +20,59 @@ export default function Upload() {
     const [tags, setTags] = useState([]);
 
     /* Image */
-    const [file, setFile] = useState();
-    function handleChange(e) {
-        console.log(e.target.files);
-        setFile(URL.createObjectURL(e.target.files[0]));
-    }
+    const [selectedImages, setSelectedImages] = useState([]);
+
+    const onSelectFile = (event) => {
+      const selectedFiles = event.target.files;
+      const selectedFilesArray = Array.from(selectedFiles);
+  
+      const imagesArray = selectedFilesArray.map((file) => {
+        return URL.createObjectURL(file);
+      });
+      // save the previous selected images
+      setSelectedImages((previousImages) => previousImages.concat(imagesArray));
+      // FOR BUG IN CHROME
+      event.target.value = "";
+    };
+
+    const deleteImage = (image) => {
+        setSelectedImages(selectedImages.filter((e) => e !== image));
+        URL.revokeObjectURL(image);
+    } 
 
     const handleSubmit = (e) => {
         // prevent page being refresh
         e.preventDefault();
-        const itemInfo = {itemName, price, describtion, tags}
+        const itemInfo = {itemName, price, describtion, tags, selectedImages}
         console.log(itemInfo)
     }
+
     return (
         <div className="layout-upload">
-            <div className="preview-container">
+            {/* <div className="preview-container">
                 <img src={sample} alt="sample"></img>
                 <img src={sample} alt="sample"></img>
                 <img src={sample} alt="sample"></img>
-            </div>
+            </div> */}
+            {/* Image uploader*/}
             <div className="upload-container">
-                <input type="file" onChange={handleChange} multiple=""/>
-                <img src={file} alt="file"/>
-                <button className="button">Upload more photos</button>
+                <label>
+                    <input className= "upload-input" type="file"  name="itemImages" multiple accept="image/*" onChange={onSelectFile}/>
+                </label>
+                <p>Upload more photos</p>
+            </div>   
+            {/* Image preview*/}
+            <div className="preview-container">
+                {selectedImages &&
+                    selectedImages.map((image, index) => {
+                        return(
+                            <div key={image} >
+                            <button className="delete-button" onClick={() => deleteImage(image)}> X </button>
+                            <img  src={image} alt="file"/>
+                            </div>
+                        )
+                    })
+                }
             </div>
             <div className="fillin-container">
                 <form method='post' onSubmit = {handleSubmit}>
