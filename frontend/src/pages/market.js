@@ -1,11 +1,11 @@
 import "../css/market.css";
-import sample from "../image/item-sample.png";
+// import sample from "../image/item-sample.png";
 
 export default function Market() {
   return (
     <div className="main">
       <div className="item-img-container">
-          <img src={sample} alt="sample"></img>
+          {/* <img src={sample} alt="sample"></img> */}
       </div>
       <div className="item-desc-container">
         <ul>

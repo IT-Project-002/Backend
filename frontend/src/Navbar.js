@@ -15,9 +15,6 @@ export default function Navbar() {
   const toggleMenu = () => {
     console.log(location.pathname)
     console.log(isShown)
-    // if(location.pathname !== "/"){
-    //   setIsSHown((isShown) => isShown);
-    // }
     setIsSHown((isShown) => !isShown);
   };
 
@@ -43,20 +40,6 @@ export default function Navbar() {
           <p>Log Out</p>
         </CustomLink>
       </ul>
-      {/* menu */}
-      {/* <ul className={isShown? "menu-list" : "offscreen"}>
-        <li>Username</li>
-        <CustomLink to="/user/profile">
-          My Profile
-        </CustomLink>
-        <CustomLink to="/user/market">
-          My Market
-        </CustomLink>
-        <li>Sign Out</li>
-        <li>Handicraft Website</li>
-        <li>About This Website</li>
-        <li>About Us</li>
-      </ul> */}
     </nav>
     
   );

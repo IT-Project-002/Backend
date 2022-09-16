@@ -6,11 +6,11 @@
     display: grid;
     grid-template-columns: 1fr 2fr 2fr;
     grid-template-areas:
-      "left middle right";
+        "left middle right";
     grid-gap: 0px;
     padding: 10px;
     text-align: left;
-  }
+}
 
 
 /* ===================================================== */
@@ -18,10 +18,26 @@
 
 .preview-container {
     grid-area: left;
+    float: left;
 }
 
 .preview-container img {
-    max-width: 70%;
+    width: 70%;
+    height: 70%;
+    margin: 4%;
+    border-radius: 20px;
+    box-shadow: 0px 1px 6px 5px rgba(0, 0, 0, 0.2);
+}
+
+.delete-button {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    border: transparent;
+    border-radius: 50%;
+    background-color: #D2CBC1;
+    z-index: 100;
+
 }
 
 /* ===================================================== */
@@ -29,12 +45,31 @@
 
 .upload-container {
     grid-area: middle;
+    text-align: center;
 }
 
 .upload-container img {
     max-width: 70%;
 }
 
+label {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 50%;
+    border-color: transparent;
+    width: 20rem;
+    height: 20rem;
+    background: URL('../image/addImage.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+.upload-input {
+    display: none;
+}
 
 /* ===================================================== */
 /* Right section: Fill in information */
@@ -57,5 +92,5 @@
 .tag {
     border: none;
     border-radius: 5px;
-    background-color: #BCB4A7;   
+    background-color: #BCB4A7;
 }
