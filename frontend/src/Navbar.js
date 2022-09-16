@@ -4,7 +4,8 @@ import "./css/style.css";
 import home from "./icon/Home.png";
 import heart from "./icon/Heart.png";
 import profile from "./icon/Profile.png";
-import market from "./icon/market.png";
+import market from "./icon/Market.png";
+import logout from "./icon/Logout.png";
 
 
 export default function Navbar() {
@@ -27,6 +28,9 @@ export default function Navbar() {
         <img className="home-icon" src={home} alt="home" onClick={toggleMenu}></img>
       </Link>
       <ul>
+      <CustomLink to="/user/register">
+          <p>Register</p>
+        </CustomLink>
         <CustomLink to="/user/profile">
           <img className="icon" src={profile} alt="profile"></img>
         </CustomLink>
@@ -39,8 +43,11 @@ export default function Navbar() {
         <CustomLink to="/user/upload">
           <p>Upload</p>
         </CustomLink>
+        <CustomLink to="/user/about">
+          <p>About</p>
+        </CustomLink>
         <CustomLink to="/">
-          <p>Log Out</p>
+          <img className="icon" src={logout} alt="logout"></img>
         </CustomLink>
       </ul>
       {/* menu */}

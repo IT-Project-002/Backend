@@ -93,7 +93,7 @@ function Registration() {
   }
 
   return (
-    <div className="main">
+    <div className="layout-register">
       <div className="register-container">
         <ul>
           <li><h1>New to this site?</h1></li>

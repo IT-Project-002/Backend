@@ -1,0 +1,78 @@
+/* ===================================================== */
+/* Grid template */
+
+.layout-profile {
+    grid-area: main;
+    margin-top: 9vh;
+    padding: 1.5vw;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "profile-photo"
+      "edit";
+    text-align: center;
+}
+
+/* ===================================================== */
+/* Profile Photo */
+
+.profile-photo-container {
+  grid-area: profile-photo;
+}
+
+.profile-photo-container img {
+  width: 20%;
+  position: fixed;
+}
+
+
+
+/* ===================================================== */
+/* Edit */
+
+.edit-container {
+  margin-top: 0;
+  grid-area: edit;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: 
+    "edit-left edit-right";
+  background-color: #D2CBC1;
+  border-radius: 20px;
+}
+
+.edit-container button {
+  border: none;
+  background: transparent;
+  text-decoration: 1px solid underline;
+}
+
+/* ===================================================== */
+/* Left: Edit profile  */
+
+.edit-left-container {
+  grid-area: edit-left;
+
+}
+
+
+/* ===================================================== */
+/* Right: Edit profile */
+
+.edit-right-container {
+  grid-area: edit-right;
+}
+
+/* ===================================================== */
+
+.layout-profile ul {
+  list-style: none;
+}
+
+.layout-profile input {
+  width: 80%;
+  height: 3rem;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #000000;
+}

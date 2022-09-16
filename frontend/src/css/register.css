@@ -1,13 +1,15 @@
 /* ===================================================== */
 /* Grid template */
 
-.main {
-  margin: 0;
+.layout-register {
+  grid-area: main;
+  margin-top: 9vh;
+  padding: 1.5vw;
   display: grid;
   grid-template-columns: 1fr 2fr;
   grid-template-areas:
-    "left right";
-  grid-gap: 10px;
+    "a b";
+  grid-gap: 0px;
   padding: 10px;
   text-align: left;
 }
@@ -32,7 +34,7 @@
 /* Left section: Register */
 
 .register-container {
-  grid-area: left;
+  grid-area: a;
   text-align: center;
 }
 
@@ -48,7 +50,7 @@
 /* Right section: Bubble */
 
 .bubble-container {
-  grid-area: right;
+  grid-area: b;
 }
 
 .avatar1 {

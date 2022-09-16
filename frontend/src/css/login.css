@@ -1,28 +1,29 @@
 /* ===================================================== */
 /* Grid template */
 
-.main {
-  margin: 0;
+.layout-login {
+  grid-area: main;
+  margin-top: 9vh;
+  padding: 1.5vw;
   display: grid;
   grid-template-columns: 1fr 2fr;
   grid-template-areas:
-    "left right";
-  grid-gap: 20px;
+    'login today';
+  grid-gap: 0px;
   padding: 10px;
-  text-align: left;
+  text-align: center;
 }
 
 /* ===================================================== */
 /* Responsive design */
 
 @media screen and (max-width:800px) {
-  .main {
-    margin: 0;
+  .main-login {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-areas:
-      "left"
-      "right";
+      "login"
+      "today";
     grid-gap: 10px;
     padding: 10px;
     text-align: left;
@@ -33,7 +34,7 @@
 /* Left section: Login */
 
 .login-container {
-  grid-area: left;
+  grid-area: login;
   text-align: center;
 }
 
@@ -59,7 +60,7 @@ textarea {
 /* Right section: Today */
 
 .today-container {
-  grid-area: right;
+  grid-area: today;
   text-align: center;
 }
 

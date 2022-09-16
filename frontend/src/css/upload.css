@@ -1,23 +1,23 @@
 /* ===================================================== */
 /* Grid template */
 
-.main {
-    margin: 0;
+.layout-upload {
+    grid-area: main;
+    margin-top: 9vh;
+    padding: 1.5vw;
     display: grid;
-    grid-template-columns: 1fr 2fr 2fr;
+    grid-template-columns: 1fr 1fr 2fr;
     grid-template-areas:
-      "left middle right";
+      "preview upload fill-in";
     grid-gap: 0px;
-    padding: 10px;
     text-align: left;
-  }
-
+}
 
 /* ===================================================== */
 /* Left section: Preview images */
 
 .preview-container {
-    grid-area: left;
+    grid-area: preview;
 }
 
 .preview-container img {
@@ -28,7 +28,7 @@
 /* Middle section: Upload image */
 
 .upload-container {
-    grid-area: middle;
+    grid-area: upload;
 }
 
 .upload-container img {
@@ -40,7 +40,7 @@
 /* Right section: Fill in information */
 
 .fillin-container {
-    grid-area: right;
+    grid-area: fill-in;
 }
 
 .fillin-container input {

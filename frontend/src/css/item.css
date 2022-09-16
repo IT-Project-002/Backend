@@ -1,0 +1,62 @@
+/* ===================================================== */
+/* Grid template */
+
+.layout-item {
+    grid-area: main;
+    margin-top: 9vh;
+    padding: 1.5vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "item-img item-desc";
+    grid-gap: 0px;
+    padding: 10px;
+    text-align: center;
+  }
+
+/* ===================================================== */
+/* Left section: Item image */
+
+.item-img-container {
+    grid-area: item-img;
+    text-align: center;
+    border-radius: 5px;
+    background-color: #C5C1A4;
+}
+
+.item-img-container img {
+    margin-top: 4%;
+    max-width: 90%;
+    max-height: 90%;
+}
+
+/* ===================================================== */
+/* Right section: Item description */
+
+.item-desc-container {
+    grid-area: item-desc;
+    text-align: center;
+}
+
+.item-desc-container ul {
+    list-style-type: none;
+}
+
+.item-desc-container ul {
+    text-align: left;
+    max-width: 70%;
+}
+
+.item-status {
+    text-align: center;
+}
+
+.item-contact {
+    text-align: center;
+}
+
+.item-desc-container button {
+    border: none;
+    border-radius: 5px;
+    background-color: #BCB4A7;
+}

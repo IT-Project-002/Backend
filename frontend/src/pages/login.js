@@ -50,7 +50,7 @@ function Login(){
   };  
 
   return(
-    <div className="main">
+    <div className="layout-login">
       <div className="login-container">
         <ul>
           <li><h2>Welcome Back!</h2></li>
