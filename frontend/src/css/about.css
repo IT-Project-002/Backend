@@ -1,0 +1,37 @@
+/* ===================================================== */
+/* Grid template */
+
+.layout-about {
+    grid-area: main;
+    margin-top: 9vh;
+    padding: 1.5vw;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "about-journal"
+      "about-web"
+      "about-us";
+    grid-gap: 2rem;
+    padding: 10px;
+}
+
+/* ===================================================== */
+/* About journal */
+
+.about-journal-container {
+    grid-area: about-journal;
+}
+
+/* ===================================================== */
+/* About website*/
+
+.about-web-container {
+    grid-area: about-website;
+}
+
+/* ===================================================== */
+/* About us */
+
+.about-us-container {
+    grid-area: about-us;
+}

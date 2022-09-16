@@ -34,7 +34,7 @@ export default function Upload() {
         console.log(itemInfo)
     }
     return (
-        <div className="main">
+        <div className="layout-upload">
             <div className="preview-container">
                 <img src={sample} alt="sample"></img>
                 <img src={sample} alt="sample"></img>

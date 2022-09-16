@@ -1,31 +1,39 @@
 import "../css/market.css";
-import sample from "../image/item-sample.png";
+import annB from "../profile/AnnB.png";
+import item1 from "../image/cloudsFav.png";
+import item2 from "../image/CloudsPainting.png";
+import item3 from "../image/embroFav.png";
+import item4 from "../image/necklaceLanding.png";
 
 export default function Market() {
-  return (
-    <div className="main">
-      <div className="item-img-container">
-          <img src={sample} alt="sample"></img>
+    return (
+      <div className="layout-market">
+        <div className="user-avatar-container">
+            <img className="user-full-profile" src={annB} alt="annB" ></img>
+        </div>
+        <div className="user-intro-container">
+            <h1>Ann B's Marketplace</h1>
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</p>
+        </div>
+        <div className="user-collection-container">
+            <div>
+                <img src={item1} alt="item1" ></img>
+                <h3>Item1</h3>
+            </div>
+            <div>
+                <img src={item2} alt="item2" ></img>
+                <h3>Item2</h3>
+            </div>
+            <div>
+                <img src={item3} alt="item3" ></img>
+                <h3>Item3</h3>
+            </div>
+            <div>
+                <img src={item4} alt="item4" ></img>
+                <h3>Item4</h3>
+            </div>
+        </div>
       </div>
-      <div className="item-desc-container">
-        <ul>
-          <li className="item-name">
-            <h1>Purely Hand-made mug, Perfectly for hot tea in winter.</h1>
-          </li>
-          <li className="item-price">
-            <h1>AU$49.00+</h1>
-          </li>
-          <li className="item-desc">
-            <p>
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et 
-              dolore magna aliquyam erat. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor 
-              invidunt ut labore et ut labore et dolore magna aliquyam erat.
-            </p>
-          </li>
-          <li className="item-status"><button>Available</button></li>
-          <li className="item-contact"><button>ann.b@gmail.com</button></li>
-        </ul>
-      </div>
-    </div>
-  );
-}
+    );
+  }
+  

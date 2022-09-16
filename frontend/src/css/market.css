@@ -1,60 +1,58 @@
 /* ===================================================== */
 /* Grid template */
 
-.main {
-    margin: 0;
+.layout-market {
+    grid-area: main;
+    margin-top: 9vh;
+    padding: 1.5vw;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 2fr;
     grid-template-areas:
-      "left right";
-    grid-gap: 20px;
+      "user-avatar user-intro user-collection";
+    grid-gap: 2rem;
     padding: 10px;
-    text-align: left;
-  }
-
-/* ===================================================== */
-/* Left section: Item image */
-
-.item-img-container {
-    grid-area: left;
-    text-align: center;
-    border-radius: 5px;
-    background-color: #C5C1A4;
-}
-
-.item-img-container img {
-    margin-top: 4%;
-    max-width: 90%;
-    max-height: 90%;
 }
 
 /* ===================================================== */
-/* Right section: Item description */
+/* User Introduction */
 
-.item-desc-container {
-    grid-area: right;
-    text-align: center;
+.user-avatar-container {
+  grid-area: user-avatar;
+  display: grid;
+  grid-template-columns: ;
+  /* background-image: url(../image/full-profile-background.png); */
 }
 
-.item-desc-container ul {
-    list-style-type: none;
+/* ===================================================== */
+/* User Introduction */
+
+.user-intro-container {
+  grid-area: user-intro;
+  /* background-image: url(../image/full-profile-background.png); */
 }
 
-.item-desc-container ul {
-    text-align: left;
-    max-width: 70%;
+.user-full-profile {
+  position:fixed;
+  left: 0;
+  bottom:0;
+  height: 90vh;
+  width: auto;
 }
 
-.item-status {
-    text-align: center;
+/* ===================================================== */
+/* User Collections */
+
+.user-collection-container {
+  grid-area: user-collection;
+  display: grid;
+  grid-template-columns: repeat(2,50%);
+  grid-gap: 5%;
+  padding: 5%;
+  text-align: center;
 }
 
-.item-contact {
-    text-align: center;
-}
-
-.item-desc-container button {
-    border: none;
-    border-radius: 5px;
-    background-color: #BCB4A7;
+.user-collection-container img {
+  width: 80%;
+  height: auto;
+  border-radius: 10px;
 }
