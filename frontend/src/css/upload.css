@@ -9,8 +9,7 @@
     grid-template-columns: 1fr 1fr 2fr;
     grid-template-areas:
       "preview upload fill-in";
-    grid-gap: 0px;
-    text-align: left;
+    grid-gap: 2rem;
 }
 
 /* ===================================================== */
@@ -19,24 +18,27 @@
 .preview-container {
     grid-area: preview;
     height: 70%;
+    text-align: center;
+}
+
+.preview-container img {
+    max-width: 70%;
     margin: 4%;
     border-radius: 20px;
     box-shadow: 0px 1px 6px 5px rgba(0, 0, 0, 0.2);
 }
 
-.preview-container img {
-    max-width: 70%;
-}
 
 .delete-button {
     width: 30px;
     height: 30px;
     position: absolute;
+    margin-left: 200px;
+    margin-top: 20px;
     border: transparent;
     border-radius: 50%;
     background-color: #D2CBC1;
     z-index: 100;
-
 }
 
 /* ===================================================== */
@@ -44,10 +46,12 @@
 
 .upload-container {
     grid-area: upload;
+    text-align: center;
 }
 
 .upload-container img {
-    max-width: 70%;
+    max-width: 60%;
+
 }
 
 label {
@@ -68,7 +72,6 @@ label {
 .upload-input {
     display: none;
 }
-
 
 /* ===================================================== */
 /* Right section: Fill in information */
