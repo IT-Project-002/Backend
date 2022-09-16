@@ -8,7 +8,6 @@ import item5 from "../image/greenMugFav.png";
 import item6 from "../image/necklaceLanding.png";
 import item7 from "../image/strawberrymug.png";
 import item8 from "../image/embroFav.png";
-import { borderRadius } from "@mui/system";
 
 function Landing() {
   const images = [
@@ -27,7 +26,6 @@ function Landing() {
           showBullets={true}
           showNavs={true}
           autoPlay={true}
-          style={borderRadius}
         />
       </div>
       <div className="browse-container">
