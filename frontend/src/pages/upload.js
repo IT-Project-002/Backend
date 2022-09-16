@@ -59,7 +59,7 @@ export default function Upload() {
                 <label>
                     <input className= "upload-input" type="file"  name="itemImages" multiple accept="image/*" onChange={onSelectFile}/>
                 </label>
-                <p>Upload more photos</p>
+                <p>Note: Maximum 3 photos to be uploaded</p>
             </div>   
             {/* Image preview*/}
             <div className="preview-container">
