@@ -26,7 +26,9 @@ export default function Profile() {
               <li><input type="text"></input></li>
             </ul>
         </div>
-        <button>Save Changes</button>
+        <div class="buttonBox">
+          <button>Save Changes</button>
+        </div> 
       </div>
     </div>
     );
