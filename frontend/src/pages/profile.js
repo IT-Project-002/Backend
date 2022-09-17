@@ -2,6 +2,7 @@ import * as React from 'react';
 import "../css/profile.css";
 import female1 from "../image/profile/female1.png";
 
+
 export default function Profile() {
   return (
     <div className='layout-profile'>
@@ -19,7 +20,14 @@ export default function Profile() {
         </div>
         <div className='edit-right-container'>
             <ul>
-              <li><input type="text" value ="Contact"></input></li>
+              <li>
+                <form>
+                  <select id="contactSelect">
+                  <option selected="selected">Public</option>
+                  <option>Private</option>
+                  </select>
+                </form>
+              </li>
               <li><input type="text" value ="Bio"></input></li>
             </ul>
         </div>
