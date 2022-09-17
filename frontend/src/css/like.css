@@ -1,0 +1,51 @@
+body {
+    background-image: none;
+}
+
+.main {
+    display: flex;
+}
+
+.itemhead {
+    width: 60%;
+    position: fixed;
+    z-index: 0;
+}
+.itemfoot {
+    bottom: 0;
+    width:100%;
+    position: fixed;
+}
+
+h1 {
+    font-weight: 500;
+    position: absolute;
+    margin-top: 8%;
+    z-index: 100;
+    margin-left: 18%;
+    font-size: 58px;
+}
+
+.items {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 25%;
+}
+
+.itemsName {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.singleItem {
+    z-index: 99;
+    width: 20%;
+    height: auto;
+}
+
+h2 {
+    font-weight: 300;
+    text-align: center;
+}
