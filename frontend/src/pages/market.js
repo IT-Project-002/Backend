@@ -1,5 +1,5 @@
 import "../css/market.css";
-import annB from "../profile/AnnB.png";
+import annB from "../image/profile/AnnB.png";
 import item1 from "../image/cloudsFav.png";
 import item2 from "../image/CloudsPainting.png";
 import item3 from "../image/embroFav.png";

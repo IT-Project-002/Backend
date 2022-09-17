@@ -1,6 +1,6 @@
 import * as React from 'react';
 import "../css/profile.css";
-import female1 from "../profile/female1.png";
+import female1 from "../image/profile/female1.png";
 
 
 export default function Profile() {

@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 import { Link, useMatch, useResolvedPath, useLocation } from "react-router-dom";
-import "./css/style.css";
-import home from "./icon/Home.png";
-import heart from "./icon/Heart.png";
-import profile from "./icon/Profile.png";
-import market from "./icon/Market.png";
-import logout from "./icon/Logout.png";
+import "../css/style.css";
+import home from "../icon/Home.png";
+import heart from "../icon/Heart.png";
+import profile from "../icon/Profile.png";
+import market from "../icon/Market.png";
+import logout from "../icon/Logout.png";
 
 
 export default function Navbar() {
@@ -65,7 +65,6 @@ export default function Navbar() {
         <li>About Us</li>
       </ul> */}
     </nav>
-    
   );
 }
 
