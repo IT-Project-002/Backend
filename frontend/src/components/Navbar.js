@@ -12,6 +12,8 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
 export default function Navbar() {
+  const token = sessionStorage.getItem("access_token")
+//  console.log("NavBar:" + token)
   let location = useLocation();
   const [isShown, setIsSHown]= useState(false)
   // console.log(isShown)
@@ -25,42 +27,61 @@ export default function Navbar() {
     setIsSHown((isShown) => !isShown);
   };
 
+   function logMeOut() {
+      fetch('http://localhost:9000/user/logout',{
+          method: 'POST',
+          mode: 'cors',
+       })
+        .then((response) => {
+           sessionStorage.removeItem("access_token")
+           window.location.href ='http://localhost:3000/user/login' ;
+        }).catch((error) => {
+          if (error.response) {
+            console.log(error.response)
+            console.log(error.response.status)
+            console.log(error.response.headers)
+            }
+        })}
+
   return (
     <nav className="navbar">
-      <ul>
+
         <Link to="/">
           <HomeOutlinedIcon onClick={toggleMenu}/>
           {/* <img className="home-icon" src={home} alt="home" onClick={toggleMenu}></img> */}
         </Link>
+         {
+           (token && token!=='' &&token!==undefined)?
+           <ul>
+              <CustomLink to="/user/about">
+                  <InfoOutlinedIcon />
+              </CustomLink>
+              <CustomLink to="/user/profile">
+                 <AccountCircleOutlinedIcon />
+              </CustomLink>
+              <CustomLink to="/user/myFav">
+                 <FavoriteBorderIcon/>
+              </CustomLink>
+              <CustomLink to="/user/market">
+                 <StorefrontOutlinedIcon />
+              </CustomLink>
+              <CustomLink to="/user/upload">
+                 <AddCircleOutlineRoundedIcon />
+              </CustomLink>
+              <CustomLink to="/user/login">
+                 <LogoutOutlinedIcon className="navbar-icon"/>
+              </CustomLink>
 
-        <CustomLink to="/user/register">
-          <FiberNewOutlinedIcon/>
-        </CustomLink>
+           </ul>:
+           <ul>
+               <CustomLink to="/user/login">
+                  <FiberNewOutlinedIcon/>
+               </CustomLink>
 
-        <CustomLink to="/user/profile">
-          <AccountCircleOutlinedIcon />
-        </CustomLink>
-
-        <CustomLink to="/user/myFav">
-          <FavoriteBorderIcon/>
-        </CustomLink>
-
-        <CustomLink to="/user/market">
-          <StorefrontOutlinedIcon />
-        </CustomLink>
-
-        <CustomLink to="/user/upload">
-          <AddCircleOutlineRoundedIcon />
-        </CustomLink>
-
-        <CustomLink to="/user/about">
-          <InfoOutlinedIcon />
-        </CustomLink>
-
-        <CustomLink to="/">
-          <LogoutOutlinedIcon className="navbar-icon"/>
-        </CustomLink>
-      </ul>
+                <CustomLink to="/user/about">
+                  <InfoOutlinedIcon />
+                </CustomLink>
+           </ul>
       {/* menu */}
       {/* <ul className={isShown? "menu-list" : "offscreen"}>
         <li>Username</li>

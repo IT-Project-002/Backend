@@ -1,14 +1,19 @@
-from datetime import timedelta
-from flask import Flask, session, g
+import json
+from datetime import datetime, timezone, timedelta
+from flask import Flask, session, g, request
 from flask_cors import CORS
 import config
 from blueprints import user_bp
 from connections import mail, db
 from flask_migrate import Migrate
-
+from flask_jwt_extended import create_access_token,get_jwt,get_jwt_identity, \
+                               unset_jwt_cookies, jwt_required, JWTManager
 from models import UserModel
 
 app = Flask(__name__)
+app.config["JWT_SECRET_KEY"] = "please-remember-to-change-me"
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes=10)
+jwt = JWTManager(app)
 cors = CORS(app)
 app.config.from_object(config)
 db.init_app(app)
@@ -19,25 +24,24 @@ migrate = Migrate(app, db)
 app.register_blueprint(user_bp)
 
 
-@app.before_request
-def before_request():
-    user_id = session.get("user_id")
-    if user_id:
-        try:
-            user = UserModel.query.get(user_id)
-            setattr(g, "user", user)
-            session.permanent = True
-            app.permanent_session_lifetime = timedelta(minutes=1)
-        except:
-            g.user = None
-
-
-@app.context_processor
-def context_processor():
-    if hasattr(g, "user"):
-        return {"user": g.user}
-    else:
-        return {}
+# this part not done yet
+@app.after_request
+def refresh_expiring_jwts(response):
+    try:
+        exp_timestamp = get_jwt()["exp"]
+        now = datetime.now(timezone.utc)
+        target_timestamp = datetime.timestamp(now + timedelta(minutes=30))
+        if target_timestamp > exp_timestamp:
+            access_token = create_access_token(identity=get_jwt_identity())
+            # print('new token: '+access_token)
+            data = response.get_data()
+            if type(data) is dict:
+                data["access_token"] = access_token
+                response.data = json.dumps(data)
+        return response
+    except (RuntimeError, KeyError):
+        # Case where there is not a valid JWT. Just return the original respone
+        return response
 
 
 if __name__ == '__main__':
