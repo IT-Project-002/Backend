@@ -1,0 +1,46 @@
+/* ===================================================== */
+/* Grid template */
+
+.layout-landing {
+  grid-area: main;
+  margin-top: 9vh;
+  padding: 1.5vw;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "slider"
+    "browse";
+  grid-gap: 2rem;
+  padding: 10px;
+  text-align: center;
+}
+
+/* ===================================================== */
+/* Image slider */
+
+.slider-container {
+  grid-area: slider;
+  padding-left: 4%;
+  padding-right: 5%;
+}
+
+.slider {
+  width: 100%;
+}
+
+/* ===================================================== */
+/* Browse Items */
+
+.browse-container {
+  grid-area: browse;
+  display: grid;
+  grid-template-columns: repeat(4, 20%);
+  grid-gap: 5%;
+  padding: 5%;
+}
+
+.browse-container img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}

@@ -1,0 +1,57 @@
+/* ===================================================== */
+/* Grid template */
+
+.layout-market {
+  grid-area: main;
+  margin-top: 9vh;
+  padding: 1.5vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  grid-template-areas:
+    "user-avatar user-intro user-collection";
+  grid-gap: 2rem;
+  padding: 10px;
+}
+
+/* ===================================================== */
+/* User Introduction */
+
+.user-avatar-container {
+  grid-area: user-avatar;
+  display: grid;
+  /* background-image: url(../image/full-profile-background.png); */
+}
+
+/* ===================================================== */
+/* User Introduction */
+
+.user-intro-container {
+  grid-area: user-intro;
+  /* background-image: url(../image/full-profile-background.png); */
+}
+
+.user-full-profile {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  height: 90vh;
+  width: auto;
+}
+
+/* ===================================================== */
+/* User Collections */
+
+.user-collection-container {
+  grid-area: user-collection;
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  grid-gap: 5%;
+  padding: 5%;
+  text-align: center;
+}
+
+.user-collection-container img {
+  width: 80%;
+  height: auto;
+  border-radius: 10px;
+}

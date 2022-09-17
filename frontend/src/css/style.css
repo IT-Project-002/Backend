@@ -6,24 +6,31 @@
 }
 
 body {
-  margin: 0;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-areas:
-    "navbar"
-    "main"
-    "footer";
-  grid-gap: 10px;
   background-color: #fcf8f4;
   background-image: url(../image/background.png);
   background-size: cover;
   background-repeat: no-repeat;
+  background-attachment: fixed;
+  margin:0;
   font-family: Ariel;
+}
+
+#root {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+  grid-template-areas:
+    "navbar"
+    "main"
+    "footer";
   text-align: left;
 }
 
-/* ===================================================== */
-
+/* redirect link */
+a {
+  color: black;
+}
 
 /* ===================================================== */
 /* Navigation bar & Icons */
@@ -31,11 +38,15 @@ body {
 /* Navigation bar */
 .navbar {
   grid-area: navbar;
-  background-color: rgba(255, 255, 255, 0.3);
+  background:white;
+  /* background-color: rgba(255, 255, 255, 0.3); */
   display: flex;
   justify-content: space-between;
-  height: 70px;
+  height: 7.5vh;
   box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  width: 100%;
+  z-index: 99;
 }
 
 .navbar ul {
@@ -52,16 +63,28 @@ body {
 /* Icon */
 .icon {
   width: 25px;
-  height: 24px;
+  height: 25px;
   margin-top: 0.8rem;
-  margin-left: 10px;
+  margin-left: 1.3rem;
 }
 
 .home-icon {
-  width: 39px;
-  height: 39px;
-  margin-left: 18px;
-  margin-top: 0.5rem;
+  width: 25px;
+  height: 25px;
+  margin-top: 1.3rem;
+  margin-left: 1.8rem;
+}
+
+/* menu */
+.menu {
+  /* background-color: white; */
+  left: 0;
+}
+
+.menu-list {
+  height: 100px;
+  flex-flow: column;
+  place-items: left;
 }
 
 /* ===================================================== */
@@ -69,13 +92,15 @@ body {
 
 .footer {
   grid-area: footer;
-  height: 70px;
+  height: 5vh;
   box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.1);
-  margin-bottom: 0;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  background: white;
 }
 
 .footer p {
-  padding-top: 30px;
   text-align: center;
 }
 
@@ -88,7 +113,7 @@ body {
 }
 
 .offscreen {
-  background-color: tran;
+  background-color: transparent;
   position: absolute;
   left: -9999px;
 }
