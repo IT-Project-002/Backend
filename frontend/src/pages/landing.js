@@ -52,6 +52,10 @@ function Landing() {
         <img src={item6} alt="item6" ></img>
         <img src={item7} alt="item7" ></img>
         <img src={item8} alt="item8" ></img>
+        <img src={item5} alt="item5" ></img>
+        <img src={item6} alt="item6" ></img>
+        <img src={item7} alt="item7" ></img>
+        <img src={item8} alt="item8" ></img>
       </div>
       {showModal && <Modal close = {Toggle}/>}
     </div>

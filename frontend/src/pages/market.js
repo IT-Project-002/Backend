@@ -4,6 +4,7 @@ import item1 from "../image/cloudsFav.png";
 import item2 from "../image/CloudsPainting.png";
 import item3 from "../image/embroFav.png";
 import item4 from "../image/necklaceLanding.png";
+import background from "../image/profile-photo-bg.png";
 import React, { useState, useEffect } from 'react'
 
 export default function Market() {
@@ -21,7 +22,7 @@ export default function Market() {
             })
             .then(res => {
                 console.log(res)
-                if(res.status == 401){
+                if(res.status === 401){
                     sessionStorage.removeItem('access_token')
                     window.location.href = "http://localhost:3000/user/login"
                 }else{
@@ -38,7 +39,8 @@ export default function Market() {
       <div className="layout-market" >
 
         <div className="user-avatar-container">
-            <img className="user-full-profile" src={annB} alt="annB" ></img>
+            <img className="user-full-profile" src={annB} alt="annB"></img>
+            <img className="user-bg" src={background} alt="background"></img>
         </div>
 
         <div className="user-intro-container">
@@ -57,6 +59,22 @@ export default function Market() {
             <div>
                 <img src={item3} alt="item3" ></img>
                 <h3>Item3</h3>
+            </div>
+            <div>
+                <img src={item4} alt="item4" ></img>
+                <h3>Item4</h3>
+            </div>
+            <div>
+                <img src={item4} alt="item4" ></img>
+                <h3>Item4</h3>
+            </div>
+            <div>
+                <img src={item4} alt="item4" ></img>
+                <h3>Item4</h3>
+            </div>
+            <div>
+                <img src={item4} alt="item4" ></img>
+                <h3>Item4</h3>
             </div>
             <div>
                 <img src={item4} alt="item4" ></img>

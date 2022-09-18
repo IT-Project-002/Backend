@@ -45,13 +45,10 @@ export default function Navbar() {
 
   return (
     <nav className="navbar">
+          <Link className="home-icon" to="/">
+            <HomeOutlinedIcon onClick={toggleMenu}/>
+          </Link>    
            <ul>
-              <Link to="/">
-                  <HomeOutlinedIcon onClick={toggleMenu}/>
-              </Link>
-              <CustomLink to="/user/about">
-                  <InfoOutlinedIcon />
-              </CustomLink>
               {
               (token && token!=='' &&token!==undefined)?
                   <CustomLink to="/user/profile">
@@ -83,6 +80,10 @@ export default function Navbar() {
                      <FiberNewOutlinedIcon/>
                   </CustomLink>
               }
+
+              <CustomLink to="/user/about">
+                  <InfoOutlinedIcon />
+              </CustomLink>
 
               {
               (token && token!=='' &&token!==undefined)?

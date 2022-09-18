@@ -34,20 +34,11 @@
 
 
 /* ===================================================== */
-/* User Introduction */
+/* User Avatar */
 
 .user-avatar-container {
   grid-area: user-avatar;
   display: grid;
-  /* background-image: url(../image/full-profile-background.png); */
-}
-
-/* ===================================================== */
-/* User Introduction */
-
-.user-intro-container {
-  grid-area: user-intro;
-  /* background-image: url(../image/full-profile-background.png); */
 }
 
 .user-full-profile {
@@ -56,6 +47,22 @@
   bottom: 0;
   height: 90vh;
   width: auto;
+}
+
+/* ===================================================== */
+/* User Introduction */
+
+.user-intro-container {
+  grid-area: user-intro;
+}
+
+.user-bg {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  height: 90vh;
+  width: auto;
+  z-index:1;
 }
 
 
