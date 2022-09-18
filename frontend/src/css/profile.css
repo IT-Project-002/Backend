@@ -1,15 +1,18 @@
 /* ===================================================== */
 /* Grid template */
 
+
 .layout-profile {
   grid-area: main;
-  margin-top: 9vh;
+  margin-top: 0;
   padding: 1.5vw;
   display: grid;
+  background-color: #FCF9F4;
   grid-template-columns: 1fr;
-  grid-template-rows: 0.3fr 1.5fr;
+  grid-template-rows: 0.1fr 0.3fr 1.5fr;
   row-gap: 3vw;
   grid-template-areas:
+    "."
     "profile-photo"
     "edit";
   text-align: center;
@@ -28,6 +31,8 @@ justify-content: center;
 width: 20%;
 position: fixed;
 }
+
+
 
 /* ===================================================== */
 /* Edit */
@@ -69,6 +74,7 @@ align-items: center;
 
 }
 
+
 /* ===================================================== */
 /* Right: Edit profile */
 
@@ -93,7 +99,8 @@ text-align: center;
 
 .layout-profile ul {
 list-style: none;
-  min-width: 100%;
+min-width: 100%;
+padding-left: 0;
 }
 
 .layout-profile input {
