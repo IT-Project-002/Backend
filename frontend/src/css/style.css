@@ -24,7 +24,6 @@ body {
     "navbar"
     "main"
     "footer";
-  text-align: left;
 }
 
 /* redirect link */
@@ -38,11 +37,8 @@ a {
 /* Navigation bar */
 .navbar {
   grid-area: navbar;
-  background:white;
-  /* background-color: rgba(255, 255, 255, 0.3); */
-  display: flex;
-  justify-content: space-between;
-  height: 7.5vh;
+  background:#fcf8f4;
+  height: 8vh;
   box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.1);
   position: fixed;
   width: 100%;
@@ -52,27 +48,17 @@ a {
 .navbar ul {
   list-style: none;
   display: flex;
-  gap: 1rem;
-  margin: 10px 50px 75px 100px;
+  justify-content: space-between;
+  margin-left: 0;
 }
 
-.navbar li:hover {
-  background-color: #f7f1e2;
+.navbar svg {
+  width: 35px;
+  height: 35px;
 }
 
-/* Icon */
-.icon {
-  width: 25px;
-  height: 25px;
-  margin-top: 0.8rem;
-  margin-left: 1.3rem;
-}
-
-.home-icon {
-  width: 25px;
-  height: 25px;
-  margin-top: 1.3rem;
-  margin-left: 1.8rem;
+.navbar svg:hover {
+  fill:#BCB4A7;
 }
 
 /* menu */
@@ -92,12 +78,13 @@ a {
 
 .footer {
   grid-area: footer;
-  height: 5vh;
+  height: 7vh;
   box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.1);
-  position: fixed;
+  /* position: fixed; */
   width: 100%;
   bottom: 0;
-  background: white;
+  background: #fcf8f4;
+  z-index: 99;
 }
 
 .footer p {

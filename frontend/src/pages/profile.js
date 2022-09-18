@@ -12,21 +12,28 @@ export default function Profile() {
       <div className='edit-container'>
         <div className='edit-left-container'>
           <ul>
-            <li><input type="text"></input></li>
-            <li><input type="text"></input></li>
-            <li><input type="text"></input></li>
-            <li><input type="text"></input></li>
+            <li><input type="text" value ="Ann.b@gmail.com"></input></li>
+            <li><input type="text" value ="Ann B"></input></li>
+            <li><input type="text" value ="Old Password"></input></li>
+            <li><input type="text" value ="New Password"></input></li>
           </ul>
         </div>
         <div className='edit-right-container'>
             <ul>
-              <li><input type="text"></input></li>
-              <li><input type="text"></input></li>
-              <li><input type="text"></input></li>
-              <li><input type="text"></input></li>
+              <li>
+                <form>
+                  <select id="contactSelect">
+                  <option selected="selected">Public</option>
+                  <option>Private</option>
+                  </select>
+                </form>
+              </li>
+              <li><input type="text" value ="Bio"></input></li>
             </ul>
         </div>
-        <button>Save Changes</button>
+        <div className="buttonBox">
+          <button>Save Changes</button>
+        </div> 
       </div>
     </div>
     );

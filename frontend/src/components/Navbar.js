@@ -1,12 +1,15 @@
 import React, {useState} from "react";
 import { Link, useMatch, useResolvedPath, useLocation } from "react-router-dom";
 import "../css/style.css";
-import home from "../icon/Home.png";
-import heart from "../icon/Heart.png";
-import profile from "../icon/Profile.png";
-import market from "../icon/Market.png";
-import logout from "../icon/Logout.png";
-
+// import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import FiberNewOutlinedIcon from '@mui/icons-material/FiberNewOutlined';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
+import StorefrontOutlinedIcon from '@mui/icons-material/StorefrontOutlined';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
 export default function Navbar() {
   let location = useLocation();
@@ -24,30 +27,38 @@ export default function Navbar() {
 
   return (
     <nav className="navbar">
-      <Link to="/">
-        <img className="home-icon" src={home} alt="home" onClick={toggleMenu}></img>
-      </Link>
       <ul>
-      <CustomLink to="/user/register">
-          <p>Register</p>
+        <Link to="/">
+          <HomeOutlinedIcon onClick={toggleMenu}/>
+          {/* <img className="home-icon" src={home} alt="home" onClick={toggleMenu}></img> */}
+        </Link>
+
+        <CustomLink to="/user/register">
+          <FiberNewOutlinedIcon/>
         </CustomLink>
+
         <CustomLink to="/user/profile">
-          <img className="icon" src={profile} alt="profile"></img>
+          <AccountCircleOutlinedIcon />
         </CustomLink>
-        <CustomLink to="/user/like">
-          <img className="icon" src={heart} alt="heart"></img>
+
+        <CustomLink to="/user/myFav">
+          <FavoriteBorderIcon/>
         </CustomLink>
+
         <CustomLink to="/user/market">
-          <img className="icon" src={market} alt="market"></img>
+          <StorefrontOutlinedIcon />
         </CustomLink>
+
         <CustomLink to="/user/upload">
-          <p>Upload</p>
+          <AddCircleOutlineRoundedIcon />
         </CustomLink>
+
         <CustomLink to="/user/about">
-          <p>About</p>
+          <InfoOutlinedIcon />
         </CustomLink>
+
         <CustomLink to="/">
-          <img className="icon" src={logout} alt="logout"></img>
+          <LogoutOutlinedIcon className="navbar-icon"/>
         </CustomLink>
       </ul>
       {/* menu */}

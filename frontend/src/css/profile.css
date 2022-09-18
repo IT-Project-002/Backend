@@ -1,28 +1,35 @@
 /* ===================================================== */
 /* Grid template */
 
+
 .layout-profile {
-    grid-area: main;
-    margin-top: 9vh;
-    padding: 1.5vw;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "profile-photo"
-      "edit";
-    text-align: center;
+  grid-area: main;
+  margin-top: 0;
+  padding: 1.5vw;
+  display: grid;
+  background-color: #FCF9F4;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.1fr 0.3fr 1.5fr;
+  row-gap: 3vw;
+  grid-template-areas:
+    "."
+    "profile-photo"
+    "edit";
+  text-align: center;
 }
 
 /* ===================================================== */
 /* Profile Photo */
 
 .profile-photo-container {
-  grid-area: profile-photo;
+grid-area: profile-photo;
+display: flex;
+justify-content: center;
 }
 
 .profile-photo-container img {
-  width: 20%;
-  position: fixed;
+width: 20%;
+position: fixed;
 }
 
 
@@ -31,27 +38,39 @@
 /* Edit */
 
 .edit-container {
-  margin-top: 0;
-  grid-area: edit;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas: 
-    "edit-left edit-right";
-  background-color: #D2CBC1;
-  border-radius: 20px;
+margin: 0 4%;
+grid-area: edit;
+display: grid;
+grid-template-columns: 1fr 1fr;
+grid-template-areas: 
+"edit-left edit-right"
+"button    button";
+background-color: rgba(210, 203, 193, 0.4);
+border-radius: 20px;
 }
 
 .edit-container button {
-  border: none;
-  background: transparent;
-  text-decoration: 1px solid underline;
+border: none;
+background: transparent;
+text-decoration: 1px solid underline;
+}
+
+.buttonBox {
+display: flex;
+width: 100%;
+grid-area: button;
+justify-content: center;
 }
 
 /* ===================================================== */
 /* Left: Edit profile  */
 
 .edit-left-container {
-  grid-area: edit-left;
+margin-top: 20%;
+grid-area: edit-left;
+display: flex;
+width: 100%;
+align-items: center;
 
 }
 
@@ -60,19 +79,38 @@
 /* Right: Edit profile */
 
 .edit-right-container {
-  grid-area: edit-right;
+margin-top: 20%;
+grid-area: edit-right;
+display: flex;
+width: 100%;
+align-items:center;
+}
+
+#contactSelect {
+width: 80%;
+height: 3rem;
+background: transparent;
+border: none;
+border-bottom: 1px solid #000000;
+text-align: center;
 }
 
 /* ===================================================== */
 
 .layout-profile ul {
-  list-style: none;
+list-style: none;
+min-width: 100%;
+padding-left: 0;
 }
 
 .layout-profile input {
-  width: 80%;
-  height: 3rem;
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid #000000;
+text-align: center;
+}
+
+.layout-profile input {
+width: 80%;
+height: 3rem;
+background: transparent;
+border: none;
+border-bottom: 1px solid #000000;
 }

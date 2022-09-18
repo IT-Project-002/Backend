@@ -3,7 +3,7 @@ import Register from "../src/pages/register";
 import Landing from "../src/pages/landing";
 import Login from "../src/pages/login";
 import Profile from "./pages/profile";
-import Likes from "./pages/like";
+import MyFav from "./pages/myFav";
 import Market from "./pages/market";
 import Upload from "./pages/upload";
 import Navbar from "./components/Navbar";
@@ -20,7 +20,7 @@ function App() {
             <Route path="/" element={<Landing />} />
             <Route path="/user/register" element={<Register />} />
             <Route path="/user/login" element={<Login />} />
-            <Route path="/user/like" element={<Likes />} />
+            <Route path="/user/like" element={<MyFav />} />
             <Route path="/user/profile" element={<Profile />} />
             <Route path="/user/market" element={<Market />} />
             <Route path="/user/upload" element={<Upload />} />
