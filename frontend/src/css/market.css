@@ -14,6 +14,26 @@
 }
 
 /* ===================================================== */
+/* Responsive design */
+
+@media screen and (max-width:800px) {
+  .layout-market {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "user-intro"
+      "user-collection";
+    padding: 10px;
+    text-align: left;
+  }
+
+  .user-avatar-container {
+    visibility: hidden;
+  }
+}
+
+
+/* ===================================================== */
 /* User Introduction */
 
 .user-avatar-container {
@@ -37,6 +57,7 @@
   height: 90vh;
   width: auto;
 }
+
 
 /* ===================================================== */
 /* User Collections */

@@ -1,12 +1,12 @@
 import React, {useState} from "react";
 import { Link, useMatch, useResolvedPath, useLocation } from "react-router-dom";
 import "../css/style.css";
-import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+// import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import FiberNewOutlinedIcon from '@mui/icons-material/FiberNewOutlined';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import AddAPhotoOutlinedIcon from '@mui/icons-material/AddAPhotoOutlined';
+import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import StorefrontOutlinedIcon from '@mui/icons-material/StorefrontOutlined';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
@@ -29,7 +29,7 @@ export default function Navbar() {
     <nav className="navbar">
       <ul>
         <Link to="/">
-          <HomeRoundedIcon onClick={toggleMenu}/>
+          <HomeOutlinedIcon onClick={toggleMenu}/>
           {/* <img className="home-icon" src={home} alt="home" onClick={toggleMenu}></img> */}
         </Link>
 
@@ -41,7 +41,7 @@ export default function Navbar() {
           <AccountCircleOutlinedIcon />
         </CustomLink>
 
-        <CustomLink to="/user/like">
+        <CustomLink to="/user/myFav">
           <FavoriteBorderIcon/>
         </CustomLink>
 
@@ -50,7 +50,7 @@ export default function Navbar() {
         </CustomLink>
 
         <CustomLink to="/user/upload">
-          <AddAPhotoOutlinedIcon />
+          <AddCircleOutlineRoundedIcon />
         </CustomLink>
 
         <CustomLink to="/user/about">
