@@ -1,21 +1,15 @@
 import React, {useState} from "react";
 import { Link, useMatch, useResolvedPath, useLocation } from "react-router-dom";
 import "../css/style.css";
-import CottageOutlinedIcon from '@mui/icons-material/CottageOutlined';
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import FiberNewOutlinedIcon from '@mui/icons-material/FiberNewOutlined';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import AddAPhotoOutlinedIcon from '@mui/icons-material/AddAPhotoOutlined';
 import StorefrontOutlinedIcon from '@mui/icons-material/StorefrontOutlined';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
-import home from "../icon/Home.png";
-import heart from "../icon/Heart.png";
-import profile from "../icon/Profile.png";
-import market from "../icon/Market.png";
-import logout from "../icon/Logout.png";
-
 
 export default function Navbar() {
   let location = useLocation();
@@ -33,37 +27,38 @@ export default function Navbar() {
 
   return (
     <nav className="navbar">
-      <Link to="/">
-        <CottageOutlinedIcon className="home-icon" sx={{fontSize:35}} onClick={toggleMenu}/>
-        {/* <img className="home-icon" src={home} alt="home" onClick={toggleMenu}></img> */}
-      </Link>
       <ul>
-      <CustomLink to="/user/register">
-        <FiberNewOutlinedIcon sx={{fontSize:35}}/>
-          {/* <p>Register</p> */}
+        <Link to="/">
+          <HomeRoundedIcon onClick={toggleMenu}/>
+          {/* <img className="home-icon" src={home} alt="home" onClick={toggleMenu}></img> */}
+        </Link>
+
+        <CustomLink to="/user/register">
+          <FiberNewOutlinedIcon/>
         </CustomLink>
+
         <CustomLink to="/user/profile">
-          <AccountCircleOutlinedIcon sx={{fontSize:35}}/>
-          {/* <img className="icon" src={profile} alt="profile"></img> */}
+          <AccountCircleOutlinedIcon />
         </CustomLink>
+
         <CustomLink to="/user/like">
-          <FavoriteBorderIcon sx={{fontSize:35}}/>
-          {/* <img className="icon" src={heart} alt="heart"></img> */}
+          <FavoriteBorderIcon/>
         </CustomLink>
+
         <CustomLink to="/user/market">
-          <StorefrontOutlinedIcon sx={{fontSize:35}}/>
-          {/* <img className="icon" src={market} alt="market"></img> */}
+          <StorefrontOutlinedIcon />
         </CustomLink>
+
         <CustomLink to="/user/upload">
-          <AddAPhotoOutlinedIcon sx={{fontSize:35}}/>
+          <AddAPhotoOutlinedIcon />
         </CustomLink>
+
         <CustomLink to="/user/about">
-          <InfoOutlinedIcon sx={{fontSize:35}}/>
-          {/* <p>About</p> */}
+          <InfoOutlinedIcon />
         </CustomLink>
+
         <CustomLink to="/">
-          <LogoutOutlinedIcon sx={{fontSize:35}}/>
-          {/* <img className="icon" src={logout} alt="logout"></img> */}
+          <LogoutOutlinedIcon className="navbar-icon"/>
         </CustomLink>
       </ul>
       {/* menu */}
