@@ -1,6 +1,15 @@
 import React, {useState} from "react";
 import { Link, useMatch, useResolvedPath, useLocation } from "react-router-dom";
 import "../css/style.css";
+import CottageOutlinedIcon from '@mui/icons-material/CottageOutlined';
+import FiberNewOutlinedIcon from '@mui/icons-material/FiberNewOutlined';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import AddAPhotoOutlinedIcon from '@mui/icons-material/AddAPhotoOutlined';
+import StorefrontOutlinedIcon from '@mui/icons-material/StorefrontOutlined';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import home from "../icon/Home.png";
 import heart from "../icon/Heart.png";
 import profile from "../icon/Profile.png";
@@ -25,29 +34,36 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <Link to="/">
-        <img className="home-icon" src={home} alt="home" onClick={toggleMenu}></img>
+        <CottageOutlinedIcon className="home-icon" sx={{fontSize:35}} onClick={toggleMenu}/>
+        {/* <img className="home-icon" src={home} alt="home" onClick={toggleMenu}></img> */}
       </Link>
       <ul>
       <CustomLink to="/user/register">
-          <p>Register</p>
+        <FiberNewOutlinedIcon sx={{fontSize:35}}/>
+          {/* <p>Register</p> */}
         </CustomLink>
         <CustomLink to="/user/profile">
-          <img className="icon" src={profile} alt="profile"></img>
+          <AccountCircleOutlinedIcon sx={{fontSize:35}}/>
+          {/* <img className="icon" src={profile} alt="profile"></img> */}
         </CustomLink>
         <CustomLink to="/user/like">
-          <img className="icon" src={heart} alt="heart"></img>
+          <FavoriteBorderIcon sx={{fontSize:35}}/>
+          {/* <img className="icon" src={heart} alt="heart"></img> */}
         </CustomLink>
         <CustomLink to="/user/market">
-          <img className="icon" src={market} alt="market"></img>
+          <StorefrontOutlinedIcon sx={{fontSize:35}}/>
+          {/* <img className="icon" src={market} alt="market"></img> */}
         </CustomLink>
         <CustomLink to="/user/upload">
-          <p>Upload</p>
+          <AddAPhotoOutlinedIcon sx={{fontSize:35}}/>
         </CustomLink>
         <CustomLink to="/user/about">
-          <p>About</p>
+          <InfoOutlinedIcon sx={{fontSize:35}}/>
+          {/* <p>About</p> */}
         </CustomLink>
         <CustomLink to="/">
-          <img className="icon" src={logout} alt="logout"></img>
+          <LogoutOutlinedIcon sx={{fontSize:35}}/>
+          {/* <img className="icon" src={logout} alt="logout"></img> */}
         </CustomLink>
       </ul>
       {/* menu */}
