@@ -57,7 +57,7 @@ function Login(){
   };
 
   if(token && token!=='' &&token!==undefined){
-     return  <Navigate replace to="/user/profile" />;
+     return  <Navigate replace to="/user/market" />;
   }else{
       return(
         <div className="layout-login">

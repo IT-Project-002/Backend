@@ -20,7 +20,7 @@ function App() {
             <Route path="/" element={<Landing />} />
             <Route path="/user/register" element={<Register />} />
             <Route path="/user/login" element={<Login />} />
-            <Route path="/user/like" element={<MyFav />} />
+            <Route path="/user/myFav" element={<MyFav />} />
             <Route path="/user/profile" element={<Profile />} />
             <Route path="/user/market" element={<Market />} />
             <Route path="/user/upload" element={<Upload />} />

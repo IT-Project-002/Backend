@@ -45,42 +45,51 @@ export default function Navbar() {
 
   return (
     <nav className="navbar">
-
-        <Link to="/">
-          <HomeOutlinedIcon onClick={toggleMenu}/>
-          {/* <img className="home-icon" src={home} alt="home" onClick={toggleMenu}></img> */}
-        </Link>
-         {
-           (token && token!=='' &&token!==undefined)?
            <ul>
+              <Link to="/">
+                  <HomeOutlinedIcon onClick={toggleMenu}/>
+              </Link>
               <CustomLink to="/user/about">
                   <InfoOutlinedIcon />
               </CustomLink>
-              <CustomLink to="/user/profile">
-                 <AccountCircleOutlinedIcon />
-              </CustomLink>
-              <CustomLink to="/user/myFav">
-                 <FavoriteBorderIcon/>
-              </CustomLink>
-              <CustomLink to="/user/market">
-                 <StorefrontOutlinedIcon />
-              </CustomLink>
-              <CustomLink to="/user/upload">
-                 <AddCircleOutlineRoundedIcon />
-              </CustomLink>
-              <CustomLink to="/user/login">
-                 <LogoutOutlinedIcon className="navbar-icon"/>
-              </CustomLink>
+              {
+              (token && token!=='' &&token!==undefined)?
+                  <CustomLink to="/user/profile">
+                     <AccountCircleOutlinedIcon />
+                  </CustomLink>:''
+              }
+              {
+              (token && token!=='' &&token!==undefined)?
+                  <CustomLink to="/user/myFav">
+                     <FavoriteBorderIcon/>
+                  </CustomLink>:''
+              }
+              {
+              (token && token!=='' &&token!==undefined)?
+                  <CustomLink to="/user/market">
+                     <StorefrontOutlinedIcon />
+                  </CustomLink>:''
+              }
+              {
+              (token && token!=='' &&token!==undefined)?
+                  <CustomLink to="/user/upload">
+                     <AddCircleOutlineRoundedIcon />
+                  </CustomLink>:''
+              }
 
-           </ul>:
-           <ul>
-               <CustomLink to="/user/login">
-                  <FiberNewOutlinedIcon/>
-               </CustomLink>
+              {
+              (token && token!=='' &&token!==undefined)?'':
+                  <CustomLink to="/user/login">
+                     <FiberNewOutlinedIcon/>
+                  </CustomLink>
+              }
 
-                <CustomLink to="/user/about">
-                  <InfoOutlinedIcon />
-                </CustomLink>
+              {
+              (token && token!=='' &&token!==undefined)?
+                  <CustomLink to="/user/login">
+                     <LogoutOutlinedIcon onClick={logMeOut}/>
+                  </CustomLink>:''
+              }
            </ul>
       {/* menu */}
       {/* <ul className={isShown? "menu-list" : "offscreen"}>
