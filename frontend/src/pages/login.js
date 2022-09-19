@@ -62,32 +62,55 @@ function Login(){
       return(
         <div className="layout-login">
           <div className="login-container">
-            <ul>
-              <li><h2>Welcome Back!</h2></li>
-                <form>
-                  <li>< AiTwotoneMail className="eye-icon"/><input
-                        type="email"
-                        className="form-control"
-                        ref={userRef}
-                        placeholder="Email"
-                        value={email}
-                        onChange = {(e) => setEmail(e.target.value)}
-                        required
-                  /></li>
-                  <li>{!isShown ? <AiFillEye className="eye-icon" onClick={togglePassword}/> :<AiFillEyeInvisible className="eye-icon" onClick={togglePassword}/>}<input
-                        type={isShown ? "text" : "password"}
-                        className="form-control"
-                        placeholder="Password"
-                        value={password}
-                        onChange = {(e) => setPassword(e.target.value)}
-                        required
-                  />
-                  </li>
-                    <li><button className='button' onClick={handleSubmit}> Log in </button></li>
-                </form>
-                <li><a href="/user/register">Haven't Sign up?</a></li>
-              </ul>
+            {/* <form>
+              <h2 className='welcom'>Welcome Back!</h2>
+              <label>
+                <AiTwotoneMail/>
+              </label>
+              <input
+                type="email"
+                className="form-control"
+                ref={userRef}
+                placeholder="Email"
+                value={email}
+                onChange = {(e) => setEmail(e.target.value)}
+                required
+                />
+              <label className='login-password'>
+                {!isShown ? <AiFillEye onClick={togglePassword}/> :<AiFillEyeInvisible className="eye-icon" onClick={togglePassword}/>}
+              </label>
+              <input
+                type={isShown ? "text" : "password"}
+                className="form-control"
+                placeholder="Password"
+                value={password}
+                onChange = {(e) => setPassword(e.target.value)}
+                required
+              />
+              <button className='login-button' onClick={handleSubmit}> Log in </button>
+            </form>
+            <a className="signup-button" href="/user/register">Haven't Sign up?</a> */}
           </div>
+          <div>
+            <form action="/action_page.php">
+              <label for="fname">First Name</label>
+              <input type="text" id="fname" name="firstname" placeholder="Your name.."/>
+
+              <label for="lname">Last Name</label>
+              <input type="text" id="lname" name="lastname" placeholder="Your last name.."/>
+
+              <label for="country">Country</label>
+              <select id="country" name="country">
+                <option value="australia">Australia</option>
+                <option value="canada">Canada</option>
+                <option value="usa">USA</option>
+              </select>
+            
+              <input type="submit" value="Submit"/>
+            </form>
+          </div>
+
+          
           <div className="today-container">
             <h2>“Creativity takes courage.”</h2>
             <p>- Henri Matisse</p>
