@@ -31,6 +31,12 @@ a {
   color: black;
 }
 
+button {
+  background: transparent;
+  border: none;
+  text-decoration: 1px solid underline;
+}
+
 /* ===================================================== */
 /* Navigation bar */
 
@@ -110,3 +116,4 @@ a {
   position: absolute;
   left: -9999px;
 }
+

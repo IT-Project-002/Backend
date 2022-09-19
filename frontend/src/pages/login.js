@@ -5,7 +5,6 @@ import "../css/form.css";
 import d1 from "../image/drawing.png";
 import {AiFillEyeInvisible, AiFillEye, AiTwotoneMail} from "react-icons/ai";
 
-
 function Login(){
   const nav = useNavigate();
   const userRef = useRef();
@@ -58,10 +57,42 @@ function Login(){
 
   if(token && token!=='' &&token!==undefined){
      return  <Navigate replace to="/user/market" />;
-  }else{
+  } else{
       return(
         <div className="layout-login">
           <div className="login-container">
+            <h1>Welcome</h1>
+            <form>
+              <div className='input-container'>
+                <i><AiTwotoneMail/></i>
+                <input
+                type="email"
+                className="input-field"
+                ref={userRef}
+                placeholder="Email"
+                value={email}
+                onChange = {(e) => setEmail(e.target.value)}
+                required
+                />
+              </div>
+              <div className='input-container'>
+                <label className='login-icon'>
+                  {!isShown ? <AiFillEye onClick={togglePassword}/> :<AiFillEyeInvisible onClick={togglePassword}/>}
+                </label>
+                <input
+                  type={isShown ? "text" : "password"}
+                  className="input-field"
+                  placeholder="Password"
+                  value={password}
+                  onChange = {(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+              <button onClick={handleSubmit}> Log in </button>
+            </form>
+            <a href="/user/register">Haven't Sign up?</a>
+
+
             {/* <form>
               <h2 className='welcom'>Welcome Back!</h2>
               <label>
@@ -91,26 +122,8 @@ function Login(){
             </form>
             <a className="signup-button" href="/user/register">Haven't Sign up?</a> */}
           </div>
-          <div>
-            <form action="/action_page.php">
-              <label for="fname">First Name</label>
-              <input type="text" id="fname" name="firstname" placeholder="Your name.."/>
 
-              <label for="lname">Last Name</label>
-              <input type="text" id="lname" name="lastname" placeholder="Your last name.."/>
-
-              <label for="country">Country</label>
-              <select id="country" name="country">
-                <option value="australia">Australia</option>
-                <option value="canada">Canada</option>
-                <option value="usa">USA</option>
-              </select>
-            
-              <input type="submit" value="Submit"/>
-            </form>
-          </div>
-
-          
+         
           <div className="today-container">
             <h2>“Creativity takes courage.”</h2>
             <p>- Henri Matisse</p>
