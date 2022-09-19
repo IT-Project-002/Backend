@@ -53,37 +53,33 @@ export default function Market() {
             <p>Lorem ipsum dolor sit amet,data consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.  </p>
         </div>
         <div className="user-collection-container">
-            <div>
+            <div className="market-column">
                 <img src={item1} alt="item1" ></img>
                 <h3>Item1</h3>
             </div>
-            <div>
-                <img src={item2} alt="item2" ></img>
-                <h3>Item2</h3>
+            <div className="market-column">
+                <img src={item1} alt="item1" ></img>
+                <h3>Item1</h3>
             </div>
-            <div>
-                <img src={item3} alt="item3" ></img>
-                <h3>Item3</h3>
+            <div className="market-column">
+                <img src={item1} alt="item1" ></img>
+                <h3>Item1</h3>
             </div>
-            <div>
-                <img src={item4} alt="item4" ></img>
-                <h3>Item4</h3>
+            <div className="market-column">
+                <img src={item1} alt="item1" ></img>
+                <h3>Item1</h3>
             </div>
-            <div>
-                <img src={item4} alt="item4" ></img>
-                <h3>Item4</h3>
+            <div className="market-column">
+                <img src={item1} alt="item1" ></img>
+                <h3>Item1</h3>
             </div>
-            <div>
-                <img src={item4} alt="item4" ></img>
-                <h3>Item4</h3>
+            <div className="market-column">
+                <img src={item1} alt="item1" ></img>
+                <h3>Item1</h3>
             </div>
-            <div>
-                <img src={item4} alt="item4" ></img>
-                <h3>Item4</h3>
-            </div>
-            <div>
-                <img src={item4} alt="item4" ></img>
-                <h3>Item4</h3>
+            <div className="market-column">
+                <img src={item1} alt="item1" ></img>
+                <h3>Item1</h3>
             </div>
         </div>
       </div>
