@@ -51,6 +51,7 @@ export default function Upload() {
 
     return (
         <div className="layout-upload">
+
             <div className="upload-container">
                 <label>
                     <CameraAltRoundedIcon className="upload-icon"/>
@@ -58,7 +59,7 @@ export default function Upload() {
                 </label>
                 <p>Maximum 3 photos</p>
             </div>   
-            {/* Image preview*/}
+
             <div className="preview-container">
                 {selectedImages &&
                     selectedImages.map((image, index) => {
@@ -71,41 +72,56 @@ export default function Upload() {
                     })
                 }
             </div>
+
             <div className="fillin-container">
                 <form method='post' onSubmit = {handleSubmit}>
-                    <h2>Name your cute work?</h2>
-                    <input type="text"
+                    <div className="fillin-input-container">
+                        <h2>Name your cute work?</h2>
+                        <input 
+                        type="text"
                         value={itemName}
                         onChange={(e) => setItemName(e.target.value)}
                         required
-                    />
-                    <h2>Price your work?</h2>
-                    <input type="number"
-                        value={price}
-                        onChange={(e) => setPrice(e.target.value)}
-                        required
-                    />                    
+                        />
+                    </div>
+                    <div className="fillin-input-container">
+                        <h2>Price your work?</h2>
+                        <input type="number"
+                            value={price}
+                            onChange={(e) => setPrice(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className="fillin-input-container">
                     <h2>Can you precisely describe your work?</h2>
-                    <input type="text"
-                        value={describtion}
-                        onChange={(e) => setDescribtion(e.target.value)}
-                        required
-                    />
-                    {/* tag selection */}
-                    <h2>Tag your work with its category.</h2>
-                    <Select className="tag"
-                        isMulti
-                        placeholder="Tell us what you interested in…"
-                        options={options}
-                        onChange={(item) => setTags(item)}
-                        isClearable={true}
-                        isSearchable={true}
-                        isDisabled={false}
-                        isLoading={false}
-                        isRtl={false}
-                        closeMenuOnSelect={false}
-                    />  
-                    <button className="button" type='submit'>Save Changes</button>
+                        <input type="text"
+                            value={describtion}
+                            onChange={(e) => setDescribtion(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <div>
+                            <h2>Tag your work with its category.</h2>
+                        </div>
+                        <div className="selector-container">
+                        <Select 
+                            isMulti
+                            placeholder="Tell us what you interested in…"
+                            options={options}
+                            onChange={(item) => setTags(item)}
+                            isClearable={true}
+                            isSearchable={true}
+                            isDisabled={false}
+                            isLoading={false}
+                            isRtl={false}
+                            closeMenuOnSelect={false}
+                        />
+                        </div>
+                    </div>
+                    <div className="profile-button-container">
+                        <button type='submit'>Save Changes</button> 
+                    </div>
                 </form>
             </div>
         </div>
