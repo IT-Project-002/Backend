@@ -2,7 +2,6 @@ import "../css/upload.css";
 import Select from "react-select";
 import React, {useState} from "react";
 import CameraAltRoundedIcon from '@mui/icons-material/CameraAltRounded';
-// import styled from '@emotion/styled'
 
 export default function Upload() {
     const options = [

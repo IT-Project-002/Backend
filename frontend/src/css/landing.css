@@ -4,14 +4,11 @@
 .layout-landing {
   grid-area: main;
   margin: 10vh 3vw;
-  padding: 1.5vw;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-areas:
     "slider"
     "browse";
-  grid-gap: 2vw;
-  padding: 10px;
   text-align: center;
 }
 
@@ -30,9 +27,9 @@
     text-align: center;
   }
 
-  /* .slider-container {
-    display: none;
-  } */
+  .slider-container {
+    visibility: hidden;
+  }
 
   .browse-container {
     grid-area: browse;
@@ -57,7 +54,6 @@
 
 .slider-container {
   grid-area: slider;
-  padding:5%;
 }
 
 .slider {
@@ -70,11 +66,9 @@
 .browse-container {
   grid-area: browse;
   display: grid;
-  grid-template-columns: repeat(auto-fit,13rem);
-  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fit,15rem);
+  grid-gap: 1.6rem;
   margin-bottom:15vh;
-  padding: 5%;
-  text-align: center;
 }
 
 .browse-container img {

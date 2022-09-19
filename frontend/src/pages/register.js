@@ -168,6 +168,7 @@ function Registration() {
           </div>
           <button className="button" type='submit'>  Sign Up  </button>
         </form>
+        <button><a href="/user/login">Already has an account?</a></button>
       </div>
       <div className="bubble-container">
         <h2>Pick your profile picture…</h2>

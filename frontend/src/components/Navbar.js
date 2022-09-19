@@ -1,12 +1,13 @@
 import React, {useState} from "react";
 import { Link, useMatch, useResolvedPath, useLocation } from "react-router-dom";
 import "../css/style.css";
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+// import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import StorefrontOutlinedIcon from '@mui/icons-material/StorefrontOutlined';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import {AiOutlineHome} from "react-icons/ai";
 
 
 export default function Navbar() {
@@ -44,7 +45,7 @@ export default function Navbar() {
   return (
     <nav className="navbar">
           <Link className="home-icon" to="/">
-            <HomeOutlinedIcon text={"Hi"} onClick={toggleMenu}/>
+            <AiOutlineHome text={"Hi"} onClick={toggleMenu}/>
           </Link>    
            <ul className="menu">
               {

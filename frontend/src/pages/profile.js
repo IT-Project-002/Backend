@@ -10,7 +10,33 @@ export default function Profile() {
           <img src={female1} alt="female1"></img>
       </div>
       <div className='edit-container'>
-        <div className='edit-left-container'>
+        <form>
+          <div className='edit-left-container'>
+            <div className='input-container'>
+              <input type="text" value ="Ann.b@gmail.com"></input>
+            </div>
+            <div className='input-container'>
+              <input type="text" value ="Ann B"></input>
+            </div>
+            <div className='input-container'>
+              <input type="text" value ="Old Password"></input>
+            </div>
+            <div className='input-container'>
+              <input type="text" value ="New Password"></input>
+            </div>
+
+
+          </div>
+
+          <div className='edit-right-container'>
+            
+          </div>
+
+
+        </form>
+
+
+        {/* <div className='edit-left-container'>
           <ul>
             <li><input type="text" value ="Ann.b@gmail.com"></input></li>
             <li><input type="text" value ="Ann B"></input></li>
@@ -33,7 +59,7 @@ export default function Profile() {
         </div>
         <div className="buttonBox">
           <button>Save Changes</button>
-        </div> 
+        </div>  */}
       </div>
     </div>
     );

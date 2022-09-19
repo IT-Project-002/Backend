@@ -88,9 +88,13 @@ function Login(){
                   required
                 />
               </div>
-              <button onClick={handleSubmit}> Log in </button>
+              <div>
+                <button onClick={handleSubmit}> Log in </button>
+              </div>
+              <div>
+                <button><a href="/user/register">Haven't Sign up?</a></button>
+              </div>
             </form>
-            <a href="/user/register">Haven't Sign up?</a>
           </div>
           <div className="today-container">
             <h2>“Creativity takes courage.”</h2>
