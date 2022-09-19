@@ -6,7 +6,7 @@ import d1 from "../image/drawing.png";
 import {AiFillEyeInvisible, AiFillEye, AiTwotoneMail} from "react-icons/ai";
 
 function Login(){
-  const nav = useNavigate();
+  // const nav = useNavigate();
   const userRef = useRef();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -91,39 +91,7 @@ function Login(){
               <button onClick={handleSubmit}> Log in </button>
             </form>
             <a href="/user/register">Haven't Sign up?</a>
-
-
-            {/* <form>
-              <h2 className='welcom'>Welcome Back!</h2>
-              <label>
-                <AiTwotoneMail/>
-              </label>
-              <input
-                type="email"
-                className="form-control"
-                ref={userRef}
-                placeholder="Email"
-                value={email}
-                onChange = {(e) => setEmail(e.target.value)}
-                required
-                />
-              <label className='login-password'>
-                {!isShown ? <AiFillEye onClick={togglePassword}/> :<AiFillEyeInvisible className="eye-icon" onClick={togglePassword}/>}
-              </label>
-              <input
-                type={isShown ? "text" : "password"}
-                className="form-control"
-                placeholder="Password"
-                value={password}
-                onChange = {(e) => setPassword(e.target.value)}
-                required
-              />
-              <button className='login-button' onClick={handleSubmit}> Log in </button>
-            </form>
-            <a className="signup-button" href="/user/register">Haven't Sign up?</a> */}
           </div>
-
-         
           <div className="today-container">
             <h2>“Creativity takes courage.”</h2>
             <p>- Henri Matisse</p>
