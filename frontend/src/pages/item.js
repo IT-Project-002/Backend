@@ -22,8 +22,8 @@ export default function Item() {
               invidunt ut labore et ut labore et dolore magna aliquyam erat.
             </p>
           </li>
-          <li className="item-status"><button>Available</button></li>
-          <li className="item-contact"><button>ann.b@gmail.com</button></li>
+          <li className="item-status"><p>Available</p></li>
+          <li className="item-contact"><p>ann.b@gmail.com</p></li>
         </ul>
       </div>
     </div>
