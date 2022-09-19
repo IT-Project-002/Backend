@@ -17,6 +17,7 @@ class RegistrationForm(wtforms.Form):
     password = wtforms.StringField(validators=[length(min=6, max=20)])
     matchPwd = wtforms.StringField(validators=[EqualTo("password")])
     bio = wtforms.StringField(validators=[length(min=0, max=200)])
+    avatar = wtforms.StringField(validators=[length(min=0, max=10)])
     # def validate_captcha(self,field):
     #     captcha = field.data
     #     email = self.email.data

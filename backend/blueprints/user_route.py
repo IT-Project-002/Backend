@@ -16,14 +16,15 @@ def register():
     if request.method == 'GET':
         return {1:'register'}
     else:
+        print(json.loads(request.data))
         form = RegistrationForm.from_json(json.loads(request.data))
         email = form.email.data
         username = form.username.data
         password = form.password.data
         hash_password = generate_password_hash(password)
         bio = form.bio.data
-        print(bio)
-        user = UserModel(email=email, username=username, password=hash_password, bio=bio)
+        avatar = form.avatar.data
+        user = UserModel(email=email, username=username, password=hash_password, bio=bio, avatar=avatar)
         db.session.add(user)
         db.session.commit()
         return redirect(url_for("user.login"))
@@ -60,7 +61,8 @@ def market():
             "username": user.username,
             "userEmail": user.email,
             "JoinTime": user.join_time,
-            "Bio": user.bio
+            "Bio": user.bio,
+            "Avatar": user.avatar
           }
 
 

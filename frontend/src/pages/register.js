@@ -66,7 +66,7 @@ function Registration() {
     e.preventDefault();
     
     // check form validation
-    if(validName && validEmail && validPwd && validPwd){
+    if(validName && validEmail && validPwd && validPwd && avatar){
       const userInfo = { username, email, password, matchPwd, bio, avatar};
       console.log(userInfo);
       history('/user/login');
