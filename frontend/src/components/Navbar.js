@@ -1,15 +1,13 @@
 import React, {useState} from "react";
 import { Link, useMatch, useResolvedPath, useLocation } from "react-router-dom";
 import "../css/style.css";
-// import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import FiberNewOutlinedIcon from '@mui/icons-material/FiberNewOutlined';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import StorefrontOutlinedIcon from '@mui/icons-material/StorefrontOutlined';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+
 
 export default function Navbar() {
   const token = sessionStorage.getItem("access_token")
@@ -45,19 +43,10 @@ export default function Navbar() {
 
   return (
     <nav className="navbar">
-           <ul>
-              <Link to="/">
-                  <HomeOutlinedIcon onClick={toggleMenu}/>
-              </Link>
-              <CustomLink to="/user/about">
-                  <InfoOutlinedIcon />
-              </CustomLink>
-              {
-              (token && token!=='' &&token!==undefined)?
-                  <CustomLink to="/user/profile">
-                     <AccountCircleOutlinedIcon />
-                  </CustomLink>:''
-              }
+          <Link className="home-icon" to="/">
+            <HomeOutlinedIcon text={"Hi"} onClick={toggleMenu}/>
+          </Link>    
+           <ul className="menu">
               {
               (token && token!=='' &&token!==undefined)?
                   <CustomLink to="/user/myFav">
@@ -70,19 +59,24 @@ export default function Navbar() {
                      <StorefrontOutlinedIcon />
                   </CustomLink>:''
               }
-              {
-              (token && token!=='' &&token!==undefined)?
-                  <CustomLink to="/user/upload">
-                     <AddCircleOutlineRoundedIcon />
-                  </CustomLink>:''
-              }
 
               {
               (token && token!=='' &&token!==undefined)?'':
                   <CustomLink to="/user/login">
-                     <FiberNewOutlinedIcon/>
+                     <AccountCircleOutlinedIcon/>
                   </CustomLink>
               }
+
+              {
+              (token && token!=='' &&token!==undefined)?
+                  <CustomLink to="/user/profile">
+                     <AccountCircleOutlinedIcon />
+                  </CustomLink>:''
+              }
+
+              <CustomLink to="/user/about">
+                  <InfoOutlinedIcon />
+              </CustomLink>
 
               {
               (token && token!=='' &&token!==undefined)?
@@ -91,20 +85,51 @@ export default function Navbar() {
                   </CustomLink>:''
               }
            </ul>
-      {/* menu */}
-      {/* <ul className={isShown? "menu-list" : "offscreen"}>
-        <li>Username</li>
-        <CustomLink to="/user/profile">
-          My Profile
-        </CustomLink>
-        <CustomLink to="/user/market">
-          My Market
-        </CustomLink>
-        <li>Sign Out</li>
-        <li>Handicraft Website</li>
-        <li>About This Website</li>
-        <li>About Us</li>
-      </ul> */}
+           {/* <ul className="side-menu">
+              {
+              (token && token!=='' &&token!==undefined)?
+                  <CustomLink to="/user/myFav">
+                    <p>MyFav</p>
+                  </CustomLink>:''
+              }
+              {
+              (token && token!=='' &&token!==undefined)?
+                  <CustomLink to="/user/market">
+                    <p>Market</p>
+                  </CustomLink>:''
+              }
+              {
+              (token && token!=='' &&token!==undefined)?
+                  <CustomLink to="/user/upload">
+                    <p>Upload</p>
+                  </CustomLink>:''
+              }
+
+              {
+              (token && token!=='' &&token!==undefined)?'':
+                  <CustomLink to="/user/login">
+                    <p>Login</p>
+                  </CustomLink>
+              }
+
+              {
+              (token && token!=='' &&token!==undefined)?
+                  <CustomLink to="/user/profile">
+                    <p>Profile</p>
+                  </CustomLink>:''
+              }
+
+              <CustomLink to="/user/about">
+                  <p>About</p>
+              </CustomLink>
+
+              {
+              (token && token!=='' &&token!==undefined)?
+                  <CustomLink to="/user/login">
+                     <p onClick={logMeOut}>Logout</p>
+                  </CustomLink>:''
+              }
+           </ul> */}
     </nav>
   );
 }

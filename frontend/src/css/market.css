@@ -3,61 +3,92 @@
 
 .layout-market {
   grid-area: main;
-  margin-top: 9vh;
-  padding: 1.5vw;
+  margin: 15vh 3vw;
   display: grid;
-  grid-template-columns: 1fr 1fr 2fr;
+  grid-template-columns: 1fr 0.5fr 3fr;
   grid-template-areas:
     "user-avatar user-intro user-collection";
-  grid-gap: 2rem;
+  grid-gap: 2vw;
   padding: 10px;
 }
 
 /* ===================================================== */
 /* Responsive design */
 
-@media screen and (max-width:800px) {
+@media screen and (max-width:1300px) {
   .layout-market {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-areas:
       "user-intro"
       "user-collection";
-    padding: 10px;
-    text-align: left;
+    text-align: center;
+  }
+
+  .user-intro-container {
+    visibility: hidden;
   }
 
   .user-avatar-container {
     visibility: hidden;
   }
+
+  .user-collection-container {
+    grid-area: user-collection;
+    display:grid;
+    grid-gap:5px;
+    padding-left:2%;
+    padding-right:2%;
+    text-align: center;
+    margin-bottom:5vh;
+  }
 }
 
-
 /* ===================================================== */
-/* User Introduction */
+/* User Avatar */
 
 .user-avatar-container {
   grid-area: user-avatar;
   display: grid;
-  /* background-image: url(../image/full-profile-background.png); */
+}
+
+.user-avatar {
+  position: fixed;
+  left:0;
+  bottom:0;
+  height: 90vh;
+  width: auto;
+}
+
+.user-avatar-bg {
+  position: fixed;
+  left:0;
+  bottom:0;
+  height:90vh;
+  width:auto;
+  z-index:-1;
 }
 
 /* ===================================================== */
 /* User Introduction */
 
 .user-intro-container {
-  grid-area: user-intro;
-  /* background-image: url(../image/full-profile-background.png); */
+    grid-area: user-intro;
+    position: fixed;
+    width:15vw;
+    margin-top:10vh;
+    margin-left:15vw;
 }
 
-.user-full-profile {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  height: 90vh;
-  width: auto;
+.user-intro-container svg {
+  width: 40px;
+  height: 40px;
 }
 
+.divider {
+  border:1px solid #C5C1A4;
+  border-radius: 10px;
+}
 
 /* ===================================================== */
 /* User Collections */
@@ -65,14 +96,20 @@
 .user-collection-container {
   grid-area: user-collection;
   display: grid;
-  grid-template-columns: repeat(2, 50%);
-  grid-gap: 5%;
-  padding: 5%;
+  grid-template-columns: repeat(auto-fit,190px);
+  grid-gap: 20px;
+  padding-left: 15%;
   text-align: center;
+  margin-bottom:10vh;
 }
 
+
 .user-collection-container img {
-  width: 80%;
+  width: 100%;
   height: auto;
-  border-radius: 10px;
+  border-radius: 18px;
+}
+
+.user-collection-container h3 {
+  margin: 0;
 }

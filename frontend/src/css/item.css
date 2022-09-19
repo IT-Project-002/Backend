@@ -3,13 +3,12 @@
 
 .layout-item {
     grid-area: main;
-    margin-top: 9vh;
-    padding: 1.5vw;
+    margin: 10vh 3vw;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
       "item-img item-desc";
-    grid-gap: 0px;
+    grid-gap: 2vw;
     padding: 10px;
     text-align: center;
   }

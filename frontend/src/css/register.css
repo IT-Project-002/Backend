@@ -3,8 +3,7 @@
 
 .layout-register {
   grid-area: main;
-  margin-top: 9vh;
-  padding: 1.5vw;
+  margin: 10vh 2vw;
   display: grid;
   grid-template-columns: 1fr 2fr;
   grid-template-areas:

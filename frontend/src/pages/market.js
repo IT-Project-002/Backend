@@ -4,6 +4,9 @@ import item1 from "../image/cloudsFav.png";
 import item2 from "../image/CloudsPainting.png";
 import item3 from "../image/embroFav.png";
 import item4 from "../image/necklaceLanding.png";
+import background from "../image/profile-photo-bg.png";
+import AddAPhotoOutlinedIcon from '@mui/icons-material/AddAPhotoOutlined';
+
 import React, { useState, useEffect } from 'react'
 
 export default function Market() {
@@ -21,7 +24,7 @@ export default function Market() {
             })
             .then(res => {
                 console.log(res)
-                if(res.status == 401){
+                if(res.status === 401){
                     sessionStorage.removeItem('access_token')
                     window.location.href = "http://localhost:3000/user/login"
                 }else{
@@ -38,29 +41,45 @@ export default function Market() {
       <div className="layout-market" >
 
         <div className="user-avatar-container">
-            <img className="user-full-profile" src={annB} alt="annB" ></img>
+            <img className="user-avatar" src={annB} alt="annB"></img>
+            <img className="user-avatar-bg" src={background} alt="background"></img>
         </div>
 
         <div className="user-intro-container">
+            <a href="/user/upload"><AddAPhotoOutlinedIcon/></a>
+            <p>Click to upload more items.</p>
+            <hr className="divider"></hr>
             <h1>{data['username']}'s Marketplace</h1>
-            <p>Lorem ipsum dolor sit amet,data consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</p>
+            <p>Lorem ipsum dolor sit amet,data consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.  </p>
         </div>
         <div className="user-collection-container">
-            <div>
+            <div className="market-column">
                 <img src={item1} alt="item1" ></img>
                 <h3>Item1</h3>
             </div>
-            <div>
-                <img src={item2} alt="item2" ></img>
-                <h3>Item2</h3>
+            <div className="market-column">
+                <img src={item1} alt="item1" ></img>
+                <h3>Item1</h3>
             </div>
-            <div>
-                <img src={item3} alt="item3" ></img>
-                <h3>Item3</h3>
+            <div className="market-column">
+                <img src={item1} alt="item1" ></img>
+                <h3>Item1</h3>
             </div>
-            <div>
-                <img src={item4} alt="item4" ></img>
-                <h3>Item4</h3>
+            <div className="market-column">
+                <img src={item1} alt="item1" ></img>
+                <h3>Item1</h3>
+            </div>
+            <div className="market-column">
+                <img src={item1} alt="item1" ></img>
+                <h3>Item1</h3>
+            </div>
+            <div className="market-column">
+                <img src={item1} alt="item1" ></img>
+                <h3>Item1</h3>
+            </div>
+            <div className="market-column">
+                <img src={item1} alt="item1" ></img>
+                <h3>Item1</h3>
             </div>
         </div>
       </div>

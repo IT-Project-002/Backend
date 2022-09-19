@@ -3,16 +3,53 @@
 
 .layout-landing {
   grid-area: main;
-  margin-top: 9vh;
+  margin: 10vh 3vw;
   padding: 1.5vw;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-areas:
     "slider"
     "browse";
-  grid-gap: 2rem;
+  grid-gap: 2vw;
   padding: 10px;
   text-align: center;
+}
+
+/* ===================================================== */
+/* Responsive */
+
+@media screen and (max-width:800px) {
+  .layout-landing {
+    grid-area: main;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "browse";
+    grid-gap: 2vw;
+    padding: 10px;
+    text-align: center;
+  }
+
+  /* .slider-container {
+    display: none;
+  } */
+
+  .browse-container {
+    grid-area: browse;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 5%;
+    margin-bottom:15vh;
+    padding: 5%;
+    text-align: center;
+  }
+
+  .browse-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+
 }
 
 /* ===================================================== */
@@ -20,8 +57,7 @@
 
 .slider-container {
   grid-area: slider;
-  padding-left: 4%;
-  padding-right: 5%;
+  padding:5%;
 }
 
 .slider {
@@ -34,9 +70,11 @@
 .browse-container {
   grid-area: browse;
   display: grid;
-  grid-template-columns: repeat(4, 20%);
-  grid-gap: 5%;
+  grid-template-columns: repeat(auto-fit,13rem);
+  grid-gap: 1rem;
+  margin-bottom:15vh;
   padding: 5%;
+  text-align: center;
 }
 
 .browse-container img {
