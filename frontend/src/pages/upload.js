@@ -104,7 +104,6 @@ export default function Upload() {
                         isLoading={false}
                         isRtl={false}
                         closeMenuOnSelect={false}
-                        style={styles.select}
                     />  
                     <button className="button" type='submit'>Save Changes</button>
                 </form>
