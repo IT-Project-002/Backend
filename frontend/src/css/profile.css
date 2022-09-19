@@ -1,7 +1,6 @@
 /* ===================================================== */
 /* Grid template */
 
-
 .layout-profile {
   grid-area: main;
   margin-top: 0;
@@ -31,8 +30,6 @@ justify-content: center;
 width: 20%;
 position: fixed;
 }
-
-
 
 /* ===================================================== */
 /* Edit */

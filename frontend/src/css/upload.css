@@ -85,6 +85,14 @@
     border-radius: 40px;
 }
 
+.upload-container svg:hover {
+    width: 250px;
+    height: 250px;
+    color: white;
+    background-color: black;
+    border-radius: 40px;
+}
+
 .upload-input {
     display: none;
 }
@@ -99,17 +107,24 @@
 
 .fillin-container input {
     width: 80%;
+    height: 2rem;
     background: transparent;
     border: none;
     border-bottom: 1px solid #000000;
+    text-align: left;
+    font-size: large;
 }
 
-.fillin-container input[text] {
-    text-align: center;
+.fillin-container input:focus {
+    outline:none;
 }
 
 .tag {
     border: none;
     border-radius: 5px;
     background-color: #BCB4A7;   
+}
+
+.fillin-container select {
+    width: 80%;
 }

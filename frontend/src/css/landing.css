@@ -30,9 +30,9 @@
     text-align: center;
   }
 
-  .slider-container {
+  /* .slider-container {
     display: none;
-  }
+  } */
 
   .browse-container {
     grid-area: browse;
@@ -70,8 +70,8 @@
 .browse-container {
   grid-area: browse;
   display: grid;
-  grid-template-columns: auto auto auto auto auto;
-  grid-gap: 5%;
+  grid-template-columns: repeat(auto-fit,13rem);
+  grid-gap: 1rem;
   margin-bottom:15vh;
   padding: 5%;
   text-align: center;

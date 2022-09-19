@@ -2,6 +2,7 @@ import "../css/upload.css";
 import Select from "react-select";
 import React, {useState} from "react";
 import CameraAltRoundedIcon from '@mui/icons-material/CameraAltRounded';
+// import styled from '@emotion/styled'
 
 export default function Upload() {
     const options = [
@@ -55,7 +56,7 @@ export default function Upload() {
                     <CameraAltRoundedIcon className="upload-icon"/>
                     <input className= "upload-input" type="file"  name="itemImages" multiple accept="image/*"  onChange={onSelectFile}/>
                 </label>
-                <p>Maximum 3 photos to be uploaded</p>
+                <p>Maximum 3 photos</p>
             </div>   
             {/* Image preview*/}
             <div className="preview-container">
@@ -103,6 +104,7 @@ export default function Upload() {
                         isLoading={false}
                         isRtl={false}
                         closeMenuOnSelect={false}
+                        style={styles.select}
                     />  
                     <button className="button" type='submit'>Save Changes</button>
                 </form>
