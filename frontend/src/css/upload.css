@@ -3,7 +3,7 @@
 
 .layout-upload {
     grid-area: main;
-    margin-top: 9vh;
+    margin-top: 14vh;
     padding: 1.5vw;
     display: grid;
     grid-template-columns: 1fr 1fr 2fr;
@@ -12,6 +12,30 @@
     grid-gap: 2rem;
 }
 
+/* ===================================================== */
+/* Responsive design */
+
+@media screen and (max-width:800px) {
+    .layout-upload {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "upload" 
+        "fill-in" 
+        "preview";
+      grid-gap: 10px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .preview-container img {
+        max-width: 70%;
+        margin: 4%;
+        border-radius: 20px;
+        box-shadow: 0px 1px 6px 5px rgba(0, 0, 0, 0.2);
+    }
+  }
+  
 /* ===================================================== */
 /* Left section: Preview images */
 
@@ -27,7 +51,6 @@
     border-radius: 20px;
     box-shadow: 0px 1px 6px 5px rgba(0, 0, 0, 0.2);
 }
-
 
 .delete-button {
     width: 30px;
@@ -78,6 +101,7 @@ label {
 
 .fillin-container {
     grid-area: fill-in;
+    text-align: left;
 }
 
 .fillin-container input {

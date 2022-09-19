@@ -39,17 +39,17 @@ function Landing() {
         <a href="/user/item"><img src={item1} alt="item1" ></img></a>
         <a href="/user/item"><img src={item1} alt="item1" ></img></a>
         <a href="/user/item"><img src={item1} alt="item1" ></img></a>
-        <img src={item2} alt="item2" ></img>
-        <img src={item3} alt="item3" ></img>
-        <img src={item4} alt="item4" ></img>
-        <img src={item5} alt="item5" ></img>
-        <img src={item6} alt="item6" ></img>
-        <img src={item7} alt="item7" ></img>
-        <img src={item8} alt="item8" ></img>
-        <img src={item5} alt="item5" ></img>
-        <img src={item6} alt="item6" ></img>
-        <img src={item7} alt="item7" ></img>
-        <img src={item8} alt="item8" ></img>
+        <a href="/user/item"><img src={item1} alt="item1" ></img></a>
+        <a href="/user/item"><img src={item1} alt="item1" ></img></a>
+        <a href="/user/item"><img src={item1} alt="item1" ></img></a>
+        <a href="/user/item"><img src={item1} alt="item1" ></img></a>
+        <a href="/user/item"><img src={item1} alt="item1" ></img></a>
+        <a href="/user/item"><img src={item1} alt="item1" ></img></a>
+        <a href="/user/item"><img src={item1} alt="item1" ></img></a>
+        <a href="/user/item"><img src={item1} alt="item1" ></img></a>
+        <a href="/user/item"><img src={item1} alt="item1" ></img></a>
+        <a href="/user/item"><img src={item1} alt="item1" ></img></a>
+        <a href="/user/item"><img src={item1} alt="item1" ></img></a>
       </div>
       {showModal && <Modal className="pop-up" close = {Toggle}/>}
     </div>

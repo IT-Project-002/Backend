@@ -37,7 +37,17 @@
   .browse-container {
     grid-area: browse;
     display: grid;
-    grid-template-columns: repeat(2, 50%);
+    grid-template-columns: auto auto;
+    grid-gap: 5%;
+    margin-bottom:15vh;
+    padding: 5%;
+    text-align: center;
+  }
+
+  .browse-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
   }
 
 }
@@ -47,8 +57,7 @@
 
 .slider-container {
   grid-area: slider;
-  padding-left: 4%;
-  padding-right: 5%;
+  padding:5%;
 }
 
 .slider {
@@ -61,10 +70,11 @@
 .browse-container {
   grid-area: browse;
   display: grid;
-  grid-template-columns: repeat(4, 20%);
+  grid-template-columns: auto auto auto auto auto;
   grid-gap: 5%;
   margin-bottom:15vh;
   padding: 5%;
+  text-align: center;
 }
 
 .browse-container img {

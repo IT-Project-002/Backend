@@ -1,6 +1,7 @@
 import "../css/upload.css";
 import Select from "react-select";
 import React, {useState} from "react";
+import AddAPhotoOutlinedIcon from '@mui/icons-material/AddAPhotoOutlined';
 
 export default function Upload() {
     const options = [
@@ -49,15 +50,9 @@ export default function Upload() {
 
     return (
         <div className="layout-upload">
-            {/* <div className="preview-container">
-                <img src={sample} alt="sample"></img>
-                <img src={sample} alt="sample"></img>
-                <img src={sample} alt="sample"></img>
-            </div> */}
-            {/* Image uploader*/}
             <div className="upload-container">
                 <label>
-                    <input className= "upload-input" type="file"  name="itemImages" multiple accept="image/*" onChange={onSelectFile}/>
+                    <input className= "upload-input" type="file"  name="itemImages" multiple accept="image/*"  onChange={onSelectFile}/>
                 </label>
                 <p>Note: Maximum 3 photos to be uploaded</p>
             </div>   
