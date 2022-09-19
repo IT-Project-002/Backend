@@ -39,39 +39,6 @@
   text-align: center;
 }
 
-.input-container {
-  display: -ms-flexbox; /* IE10 */
-  display: flex;
-  width: 80%;
-  margin-left: 10%;
-  margin-right: 10%;;
-  margin-bottom: 15px;
-}
-
-.login-container input[type=email],input[type=password],input[type=text] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: none;
-  background: transparent;
-  border-bottom: 1px solid black;
-  box-sizing: border-box;
-  text-align: left;
-}
-
-.login-container input[type=email]:focus,input[type=password]:focus {
-  background: transparent;
-  outline: none;
-}
-
-.login-container svg {
-  width: 25px;
-  height: 25px;
-  position: relative;
-  margin-top: 15px;
-}
-
 /* ===================================================== */
 /* Right section: Today */
 

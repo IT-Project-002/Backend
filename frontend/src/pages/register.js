@@ -1,4 +1,8 @@
 import React, { useRef, useState, useEffect} from "react";
+import PersonIcon from '@mui/icons-material/Person';
+import EmailIcon from '@mui/icons-material/Email';
+import LockIcon from '@mui/icons-material/Lock';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 import {useNavigate} from "react-router-dom";
 import "../css/register.css";
 import "../css/form.css";
@@ -95,72 +99,76 @@ function Registration() {
   return (
     <div className="layout-register">
       <div className="register-container">
-        <ul>
-          <li><h1>New to this site?</h1></li>
-          <li><h1>Let's get you started!</h1></li>
-
-          {/* registration form */}
-          <form  method='post' onSubmit = {handleSubmit}>
-            <li><input
+        <h1>New to this site?</h1>
+        <h1>Let's get you started!</h1>
+        <form  method='post' onSubmit = {handleSubmit}>
+          <div className='input-container'>
+            <i><PersonIcon/></i>
+            <input
               type="text"
-              className="form-control"
               ref={userRef}
               placeholder="Name"
               value={username}
               onChange={(e) => setName(e.target.value)}
               required
-            /></li>
-            <p id="uidnote" className={username && !validName ? "instructions" : "offscreen"}>
+            />  
+          </div>
+          <p id="uidnote" className={username && !validName ? "instructions" : "offscreen"}>
                 3 to 14 characters.<br />
                 Letters, numbers, underscores, hyphens allowed.
-            </p>          
-            <li><input
+            </p>
+          <div className='input-container'>
+            <i><EmailIcon/></i>
+            <input
               type = "email"
-              className="form-control"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-            /></li>
-            <p id="emailnote" className={ email && !validEmail ? "instructions" : "offscreen"}>
+            />
+          </div>
+          <p id="emailnote" className={ email && !validEmail ? "instructions" : "offscreen"}>
               Valid email prefixes: example@mail.com
-            </p>           
-            <li><input
+            </p>
+          <div className='input-container'>
+            <i><LockIcon/></i>
+            <input
               type = "password"
-              className="form-control"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-            /></li>
-            <p id="pwdnote" className={ password && !validPwd ? "instructions" : "offscreen"}>
+            /> 
+          </div>
+          <p id="pwdnote" className={ password && !validPwd ? "instructions" : "offscreen"}>
               8 to 24 characters.<br />
               Must include uppercase, lowercase letters and a number.<br />            
-            </p>   
-            <li><input
+            </p> 
+          <div className='input-container'>
+            <i><LockIcon/></i>
+            <input
               type = "password"
-              className="form-control"
               placeholder="Comfirmed Password"
               value={matchPwd}
               onChange={(e) => setMatchPwd(e.target.value)}
               required             
-            /></li>
-            <p id="pwdnote" className={ matchPwd && !validMatch ? "instructions" : "offscreen"}>
+            />
+          </div>
+          <p id="pwdnote" className={ matchPwd && !validMatch ? "instructions" : "offscreen"}>
               Passwords did not match 
             </p> 
-            <li><textarea 
+          <div className='input-container'>
+            <i><BorderColorIcon/></i>
+            <textarea 
                 type="text"
-                className="form-bio"
                 placeholder="Tell us a bit more about you…"
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
-            /></li>
-            <li><button className="button" type='submit'>  Sign me Up!  </button></li>
-          </form>
-          <li><a href="/user/login" className="button">Already registered?</a></li>
-        </ul>
+            />
+          </div>
+          <button className="button" type='submit'>  Sign Up  </button>
+        </form>
       </div>
-      {/* Avatar selection */}
       <div className="bubble-container">
         <h2>Pick your profile picture…</h2>
         <img src={female1} alt="female1" className = "avatar2" onClick={handleClick}></img>
