@@ -4,12 +4,9 @@ import "../css/style.css";
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import StorefrontOutlinedIcon from '@mui/icons-material/StorefrontOutlined';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
-import { ProSidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
-import 'react-pro-sidebar/dist/css/styles.css';
 
 
 export default function Navbar() {
@@ -60,12 +57,6 @@ export default function Navbar() {
               (token && token!=='' &&token!==undefined)?
                   <CustomLink to="/user/market">
                      <StorefrontOutlinedIcon />
-                  </CustomLink>:''
-              }
-              {
-              (token && token!=='' &&token!==undefined)?
-                  <CustomLink to="/user/upload">
-                     <AddCircleOutlineRoundedIcon />
                   </CustomLink>:''
               }
 

@@ -72,6 +72,16 @@
   margin-left:16vw;
 }
 
+.user-intro-container svg {
+  width: 40px;
+  height: 40px;
+}
+
+.divider {
+  border:1px solid #C5C1A4;
+  border-radius: 10px;
+}
+
 /* ===================================================== */
 /* User Collections */
 

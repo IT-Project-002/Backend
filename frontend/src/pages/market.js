@@ -5,6 +5,8 @@ import item2 from "../image/CloudsPainting.png";
 import item3 from "../image/embroFav.png";
 import item4 from "../image/necklaceLanding.png";
 import background from "../image/profile-photo-bg.png";
+import AddAPhotoOutlinedIcon from '@mui/icons-material/AddAPhotoOutlined';
+
 import React, { useState, useEffect } from 'react'
 
 export default function Market() {
@@ -44,6 +46,9 @@ export default function Market() {
         </div>
 
         <div className="user-intro-container">
+            <a href="/user/upload"><AddAPhotoOutlinedIcon/></a>
+            <p>Click to upload more items.</p>
+            <hr className="divider"></hr>
             <h1>{data['username']}'s Marketplace</h1>
             <p>Lorem ipsum dolor sit amet,data consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.  </p>
         </div>
