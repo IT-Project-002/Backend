@@ -5,6 +5,10 @@ import item3 from "../image/about/aboutUs1.png";
 import item4 from "../image/about/aboutUs2.png";
 import item5 from "../image/about/aboutUs3.png";
 import item6 from "../image/about/aboutUs4.png";
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+
+import { ProSidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
+import 'react-pro-sidebar/dist/css/styles.css';
 
 export default function About() {
     return (

@@ -3,15 +3,15 @@
 
 .layout-login {
   grid-area: main;
-  margin-top: 9vh;
-  padding: 1.5vw;
+  margin:25vh 3vw;
   display: grid;
   grid-template-columns: 1fr 2fr;
   grid-template-areas:
     'login today';
-  grid-gap: 0px;
-  padding: 10px;
-  text-align: center;
+  /* background-image: url(../image/background.png);
+  background-repeat: none;
+  background-position: fixed;
+  background-position-x: 100px; */
 }
 
 /* ===================================================== */

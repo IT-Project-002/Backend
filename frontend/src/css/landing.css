@@ -3,16 +3,43 @@
 
 .layout-landing {
   grid-area: main;
-  margin-top: 9vh;
+  margin: 10vh 3vw;
   padding: 1.5vw;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-areas:
     "slider"
     "browse";
-  grid-gap: 2rem;
+  grid-gap: 2vw;
   padding: 10px;
   text-align: center;
+}
+
+/* ===================================================== */
+/* Responsive */
+
+@media screen and (max-width:800px) {
+  .layout-landing {
+    grid-area: main;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "browse";
+    grid-gap: 2vw;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .slider-container {
+    display: none;
+  }
+
+  .browse-container {
+    grid-area: browse;
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+  }
+
 }
 
 /* ===================================================== */
@@ -36,6 +63,7 @@
   display: grid;
   grid-template-columns: repeat(4, 20%);
   grid-gap: 5%;
+  margin-bottom:15vh;
   padding: 5%;
 }
 
