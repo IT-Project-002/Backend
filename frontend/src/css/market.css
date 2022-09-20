@@ -35,12 +35,12 @@
 
   .user-collection-container {
     grid-area: user-collection;
-    display:grid;
-    grid-gap:5px;
-    padding-left:2%;
-    padding-right:2%;
+    display: grid;
+    grid-gap: 5px;
+    padding-left: 2%;
+    padding-right: 2%;
     text-align: center;
-    margin-bottom:5vh;
+    margin-bottom: 5vh;
   }
 }
 
@@ -54,30 +54,30 @@
 
 .user-avatar {
   position: fixed;
-  left:0;
-  bottom:0;
+  left: 0;
+  bottom: 0;
   height: 90vh;
   width: auto;
 }
 
 .user-avatar-bg {
   position: fixed;
-  left:0;
-  bottom:0;
-  height:90vh;
-  width:auto;
-  z-index:-1;
+  left: 0;
+  bottom: 0;
+  height: 90vh;
+  width: auto;
+  z-index: -1;
 }
 
 /* ===================================================== */
 /* User Introduction */
 
 .user-intro-container {
-    grid-area: user-intro;
-    position: fixed;
-    width:15vw;
-    margin-top:10vh;
-    margin-left:15vw;
+  grid-area: user-intro;
+  position: fixed;
+  width: 15vw;
+  margin-top: 10vh;
+  margin-left: 15vw;
 }
 
 .user-intro-container svg {
@@ -86,7 +86,7 @@
 }
 
 .divider {
-  border:1px solid #C5C1A4;
+  border: 1px solid #C5C1A4;
   border-radius: 10px;
 }
 
@@ -96,11 +96,11 @@
 .user-collection-container {
   grid-area: user-collection;
   display: grid;
-  grid-template-columns: repeat(auto-fit,190px);
+  grid-template-columns: repeat(auto-fit, 190px);
   grid-gap: 20px;
   padding-left: 15%;
   text-align: center;
-  margin-bottom:10vh;
+  margin-bottom: 10vh;
 }
 
 
