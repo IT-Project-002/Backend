@@ -3,15 +3,14 @@
 
 .layout-login {
   grid-area: main;
-  margin:25vh 3vw;
+  margin:15vh 3vw;
   display: grid;
   grid-template-columns: 1fr 2fr;
   grid-template-areas:
     'login today';
   /* background-image: url(../image/background.png);
   background-repeat: none;
-  background-position: fixed;
-  background-position-x: 100px; */
+  background-position: fixed; */
 }
 
 /* ===================================================== */
@@ -35,25 +34,9 @@
 
 .login-container {
   grid-area: login;
+  display: grid;
+  padding:5%;
   text-align: center;
-}
-
-.login-container ul {
-  list-style-type: none;
-}
-
-.login-container li {
-  margin: 2.5vh;
-}
-
-.eye-icon {
-  position: fixed;
-  margin-left: 18px;
-  margin-top: 22px;
-}
-
-textarea {
-  resize: none;
 }
 
 /* ===================================================== */

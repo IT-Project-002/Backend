@@ -17,12 +17,13 @@
 /* Responsive design */
 
 @media screen and (max-width:800px) {
-  .main {
+  .layout-register {
     margin: 0;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-areas:
-      "left";
+      "a"
+      "b";
     grid-gap: 10px;
     padding: 10px;
     text-align: left;
@@ -35,14 +36,6 @@
 .register-container {
   grid-area: a;
   text-align: center;
-}
-
-.register-container ul {
-  list-style: none;
-}
-
-.register-container li {
-  margin: 1vh;
 }
 
 /* ===================================================== */

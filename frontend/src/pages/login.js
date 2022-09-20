@@ -5,9 +5,8 @@ import "../css/form.css";
 import d1 from "../image/drawing.png";
 import {AiFillEyeInvisible, AiFillEye, AiTwotoneMail} from "react-icons/ai";
 
-
 function Login(){
-  const nav = useNavigate();
+  // const nav = useNavigate();
   const userRef = useRef();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -58,35 +57,44 @@ function Login(){
 
   if(token && token!=='' &&token!==undefined){
      return  <Navigate replace to="/user/market" />;
-  }else{
+  } else{
       return(
         <div className="layout-login">
           <div className="login-container">
-            <ul>
-              <li><h2>Welcome Back!</h2></li>
-                <form>
-                  <li>< AiTwotoneMail className="eye-icon"/><input
-                        type="email"
-                        className="form-control"
-                        ref={userRef}
-                        placeholder="Email"
-                        value={email}
-                        onChange = {(e) => setEmail(e.target.value)}
-                        required
-                  /></li>
-                  <li>{!isShown ? <AiFillEye className="eye-icon" onClick={togglePassword}/> :<AiFillEyeInvisible className="eye-icon" onClick={togglePassword}/>}<input
-                        type={isShown ? "text" : "password"}
-                        className="form-control"
-                        placeholder="Password"
-                        value={password}
-                        onChange = {(e) => setPassword(e.target.value)}
-                        required
-                  />
-                  </li>
-                    <li><button className='button' onClick={handleSubmit}> Log in </button></li>
-                </form>
-                <li><a href="/user/register">Haven't Sign up?</a></li>
-              </ul>
+            <h1>Welcome</h1>
+            <form>
+              <div className='input-container'>
+                <i><AiTwotoneMail/></i>
+                <input
+                type="email"
+                className="input-field"
+                ref={userRef}
+                placeholder="Email"
+                value={email}
+                onChange = {(e) => setEmail(e.target.value)}
+                required
+                />
+              </div>
+              <div className='input-container'>
+                <label className='login-icon'>
+                  {!isShown ? <AiFillEye onClick={togglePassword}/> :<AiFillEyeInvisible onClick={togglePassword}/>}
+                </label>
+                <input
+                  type={isShown ? "text" : "password"}
+                  className="input-field"
+                  placeholder="Password"
+                  value={password}
+                  onChange = {(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+              <div>
+                <button onClick={handleSubmit}> Log in </button>
+              </div>
+              <div>
+                <button><a href="/user/register">Haven't Sign up?</a></button>
+              </div>
+            </form>
           </div>
           <div className="today-container">
             <h2>“Creativity takes courage.”</h2>

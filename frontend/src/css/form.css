@@ -1,48 +1,78 @@
-.form-control {
-  width: 80%;
-  height: 3rem;
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid #000000;
-  /* 向外阴影x 偏移量 | y 偏移量 | 阴影模糊半径 | 阴影扩散半径 | 阴影颜色 */
-  box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.1);
-  /* 阴影向内 | x 偏移量 | y 偏移量 | 阴影颜色 */
-  /* box-shadow: inset 0px 1px 4px 2px rgba(0, 0, 0, 0.2); */
-}
-
-.form-bio {
-  margin-top: 3%;
-  background-color: white;
-  height: 80px;
-  width: 315px;
-  font-size: 15px;
-  border-style: none;
-  border-radius: 20px;
-  padding-top: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
-  box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.1);
-}
-
-button {
-  margin-top: 3%;
-  height: 30px;
-  width: 200px;
-  font-size: 15px;
-}
-
-input::-webkit-input-placeholder {
-  position: relative;
-  left: 15px;
-}
-
-.form-control {
-  text-indent: 40px;
-}
-
+/* ===================================================== */
+/* Error message */
 .instructions {
   font-size: 0.75rem;
+  margin-top: 0;
   position: relative;
   color: firebrick;
   font-weight: bold;
+}
+
+/* ===================================================== */
+/* Input styles */
+
+.input-container {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  width: 60%;
+  margin-left: 20%;
+  margin-right: 20%;;
+  margin-bottom: 15px;
+  font-size: medium;
+}
+
+.input-container input[type=email],input[type=password],input[type=text],input[type=number] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: none;
+  background: transparent;
+  border-bottom: 1px solid black;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.input-container input[type=email]:focus,input[type=password]:focus,input[type=text]:focus {
+  background: transparent;
+  outline: none;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow:200px 200px 100px #fcf8f4 inset; 
+  box-shadow:200px 200px 100px #fcf8f4 inset; 
+  border-radius: none;
+}
+
+/* ===================================================== */
+/* Input icon */
+
+.input-container svg {
+  width: 25px;
+  height: 25px;
+  color:#707070;
+  position: relative;
+  margin-top: 15px;
+}
+
+/* ===================================================== */
+/* Textarea (bio) */
+
+textarea {
+  font-family: "Ariel";
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: none;
+  background: transparent;
+  border-bottom: 1px solid black;
+  box-sizing: border-box;
+  text-align: left;
+  resize: none;
+}
+
+textarea:focus {
+  background: transparent;
+  outline: none;
 }

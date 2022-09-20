@@ -18,6 +18,24 @@
 }
 
 /* ===================================================== */
+/* Responsive design */
+
+@media screen and (max-width:800px) {
+  .edit-container {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+     "edit-left" 
+     "edit-right"
+     "button";
+    grid-gap: 10px;
+    padding: 10px;
+    text-align: left;
+  }
+}
+
+/* ===================================================== */
 /* Profile Photo */
 
 .profile-photo-container {
@@ -65,7 +83,7 @@ justify-content: center;
 .edit-left-container {
 margin-top: 20%;
 grid-area: edit-left;
-display: flex;
+/* display: flex; */
 width: 100%;
 align-items: center;
 
@@ -78,13 +96,13 @@ align-items: center;
 .edit-right-container {
 margin-top: 20%;
 grid-area: edit-right;
-display: flex;
+/* display: flex; */
 width: 100%;
 align-items:center;
 }
 
 #contactSelect {
-width: 80%;
+width: 45%;
 height: 3rem;
 background: transparent;
 border: none;
@@ -94,20 +112,34 @@ text-align: center;
 
 /* ===================================================== */
 
-.layout-profile ul {
-list-style: none;
-min-width: 100%;
-padding-left: 0;
-}
-
 .layout-profile input {
-text-align: center;
-}
-
-.layout-profile input {
-width: 80%;
+width: 75%;
 height: 3rem;
 background: transparent;
 border: none;
 border-bottom: 1px solid #000000;
+}
+
+
+.selector-container {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  width: 100%;
+  margin-left: 20%;
+  margin-right: 20%;;
+  margin-bottom: 15px;
+  font-size: medium;
+}
+
+.selector-container svg {
+  width: 25px;
+  height: 25px;
+  color:#707070;
+  position: relative;
+  margin-top: 15px;
+}
+
+.selector-container select:focus {
+  background: transparent;
+  outline: none;
 }
