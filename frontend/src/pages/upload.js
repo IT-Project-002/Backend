@@ -1,6 +1,20 @@
 import "../css/upload.css";
 import Select from "react-select";
 import React, {useState} from "react";
+import AWS from 'aws-sdk'
+
+const S3_BUCKET ='it-project-002';
+const REGION ='ap-southeast-2';
+
+AWS.config.update({
+    accessKeyId: 'AKIA3V2C4OGZ2UVFEEHG',
+    secretAccessKey: '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'
+})
+
+const s3 = new AWS.S3({
+    params: { Bucket: S3_BUCKET},
+    region: REGION,
+})
 
 export default function Upload() {
     const options = [
@@ -21,19 +35,42 @@ export default function Upload() {
 
     /* Image */
     const [selectedImages, setSelectedImages] = useState([]);
+    const [progress , setProgress] = useState(0);
+    const [selectedFile, setSelectedFile] = useState(null);
 
-    const onSelectFile = (event) => {
-      const selectedFiles = event.target.files;
-      const selectedFilesArray = Array.from(selectedFiles);
-  
-      const imagesArray = selectedFilesArray.map((file) => {
-        return URL.createObjectURL(file);
-      });
-      // save the previous selected images
-      setSelectedImages((previousImages) => previousImages.concat(imagesArray));
-      // FOR BUG IN CHROME
-      event.target.value = "";
+    const onSelectFile = (e) => {
+        //   const selectedFiles = event.target.files;
+        //   const selectedFilesArray = Array.from(selectedFiles);
+    
+        //   const imagesArray = selectedFilesArray.map((file) => {
+        //     return URL.createObjectURL(file);
+        //   });
+        //   // save the previous selected images
+        //   setSelectedImages((previousImages) => previousImages.concat(imagesArray));
+        //   // FOR BUG IN CHROME
+        //   event.target.value = "";
+        setSelectedFile(e.target.files[0]);
     };
+
+    const uploadFile = (file) => {
+
+        // console.log(file.name)
+
+        const params = {
+            ACL: 'public-read',
+            Body: file,
+            Bucket: S3_BUCKET,
+            Key: `lily/${file.name}`
+        };
+
+        s3.putObject(params)
+            .on('httpUploadProgress', (evt) => {
+                setProgress(Math.round((evt.loaded / evt.total) * 100))
+            })
+            .send((err) => {
+                if (err) console.log(err)
+            })
+    }
 
     const deleteImage = (image) => {
         setSelectedImages(selectedImages.filter((e) => e !== image));
@@ -43,8 +80,24 @@ export default function Upload() {
     const handleSubmit = (e) => {
         // prevent page being refresh
         e.preventDefault();
+        console.log(e.target.files)
         const itemInfo = {itemName, price, describtion, tags, selectedImages}
-        console.log(itemInfo)
+        console.log(itemInfo);
+        fetch('http://localhost:9000/user/upload',{
+            headers : {
+                'Content-Type':'application/json',
+                'Access-Control-Allow-Origin': '*',
+            },
+            method: 'POST',
+            mode: 'cors',
+            body: JSON.stringify(itemInfo)
+        })
+        .then(response => {
+            console.log('hi:', response);
+        })
+        .then(itemInfo => {
+            console.log('Success:', itemInfo);
+        })
     }
 
     return (
@@ -57,7 +110,7 @@ export default function Upload() {
             {/* Image uploader*/}
             <div className="upload-container">
                 <label>
-                    <input className= "upload-input" type="file"  name="itemImages" multiple accept="image/*" onChange={onSelectFile}/>
+                    <input className= "upload-input" type="file"  name="itemImages" multiple accept="image/*" onChange={uploadFile}/>
                 </label>
                 <p>Upload more photos</p>
             </div>
@@ -76,7 +129,7 @@ export default function Upload() {
                 }
             </div>
             <div className="fillin-container">
-                <form method='post' onSubmit = {handleSubmit}>
+                <form method='post' onSubmit = {handleSubmit} enctype="multipart/form-data">
                     <h2>Name your cute work?</h2>
                     <input type="text"
                         value={itemName}

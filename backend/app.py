@@ -5,14 +5,19 @@ import config
 from blueprints import user_bp
 from connections import mail, db
 from flask_migrate import Migrate
+import boto3
 
 from models import UserModel
 
 app = Flask(__name__)
-cors = CORS(app)
+cors = CORS(app, resources={'/*':{'origins': 'http://localhost:3000'}})
 app.config.from_object(config)
 db.init_app(app)
 mail.init_app(app)
+# s3 = boto3.client('s3',
+#             region_name = app.config.get("REGION_NAME"),
+#             aws_access_key_id = app.config.get("AWS_ACCESS_KEY_ID"),
+#             aws_secret_access_key = app.config.get("AWS_SECRET_ACCESS_KEY"))
 
 migrate = Migrate(app, db)
 
