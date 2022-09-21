@@ -1,5 +1,5 @@
 import "../css/item.css";
-import Slider from "../components/image-slider";
+import Slider from "../components/imageSlider";
 
 export default function Item() {
   return (

@@ -6,7 +6,7 @@ import Profile from "./pages/profile";
 import MyFav from "./pages/myFav";
 import Market from "./pages/market";
 import Upload from "./pages/upload";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 import Item from "./pages/item";
 import About from "./pages/about";

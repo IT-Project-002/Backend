@@ -12,10 +12,10 @@ export default function Like() {
       <div className = "content">
         <h1>My Favourite</h1>
         <div className = "items">
-        <img className="singleItem" src={item1} alt="item3" ></img>
-        <img className="singleItem" src={item2} alt="item4" ></img>
-        <img className="singleItem" src={item3} alt="item5" ></img>
-        <img className="singleItem" src={item4} alt="item6" ></img>
+          <img className="singleItem" src={item1} alt="item1" ></img>
+          <img className="singleItem" src={item2} alt="item2" ></img>
+          <img className="singleItem" src={item3} alt="item3" ></img>
+          <img className="singleItem" src={item4} alt="item4" ></img>
         </div>
         <div className = "itemsName">
           <h2 className="singleItem">Embroidery Artist Katerina Marchenko</h2>
@@ -23,10 +23,9 @@ export default function Like() {
           <h2 className="singleItem">Spring in Coming in my mug</h2>
           <h2 className="singleItem">Painting: Clouds</h2>
         </div>
-
       </div>
-      <img className="itemhead" src={backgroundTop} alt="item1" ></img>
-      <img className="itemfoot" src={backgroundBottom} alt="item2" ></img>
+      <img className="itemhead" src={backgroundTop} alt="backgroundTop"></img>
+      <img className="itemfoot" src={backgroundBottom} alt="backgroundBottom" ></img>
     </div>
   );
 }
