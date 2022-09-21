@@ -10,7 +10,7 @@ from flask_jwt_extended import create_access_token,get_jwt,get_jwt_identity, \
                                unset_jwt_cookies, jwt_required, JWTManager
 from models import UserModel
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../frontend/build')
 app.config["JWT_SECRET_KEY"] = "please-remember-to-change-me"
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes=10)
 jwt = JWTManager(app)
