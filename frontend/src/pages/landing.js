@@ -1,14 +1,11 @@
 import "../css/landing.css";
 import "../css/modal.css";
 import Modal from "../components/modal"
-import item1 from "../image/cloudsFav.png";
-import item2 from "../image/CloudsPainting.png";
-import item3 from "../image/countryRoadPainting.png";
-import item4 from "../image/embroLanding.png";
-import item5 from "../image/greenMugFav.png";
-import item6 from "../image/necklaceLanding.png";
-import item7 from "../image/strawberrymug.png";
-import item8 from "../image/embroFav.png";
+import item1 from "../image/items/item1.png";
+import item2 from "../image/items/item2.png";
+import item3 from "../image/items/item3.png";
+import item4 from "../image/items/item4.png";
+import item5 from "../image/items/item5.png";
 import Gallery from "../components/Carousel";
 
 import React,{useEffect, useState} from "react"
@@ -34,14 +31,14 @@ function Landing() {
       <div className="browse-container">
         <a href="/user/item"><img src={item1} alt="item1" ></img></a>
         <a href="/user/item"><img src={item2} alt="item1" ></img></a>
-        <a href="/user/item"><img src={item8} alt="item1" ></img></a>
+        <a href="/user/item"><img src={item3} alt="item1" ></img></a>
         <a href="/user/item"><img src={item4} alt="item1" ></img></a>
         <a href="/user/item"><img src={item1} alt="item1" ></img></a>
         <a href="/user/item"><img src={item2} alt="item1" ></img></a>
-        <a href="/user/item"><img src={item8} alt="item1" ></img></a>
+        <a href="/user/item"><img src={item3} alt="item1" ></img></a>
         <a href="/user/item"><img src={item4} alt="item1" ></img></a>
-        <a href="/user/item"><img src={item6} alt="item1" ></img></a>
-        <a href="/user/item"><img src={item7} alt="item1" ></img></a>
+        <a href="/user/item"><img src={item5} alt="item1" ></img></a>
+        <a href="/user/item"><img src={item1} alt="item1" ></img></a>
       </div>
       {showModal && <Modal className="pop-up" close = {Toggle}/>}
     </div>

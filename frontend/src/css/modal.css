@@ -37,7 +37,7 @@
 
 .image-container {
     grid-area: image;
-    background-image: url(../image/modalPlants.png);
+    background-image: url(../image/pages/modalPlants.png);
     background-size: contain;
     background-repeat: no-repeat;
 }

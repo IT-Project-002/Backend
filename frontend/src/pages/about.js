@@ -1,14 +1,10 @@
 import "../css/about.css";
-import item1 from "../image/about/about1.png";
-import item2 from "../image/about/about2.png";
-import item3 from "../image/about/aboutUs1.png";
-import item4 from "../image/about/aboutUs2.png";
-import item5 from "../image/about/aboutUs3.png";
-import item6 from "../image/about/aboutUs4.png";
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-
-import { ProSidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
-import 'react-pro-sidebar/dist/css/styles.css';
+import item1 from "../image/pages/about1.png";
+import item2 from "../image/pages/about2.png";
+import item3 from "../image/pages/aboutUs1.png";
+import item4 from "../image/pages/aboutUs2.png";
+import item5 from "../image/pages/aboutUs3.png";
+import item6 from "../image/pages/aboutUs4.png";
 
 export default function About() {
     return (

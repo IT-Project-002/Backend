@@ -1,8 +1,7 @@
 import React from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
-import sample from "../image/item-sample.png";
-import sample1 from "../image/items/pinkmug.png";
+import sample from "../image/items/item1.png";
 
 
 class Gallery extends React.Component {

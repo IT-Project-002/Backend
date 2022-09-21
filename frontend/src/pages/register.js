@@ -6,12 +6,12 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 import {useNavigate} from "react-router-dom";
 import "../css/register.css";
 import "../css/form.css";
-import female1 from "../image/profile/female1.png";
-import female2 from "../image/profile/female2.png";
-import female3 from "../image/profile/female3.png";
-import male1 from "../image/profile/male1.png";
-import male2 from "../image/profile/male2.png";
-import male3 from "../image/profile/male3.png";
+import female1 from "../image/avatar/female1.png";
+import female2 from "../image/avatar/female2.png";
+import female3 from "../image/avatar/female3.png";
+import male1 from "../image/avatar/male1.png";
+import male2 from "../image/avatar/male2.png";
+import male3 from "../image/avatar/male3.png";
 
 const NAME_REG = new RegExp(/^[A-Z0-9][A-z0-9-_]{3,14}$/i);
 const EMAIL_REG = new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i);

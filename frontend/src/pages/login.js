@@ -2,7 +2,7 @@ import {useState, useEffect, useRef} from 'react'
 import {Navigate, useNavigate} from 'react-router-dom';
 import "../css/login.css";
 import "../css/form.css";
-import d1 from "../image/drawing.png";
+import d1 from "../image/pages/loginDrawer.png";
 import {AiFillEyeInvisible, AiFillEye, AiTwotoneMail} from "react-icons/ai";
 
 function Login(){
