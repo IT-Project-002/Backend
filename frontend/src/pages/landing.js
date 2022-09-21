@@ -51,6 +51,19 @@ function Landing() {
           <div>
             <a href="/user/item"><img src={item2} alt="item1" ></img></a>
           </div>
+          <div>
+            <a href="/user/item"><img src={item4} alt="item1" ></img></a>
+          </div>
+          <div>
+            <a href="/user/item"><img src={item5} alt="item1" ></img></a>
+          </div>
+          <div>
+            <a href="/user/item"><img src={item1} alt="item1" ></img></a>
+          </div>
+          <div>
+            <a href="/user/item"><img src={item2} alt="item1" ></img></a>
+          </div>
+          <div></div>
         </div>
       </div>
       {showModal && <Modal className="pop-up" close = {Toggle}/>}
