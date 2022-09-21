@@ -5,10 +5,16 @@ import female3 from "../image/avatar/female3background.png";
 import male1 from "../image/avatar/male2background.png";
 import male2 from "../image/avatar/male2background.png";
 import male3 from "../image/avatar/male3background.png";
+import EditIcon from '@mui/icons-material/Edit';
 
 import item1 from "../image/items/item1.png";
+import item2 from "../image/items/item2.png";
+import item3 from "../image/items/item3.png";
+import item4 from "../image/items/item4.png";
+import item5 from "../image/items/item5.png";
 import background from "../image/background/marketplace.png";
 import AddAPhotoOutlinedIcon from "@mui/icons-material/AddAPhotoOutlined";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 import React, { useState, useEffect } from "react";
 
@@ -80,34 +86,62 @@ export default function Market() {
           rebum.{" "}
         </p>
       </div>
-      <div className="user-collection-container">
-        <div className="market-column">
-          <img src={item1} alt="item1"></img>
-          <h3>Item1</h3>
-        </div>
-        <div className="market-column">
-          <img src={item1} alt="item1"></img>
-          <h3>Item1</h3>
-        </div>
-        <div className="market-column">
-          <img src={item1} alt="item1"></img>
-          <h3>Item1</h3>
-        </div>
-        <div className="market-column">
-          <img src={item1} alt="item1"></img>
-          <h3>Item1</h3>
-        </div>
-        <div className="market-column">
-          <img src={item1} alt="item1"></img>
-          <h3>Item1</h3>
-        </div>
-        <div className="market-column">
-          <img src={item1} alt="item1"></img>
-          <h3>Item1</h3>
-        </div>
-        <div className="market-column">
-          <img src={item1} alt="item1"></img>
-          <h3>Item1</h3>
+      <div className="user-collection-grid-container">
+        <div className="user-collection-container">
+          <div className="market-item">
+            <EditIcon className="edit-icon"/>
+            <DeleteForeverIcon className="delete-icon"/>
+            <img src={item1} alt="item1"></img>
+            <h3>Embroidery Artist Katerina Marchenko</h3>
+          </div>
+          <div className="market-item">
+            <EditIcon className="edit-icon"/>
+            <DeleteForeverIcon className="delete-icon"/>
+            <img src={item1} alt="item1"></img>
+            <h3>Painting: Clouds</h3>
+          </div>
+          <div className="market-item">
+            <EditIcon className="edit-icon"/>
+            <DeleteForeverIcon className="delete-icon"/>
+            <img src={item2} alt="item1"></img>
+            <h3>Painting: Clouds</h3>
+          </div>
+          <div className="market-item">
+            <EditIcon className="edit-icon"/>
+            <DeleteForeverIcon className="delete-icon"/>
+            <img src={item3} alt="item1"></img>
+            <h3>Embroidery Artist Katerina Marchenko</h3>
+          </div>
+          <div className="market-item">
+            <EditIcon className="edit-icon"/>
+            <DeleteForeverIcon className="delete-icon"/>
+            <img src={item4} alt="item1"></img>
+            <h3>Spring in Coming in my mug</h3>
+          </div>
+          <div className="market-item">
+            <EditIcon className="edit-icon"/>
+            <DeleteForeverIcon className="delete-icon"/>
+            <img src={item5} alt="item1"></img>
+            <h3>Spring in Coming in my mug</h3>
+          </div>
+          <div className="market-item">
+            <EditIcon className="edit-icon"/>
+            <DeleteForeverIcon className="delete-icon"/>
+            <img src={item1} alt="item1"></img>
+            <h3>Painting: Clouds</h3>
+          </div>
+          <div className="market-item">
+            <EditIcon className="edit-icon"/>
+            <DeleteForeverIcon className="delete-icon"/>
+            <img src={item2} alt="item1"></img>
+            <h3>Painting: Clouds</h3>
+          </div>
+          <div className="market-item">
+            <EditIcon className="edit-icon"/>
+            <DeleteForeverIcon className="delete-icon"/>
+            <img src={item3} alt="item1"></img>
+            <h3>Spring in Coming in my mug</h3>
+          </div>
         </div>
       </div>
     </div>
