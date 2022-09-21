@@ -10,7 +10,7 @@ from flask_jwt_extended import create_access_token,get_jwt,get_jwt_identity, \
                                unset_jwt_cookies, jwt_required, JWTManager
 from models import UserModel
 
-app = Flask(__name__, static_folder='../frontend/build', static_url_path='/')
+app = Flask(__name__)#, static_folder='../frontend/build', static_url_path='/')
 app.config["JWT_SECRET_KEY"] = "please-remember-to-change-me"
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes=10)
 jwt = JWTManager(app)
@@ -23,9 +23,9 @@ migrate = Migrate(app, db)
 
 app.register_blueprint(user_bp)
 
-@app.route('/')
-def index():
-    return app.send_static_file('index.html')
+# @app.route('/')
+# def index():
+#     return app.send_static_file('index.html')
 # this part not done yet
 @app.after_request
 def refresh_expiring_jwts(response):
