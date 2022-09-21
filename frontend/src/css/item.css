@@ -3,9 +3,9 @@
 
 .layout-item {
     grid-area: main;
-    margin: 10vh 10vw;
+    margin: 15vh 10vw;
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
+    grid-template-columns: 1fr 0.8fr;
     grid-template-areas:
       "item-img item-desc";
     grid-gap: 5vw;
@@ -15,33 +15,30 @@
 /* ===================================================== */
 /* Responsive design */
 
-@media screen and (max-width:800px) {
+@media screen and (max-width:1023px) {
     .layout-item {
       display: grid;
       grid-template-columns: 1fr;
       grid-template-areas:
         "item-img"
         "item-desc";
-      grid-gap: 10px;
-      padding: 10px;
-      text-align: left;
+      text-align: center;
     }
   }
 
 /* ===================================================== */
 /* Left section: Item image */
 
-.item-img-container {
+.item-img {
     grid-area: item-img;
-    text-align: center;
-    border-radius: 5px;
+    border-radius: 10px;
+    padding: 30px;
     background-color: #C5C1A4;
 }
 
-.item-img-container img {
-    margin-top: 4%;
-    max-width: 90%;
-    max-height: 90%;
+.layout-item img {
+  width: 100%;
+  object-fit: contain;
 }
 
 /* ===================================================== */
@@ -60,9 +57,7 @@
     text-align: left;
 }
 
-/* ===================================================== */
-/* Button */
-
+/* Item status and contact */
 .item-status, .item-contact {
     background-color: #BCB4A7;
     border-radius: 5px;
