@@ -1,10 +1,13 @@
 import "../css/item.css";
-import sample from "../image/item-sample.png";
+import Slider from "../components/image-slider";
 
 export default function Item() {
   return (
     <div className="layout-item">
-      <img className="item-img" src={sample} alt="sample"></img>
+      <div className="item-img" >
+        <Slider/>
+      </div>
+      {/* <img className="item-img" src={sample} alt="sample"></img> */}
       <div className="item-desc-container">
         <h1 className="item-name">Purely Hand-made mug, Perfectly for hot tea in winter.</h1>
         <h1 className="item-price">AU$49.00+</h1>
