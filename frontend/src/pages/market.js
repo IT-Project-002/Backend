@@ -13,7 +13,7 @@ export default function Market() {
     const access_token=sessionStorage.getItem('access_token')
     const [data, setData]= useState({})
     useEffect(()=>{
-        fetch('http://localhost:9000/user/market', {
+        fetch('http://localhost:9000/users/market', {
             headers : {
                 'Content-Type':'application/json',
                 'Access-Control-Allow-Origin': '*',
@@ -26,7 +26,7 @@ export default function Market() {
                 console.log(res)
                 if(res.status === 401){
                     sessionStorage.removeItem('access_token')
-                    window.location.href = "http://localhost:3000/user/login"
+                    window.location.href =window.location.origin +"/user/login"
                 }else{
                     return res.json()
                 }
