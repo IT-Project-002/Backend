@@ -8,23 +8,15 @@ export default function Item() {
           <img src={sample} alt="sample"></img>
       </div>
       <div className="item-desc-container">
-        <ul>
-          <li className="item-name">
-            <h1>Purely Hand-made mug, Perfectly for hot tea in winter.</h1>
-          </li>
-          <li className="item-price">
-            <h1>AU$49.00+</h1>
-          </li>
-          <li className="item-desc">
-            <p>
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et 
-              dolore magna aliquyam erat. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor 
-              invidunt ut labore et ut labore et dolore magna aliquyam erat.
-            </p>
-          </li>
-          <li className="item-status"><p>Available</p></li>
-          <li className="item-contact"><p>ann.b@gmail.com</p></li>
-        </ul>
+        <h1 className="item-name">Purely Hand-made mug, Perfectly for hot tea in winter.</h1>
+        <h1 className="item-price">AU$49.00+</h1>
+        <p className="item-desc">
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et 
+            dolore magna aliquyam erat. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor 
+            invidunt ut labore et ut labore et dolore magna aliquyam erat.
+        </p>
+        <p className="item-status">Available</p>
+        <p className="item-contact">ann.b@gmail.com</p>
       </div>
     </div>
   );

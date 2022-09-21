@@ -3,13 +3,12 @@
 
 .layout-item {
     grid-area: main;
-    margin: 10vh 3vw;
+    margin: 10vh 10vw;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.5fr 1fr;
     grid-template-areas:
       "item-img item-desc";
-    grid-gap: 2vw;
-    padding: 10px;
+    grid-gap: 5vw;
     text-align: center;
   }
 
@@ -50,30 +49,15 @@
 
 .item-desc-container {
     grid-area: item-desc;
-    text-align: center;
-}
-
-.item-desc-container ul {
-    list-style-type: none;
-}
-
-.item-desc-container ul {
+    display: grid;
+    grid-template-rows: 0.1fr 0.1fr 0.1fr 0.05fr 0.05fr;
+    grid-template-areas: 
+      "item-name"
+      "item-price"
+      "item-desc"
+      "item-status"
+      "item-contact";
     text-align: left;
-    max-width: 70%;
-}
-
-.item-status {
-    text-align: center;
-}
-
-.item-contact {
-    text-align: center;
-}
-
-.item-desc-container button {
-    border: none;
-    border-radius: 5px;
-    background-color: #BCB4A7;
 }
 
 /* ===================================================== */
@@ -83,4 +67,5 @@
     background-color: #BCB4A7;
     border-radius: 5px;
     height: 2rem;
+    text-align: center;
 }

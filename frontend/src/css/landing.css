@@ -3,7 +3,7 @@
 
 .layout-landing {
   grid-area: main;
-  margin: 10vh 3vw;
+  margin: 10vh 10vw;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-areas:
