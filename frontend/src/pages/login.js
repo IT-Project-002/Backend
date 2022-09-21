@@ -28,7 +28,7 @@ function Login(){
     const userInfo = {email, password};
     console.log(userInfo)
 
-    fetch('http://localhost:9000/user/login', {
+    fetch('http://localhost:9000/users/login', {
         headers : {
             'Content-Type':'application/json',
             'Access-Control-Allow-Origin': '*'
@@ -45,10 +45,10 @@ function Login(){
         if(data.access_token){
             sessionStorage.setItem("access_token",data.access_token)
             console.log("access_token exist")
-            window.location.href = "http://localhost:3000/user/market"
+            window.location.href = window.location.href
             return data.access_token
         }else{
-            window.location.href = "http://localhost:3000/user/login"
+            window.location.href = window.location.href
         }
     })
     .catch((error) => {
