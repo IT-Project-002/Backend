@@ -31,10 +31,9 @@ export default function Profile() {
             <BorderColorIcon/>
             <input type="text" value ="New Password"></input>
           </div>
-          
         </div>
+        
         <div className='edit-right-container'>
-
           <form>
             <div className='selector-container'>
             <ToggleOffIcon/>
@@ -44,7 +43,6 @@ export default function Profile() {
               </select>
             </div>
           </form>
-
           <div className='input-container'>
             <BorderColorIcon/>
             <input type="text" value ="Bio"></input>

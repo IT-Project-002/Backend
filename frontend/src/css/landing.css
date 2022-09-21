@@ -9,7 +9,6 @@
   grid-template-areas:
     "slider"
     "browse";
-  text-align: center;
 }
 
 /* ===================================================== */
@@ -22,31 +21,28 @@
     grid-template-columns: 1fr;
     grid-template-areas:
       "browse";
-    grid-gap: 2vw;
-    padding: 10px;
-    text-align: center;
   }
 
   .slider-container {
     visibility: hidden;
   }
 
-  .browse-container {
+  .browse-grid-container {
     grid-area: browse;
     display: grid;
-    grid-template-columns: auto auto;
-    grid-gap: 5%;
-    margin-bottom:15vh;
-    padding: 5%;
-    text-align: center;
+  }
+  
+  .browse-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
   }
 
-  .browse-container img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
+  .browse-container > div {
+    width: 50%;
+    padding:10px;
   }
-
+  
 }
 
 /* ===================================================== */
@@ -54,25 +50,38 @@
 
 .slider-container {
   grid-area: slider;
-}
-
-.slider {
-  width: 100%;
+  display: grid;
 }
 
 /* ===================================================== */
 /* Browse Items */
 
-.browse-container {
+
+.browse-grid-container {
   grid-area: browse;
   display: grid;
-  grid-template-columns: repeat(auto-fit,15rem);
-  grid-gap: 1.6rem;
-  margin-bottom:15vh;
+}
+
+.browse-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.browse-container > div {
+  width: 20%;
+  padding:10px;
 }
 
 .browse-container img {
-  width: 100%;
-  height: auto;
+  width:100%;
+  height:100%;
+  object-fit: fill;
   border-radius: 10px;
+}
+
+.browse-container .browse-item {
+  width: 20%;
+  height: auto;
+  padding: 20px;
 }

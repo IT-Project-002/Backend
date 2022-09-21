@@ -28,17 +28,30 @@ function Landing() {
       <div className="slider-container">
         <Gallery autoPlay={false}/>
       </div>
-      <div className="browse-container">
-        <a href="/user/item"><img src={item1} alt="item1" ></img></a>
-        <a href="/user/item"><img src={item2} alt="item2" ></img></a>
-        <a href="/user/item"><img src={item3} alt="item3" ></img></a>
-        <a href="/user/item"><img src={item4} alt="item4" ></img></a>
-        <a href="/user/item"><img src={item1} alt="item1" ></img></a>
-        <a href="/user/item"><img src={item2} alt="item2" ></img></a>
-        <a href="/user/item"><img src={item3} alt="item3" ></img></a>
-        <a href="/user/item"><img src={item4} alt="item4" ></img></a>
-        <a href="/user/item"><img src={item5} alt="item5" ></img></a>
-        <a href="/user/item"><img src={item1} alt="item1" ></img></a>
+      <div className="browse-gird-container">
+        <div className="browse-container">
+          <div>
+            <a href="/user/item"><img src={item1} alt="item1" ></img></a>
+          </div>
+          <div>
+            <a href="/user/item"><img src={item2} alt="item1" ></img></a>
+          </div>
+          <div>
+            <a href="/user/item"><img src={item3} alt="item1" ></img></a>
+          </div>
+          <div>
+            <a href="/user/item"><img src={item4} alt="item1" ></img></a>
+          </div>
+          <div>
+            <a href="/user/item"><img src={item5} alt="item1" ></img></a>
+          </div>
+          <div>
+            <a href="/user/item"><img src={item1} alt="item1" ></img></a>
+          </div>
+          <div>
+            <a href="/user/item"><img src={item2} alt="item1" ></img></a>
+          </div>
+        </div>
       </div>
       {showModal && <Modal className="pop-up" close = {Toggle}/>}
     </div>
