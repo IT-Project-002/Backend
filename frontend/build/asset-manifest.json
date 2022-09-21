@@ -1,0 +1,37 @@
+{
+  "files": {
+    "main.css": "/static/css/main.4a5eedd8.css",
+    "main.js": "/static/js/main.4f3376bf.js",
+    "static/media/necklaceLanding.png": "/static/media/necklaceLanding.9df63015d23f05b2e353.png",
+    "static/media/embroFav.png": "/static/media/embroFav.4a3ef21542bad9a90238.png",
+    "static/media/item-sample.png": "/static/media/item-sample.b16e7008acc3af4abca8.png",
+    "static/media/about2.png": "/static/media/about2.ee70b0c6927cab8e1794.png",
+    "static/media/cloudsFav.png": "/static/media/cloudsFav.5fa35fb4441f563470b3.png",
+    "static/media/CloudsPainting.png": "/static/media/CloudsPainting.cd6e90203f8e8a8ed472.png",
+    "static/media/about1.png": "/static/media/about1.d16b568ac898508bbfc2.png",
+    "static/media/greenMugFav.png": "/static/media/greenMugFav.fc10ed4940d9fa860ed0.png",
+    "static/media/aboutUs3.png": "/static/media/aboutUs3.8fce674850fd5bfa0305.png",
+    "static/media/aboutUs1.png": "/static/media/aboutUs1.e3d87406cd1b6ab35bba.png",
+    "static/media/aboutUs2.png": "/static/media/aboutUs2.cc8b76b416ba862d32ac.png",
+    "static/media/female3.png": "/static/media/female3.059106b59995a70cc978.png",
+    "static/media/modalPlants.png": "/static/media/modalPlants.408ea6fbc0313a6a35bb.png",
+    "static/media/aboutUs4.png": "/static/media/aboutUs4.cb24eb3aa568a469bb06.png",
+    "static/media/AnnB.png": "/static/media/AnnB.892e928ebb4723b2a165.png",
+    "static/media/female1.png": "/static/media/female1.0e1e218e5875511fc984.png",
+    "static/media/male3.png": "/static/media/male3.66c4a7e9e5b0ddd48f8a.png",
+    "static/media/male1.png": "/static/media/male1.05cc525bcd6f851e7647.png",
+    "static/media/male2.png": "/static/media/male2.9c7a3122c7f9c416c07d.png",
+    "static/media/female2.png": "/static/media/female2.1f13a3bfe2d567b713d9.png",
+    "static/media/drawing.png": "/static/media/drawing.c10d75c875518cb65adc.png",
+    "static/media/profile-photo-bg.png": "/static/media/profile-photo-bg.eadab32bc865c8a97107.png",
+    "static/media/myfav1.png": "/static/media/myfav1.df336762893786be370f.png",
+    "static/media/myfav2.png": "/static/media/myfav2.ca65aa2ba7bad11674b1.png",
+    "index.html": "/index.html",
+    "main.4a5eedd8.css.map": "/static/css/main.4a5eedd8.css.map",
+    "main.4f3376bf.js.map": "/static/js/main.4f3376bf.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4a5eedd8.css",
+    "static/js/main.4f3376bf.js"
+  ]
+}
