@@ -11,6 +11,7 @@ import boto3
 from boto.s3.key import Key
 from werkzeug.utils import secure_filename
 import requests
+from io import BytesIO
 bp = Blueprint("user", __name__, url_prefix='/user')
 
 
@@ -60,18 +61,26 @@ def login():
             flash("email or password structure incorrect！")
             return redirect(url_for("user.login"))
 
+
 @bp.route("/upload", methods=['GET', 'POST'])
 def upload():
     if request.method == 'GET':
         return {1:'upload'}
     else:
+        # print(request.files)
+        # file = request.files['files']
+        # filename = file.filename
+        # print(f"Uploading file {filename}")
+        # file_bytes = file.read()
+        # file_content = BytesIO(file_bytes).readlines()
+        # print(file_content)
         form = json.loads(request.data)
         print(form)
         username = "lily"
         name = form["itemName"]
         price = float(form["price"])
         tags = [i["value"] for i in form["tags"]]
-        images = [f"{username}/{name}/{i}" for i in range(len(form["selectedImages"]))]
+        images = [f"{username}/{name}/{i}" for i in range(len(form["images"]))]
         s3 = boto3.client('s3',
                     region_name='ap-southeast-2',
                     aws_access_key_id='AKIA3V2C4OGZ2UVFEEHG',
@@ -86,13 +95,15 @@ def upload():
         #             "ContentType": request.files[i].content_type
         #         }
         #     )
-        # for i in range(len(form['selectedImages'])):
-        #     url = form['selectedImages'][i]
-        #     r = requests.get(url)
-        #     k = Key(bucket_name)
-        #     k.key = f"{username}/{name}/{i}"
-        #     k.content_type = r.headers['content-type']
-        #     k.set_contents_from_string(r.content)
+        for i in range(len(form['images'])):
+            print(i)
+            # url = form['selectedImages'][i]
+            # s = requests.Session()
+            # r = s.get(url)
+            # k = Key(bucket_name)
+            # k.key = f"{username}/{name}/{i}"
+            # k.content_type = r.headers['content-type']
+            # k.set_contents_from_string(r.content)
         product = ProductModel(username=username, name=name, price=price, tags=tags, images=images)
         # db.session.add(product)
         # db.session.commit()

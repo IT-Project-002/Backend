@@ -37,19 +37,24 @@ export default function Upload() {
     const [selectedImages, setSelectedImages] = useState([]);
     const [progress , setProgress] = useState(0);
     const [selectedFile, setSelectedFile] = useState(null);
+    const files = []
+    var form = new FormData();
 
     const onSelectFile = (e) => {
-        //   const selectedFiles = event.target.files;
-        //   const selectedFilesArray = Array.from(selectedFiles);
+        // const file = e.target.files[0];
+        // files.concat(file);
+        // form.append('file', file)
+          const selectedFiles = e.target.files;
+          const selectedFilesArray = Array.from(selectedFiles);
     
-        //   const imagesArray = selectedFilesArray.map((file) => {
-        //     return URL.createObjectURL(file);
-        //   });
-        //   // save the previous selected images
-        //   setSelectedImages((previousImages) => previousImages.concat(imagesArray));
-        //   // FOR BUG IN CHROME
-        //   event.target.value = "";
-        setSelectedFile(e.target.files[0]);
+          const imagesArray = selectedFilesArray.map((file) => {
+            return URL.createObjectURL(file);
+          });
+          // save the previous selected images
+          setSelectedImages((previousImages) => previousImages.concat(imagesArray));
+          // FOR BUG IN CHROME
+          e.target.value = "";
+        // setSelectedFile(e.target.files[0]);
     };
 
     const uploadFile = (file) => {
@@ -80,8 +85,23 @@ export default function Upload() {
     const handleSubmit = (e) => {
         // prevent page being refresh
         e.preventDefault();
-        console.log(e.target.files)
-        const itemInfo = {itemName, price, describtion, tags, selectedImages}
+        var images = selectedImages.map(async (image) => {
+            return await fetch(image)
+                .then(r => r.blob())
+                .then(blobFile => new File([blobFile], image, { type: "image/png" }))
+        })
+        // const getFile = async (i) => {
+        //     await fetch(i).then(r => r.blob()).then(blobFile => new File([blobFile], i, { type: "image/png" }))
+        // }
+        // var images = []
+        // const convertBlob = async() => {
+        //     const imagesPromise = selectedImages.map(getFile);
+        //     images = await Promise.all(imagesPromise);
+        // }
+        // convertBlob();
+        console.log(images);
+        const itemInfo = {itemName, price, describtion, tags, images}
+        itemInfo["files"] = files;
         console.log(itemInfo);
         fetch('http://localhost:9000/user/upload',{
             headers : {
@@ -110,7 +130,7 @@ export default function Upload() {
             {/* Image uploader*/}
             <div className="upload-container">
                 <label>
-                    <input className= "upload-input" type="file"  name="itemImages" multiple accept="image/*" onChange={uploadFile}/>
+                    <input className= "upload-input" type="file"  name="itemImages" multiple accept="image/*" onChange={onSelectFile}/>
                 </label>
                 <p>Upload more photos</p>
             </div>
