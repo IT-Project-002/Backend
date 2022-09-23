@@ -67,12 +67,6 @@ def upload():
     if request.method == 'GET':
         return {1:'upload'}
     else:
-        # file = request.files['files']
-        # filename = file.filename
-        # print(f"Uploading file {filename}")
-        # file_bytes = file.read()
-        # file_content = BytesIO(file_bytes).readlines()
-        # print(file_content)
         form = request.form
         username = "lily"
         name = form.get("itemName")
@@ -98,20 +92,6 @@ def upload():
         db.session.commit()
         return {}
 
-
-# @app.route('/', methods=['POST'])
-# def upload():
-#     if request.method == "POST":
-#         f = request.files['file']
-#         s3.upload_fileobj(
-#             f,
-#             bucket_name,
-#             secure_filename(f.filename),
-#             ExtraArgs={
-#                 "ContentType": f.content_type
-#             }
-#         )
-#     return redirect("/display")
 
 @bp.route("/logout")
 def logout():
