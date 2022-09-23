@@ -14,7 +14,7 @@ import requests
 from io import BytesIO
 from flask_jwt_extended import create_access_token, get_jwt, get_jwt_identity, \
     unset_jwt_cookies, jwt_required, JWTManager
-bp = Blueprint("user", __name__, url_prefix='/user')
+bp = Blueprint("user", __name__, url_prefix='/users')
 
 
 @bp.route("/register", methods=['GET', 'POST'])
@@ -46,8 +46,9 @@ def login():
             email = form.email.data
             password = form.password.data
             user = UserModel.query.filter_by(email=email).first()
+            print(user)
             if user and check_password_hash(user.password, password):
-              create_access_token(identity=email)
+                create_access_token(identity=email)
                 response = {"access_token": create_access_token(identity=email)}
                 return response
             else:
@@ -56,16 +57,18 @@ def login():
             return redirect(url_for("user.login"))
 
 @bp.route("/upload", methods=['GET', 'POST'])
+@jwt_required()
 def upload():
     if request.method == 'GET':
         return {1:'upload'}
     else:
+        current_user = get_jwt_identity()
         form = request.form
-        username = "lily"
+        user = current_user
         name = form.get("itemName")
         price = float(form.get("price"))
         tags = [i["value"] for i in json.loads(form.get("tags"))]
-        images = [f"{username}/{name}/{i}" for i in range(len(request.files))]
+        images = [f"{user}/{name}/{i}" for i in range(len(request.files))]
         s3 = boto3.client('s3',
                     region_name='ap-southeast-2',
                     aws_access_key_id='AKIA3V2C4OGZ2UVFEEHG',
@@ -75,16 +78,15 @@ def upload():
             s3.upload_fileobj(
                 request.files.get(str(i)),
                 bucket_name,
-                f"{username}/{name}/{i}",
+                f"{user}/{name}/{i}",
                 ExtraArgs={
                     "ContentType": request.files.get(str(i)).content_type
                 }
             )
-        product = ProductModel(username=username, name=name, price=price, tags=tags, images=images)
+        product = ProductModel(user=user, name=name, price=price, tags=tags, images=images)
         db.session.add(product)
         db.session.commit()
         return {}
-
 
 @bp.route("/market", methods=['GET'])
 @jwt_required()
