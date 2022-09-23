@@ -15,7 +15,7 @@ class UserModel(db.Model):
 class ProductModel(db.Model):
     __tablename__ = "products"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    username = db.Column(db.String(200), nullable=False)
+    user = db.Column(db.String(200), nullable=False)
     name = db.Column(db.String(200), nullable=False)
     price = db.Column(db.Numeric, nullable=False)
     tags = db.Column(db.ARRAY(db.String(200)), nullable=False)
