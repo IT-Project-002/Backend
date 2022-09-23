@@ -7,7 +7,7 @@
 ### Set up
     - run command 'python3 -m venv env'           :: create a new virtual environment
     - run command 'source env/bin/activate'       :: activate the new environment
-    - run command 'pip install -r requirements'   :: install the required packages
+    - run command 'pip install -r requirements.txt'   :: install the required packages
 
 ### Resolve case: Port already been used
     - run command 'lsof -i:5000'                  :: generate a table with PID
@@ -26,3 +26,4 @@
         - python -m flask db init
         - python -m flask db migrate
         - python -m flask db upgrade
+        - delete from alembic_version;

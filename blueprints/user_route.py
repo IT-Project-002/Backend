@@ -1,5 +1,5 @@
 from tokenize import Double
-from flask import Blueprint, render_template, redirect, url_for, request, session, flash
+from flask import Blueprint, render_template, redirect, url_for, request, session, flash, jsonify
 from blueprints.forms import RegistrationForm, LoginForm
 from connections import mail, db
 from flask_mail import Message
@@ -12,6 +12,8 @@ from boto.s3.key import Key
 from werkzeug.utils import secure_filename
 import requests
 from io import BytesIO
+from flask_jwt_extended import create_access_token, get_jwt, get_jwt_identity, \
+    unset_jwt_cookies, jwt_required, JWTManager
 bp = Blueprint("user", __name__, url_prefix='/user')
 
 
@@ -21,23 +23,17 @@ def register():
         return {1:'register'}
     else:
         print(json.loads(request.data))
-        print(type(json.loads(request.data)))
-        print(type(request.data))
         form = RegistrationForm.from_json(json.loads(request.data))
-        if True:
-            # if form.validate():
-            print("form validate")
-            email = form.email.data
-            username = form.username.data
-            password = form.password.data
-            hash_password = generate_password_hash(password)
-            user = UserModel(email=email, username=username, password=hash_password)
-            db.session.add(user)
-            db.session.commit()
-            # print("done")
-            return redirect(url_for("user.login"))
-        else:
-            return redirect(url_for("user.register"))
+        email = form.email.data
+        username = form.username.data
+        password = form.password.data
+        hash_password = generate_password_hash(password)
+        bio = form.bio.data
+        avatar = form.avatar.data
+        user = UserModel(email=email, username=username, password=hash_password, bio=bio, avatar=avatar)
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for("user.login"))
 
 
 @bp.route("/login", methods=['GET', 'POST'])
@@ -45,22 +41,19 @@ def login():
     if request.method == 'GET':
         return {1:'login'}
     else:
-        print(request)
-        form = LoginForm(request.form)
+        form = LoginForm.from_json(json.loads(request.data))
         if form.validate():
             email = form.email.data
             password = form.password.data
             user = UserModel.query.filter_by(email=email).first()
             if user and check_password_hash(user.password, password):
-                session['user_id'] = user.id
-                return redirect("/")
+              create_access_token(identity=email)
+                response = {"access_token": create_access_token(identity=email)}
+                return response
             else:
-                flash("email or password incorrect！")
                 return redirect(url_for("user.login"))
         else:
-            flash("email or password structure incorrect！")
             return redirect(url_for("user.login"))
-
 
 @bp.route("/upload", methods=['GET', 'POST'])
 def upload():
@@ -93,10 +86,29 @@ def upload():
         return {}
 
 
-@bp.route("/logout")
+@bp.route("/market", methods=['GET'])
+@jwt_required()
+def market():
+    # user name bio ,
+    current_user = get_jwt_identity()
+    user = UserModel.query.filter_by(email=current_user).first()
+    return {
+            "userID": user.id,
+            "username": user.username,
+            "userEmail": user.email,
+            "JoinTime": user.join_time,
+            "Bio": user.bio,
+            "Avatar": user.avatar
+          }
+
+
+@bp.route("/logout", methods=['POST'])
 def logout():
-    session.clear()
-    return redirect(url_for('user.login'))
+    if request.method == 'POST':
+        response = jsonify({"msg": "logout successful"})
+        print("logout la")
+        unset_jwt_cookies(response)
+        return response
 
 
 # not yet ready for connect
