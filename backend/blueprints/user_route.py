@@ -67,46 +67,35 @@ def upload():
     if request.method == 'GET':
         return {1:'upload'}
     else:
-        # print(request.files)
         # file = request.files['files']
         # filename = file.filename
         # print(f"Uploading file {filename}")
         # file_bytes = file.read()
         # file_content = BytesIO(file_bytes).readlines()
         # print(file_content)
-        form = json.loads(request.data)
-        print(form)
+        form = request.form
         username = "lily"
-        name = form["itemName"]
-        price = float(form["price"])
-        tags = [i["value"] for i in form["tags"]]
-        images = [f"{username}/{name}/{i}" for i in range(len(form["images"]))]
+        name = form.get("itemName")
+        price = float(form.get("price"))
+        tags = [i["value"] for i in json.loads(form.get("tags"))]
+        images = [f"{username}/{name}/{i}" for i in range(len(request.files))]
         s3 = boto3.client('s3',
                     region_name='ap-southeast-2',
                     aws_access_key_id='AKIA3V2C4OGZ2UVFEEHG',
                     aws_secret_access_key= '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')
         bucket_name = 'it-project-002'
-        # for i in range(len(request.files)):
-        #     s3.upload_fileobj(
-        #         request.files[i],
-        #         bucket_name,
-        #         f"{username}/{name}/{i}",
-        #         ExtraArgs={
-        #             "ContentType": request.files[i].content_type
-        #         }
-        #     )
-        for i in range(len(form['images'])):
-            print(i)
-            # url = form['selectedImages'][i]
-            # s = requests.Session()
-            # r = s.get(url)
-            # k = Key(bucket_name)
-            # k.key = f"{username}/{name}/{i}"
-            # k.content_type = r.headers['content-type']
-            # k.set_contents_from_string(r.content)
+        for i in range(len(request.files)):
+            s3.upload_fileobj(
+                request.files.get(str(i)),
+                bucket_name,
+                f"{username}/{name}/{i}",
+                ExtraArgs={
+                    "ContentType": request.files.get(str(i)).content_type
+                }
+            )
         product = ProductModel(username=username, name=name, price=price, tags=tags, images=images)
-        # db.session.add(product)
-        # db.session.commit()
+        db.session.add(product)
+        db.session.commit()
         return {}
 
 
