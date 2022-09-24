@@ -6,9 +6,11 @@ import config
 from blueprints import user_bp
 from connections import mail, db
 from flask_migrate import Migrate
+import boto3
+
+from models import UserModel
 from flask_jwt_extended import create_access_token,get_jwt,get_jwt_identity, \
                                unset_jwt_cookies, jwt_required, JWTManager
-from models import UserModel
 
 app = Flask(__name__)#, static_folder='../frontend/build', static_url_path='/')
 app.config["JWT_SECRET_KEY"] = "please-remember-to-change-me"
@@ -44,7 +46,6 @@ def refresh_expiring_jwts(response):
     except (RuntimeError, KeyError):
         # Case where there is not a valid JWT. Just return the original respone
         return response
-
 
 if __name__ == '__main__':
     app.run(debug=True, port=9000)
