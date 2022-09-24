@@ -11,13 +11,3 @@ class UserModel(db.Model):
     join_time = db.Column(db.DateTime, default=datetime.now)
     bio = db.Column(db.String(200), nullable=True)
     avatar = db.Column(db.String(200), nullable=False)
-
-class ProductModel(db.Model):
-    __tablename__ = "products"
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user = db.Column(db.String(200), nullable=False)
-    name = db.Column(db.String(200), nullable=False)
-    price = db.Column(db.Numeric, nullable=False)
-    tags = db.Column(db.ARRAY(db.String(200)), nullable=False)
-    images = db.Column(db.ARRAY(db.String(200)), nullable=False)
-    add_time = db.Column(db.DateTime, default=datetime.now)
