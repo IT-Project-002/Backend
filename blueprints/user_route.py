@@ -86,7 +86,7 @@ def upload():
         product = ProductModel(user=user, name=name, price=price, tags=tags, images=images)
         db.session.add(product)
         db.session.commit()
-        return {}
+        return redirect(url_for("user.market"))
 
 @bp.route("/market", methods=['GET'])
 @jwt_required()
