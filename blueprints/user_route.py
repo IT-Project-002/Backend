@@ -3,18 +3,25 @@ from blueprints.forms import RegistrationForm, LoginForm
 from connections import mail, db
 from flask_mail import Message
 from werkzeug.security import generate_password_hash, check_password_hash
-from models import UserModel
+from models import UserModel, ProductModel
 import json
 import wtforms_json
+from tokenize import Double
+import boto3
+from boto.s3.key import Key
+from werkzeug.utils import secure_filename
+import requests
+from io import BytesIO
 from flask_jwt_extended import create_access_token, get_jwt, get_jwt_identity, \
     unset_jwt_cookies, jwt_required, JWTManager
+
 bp = Blueprint("user", __name__, url_prefix='/users')
 
 
 @bp.route("/register", methods=['GET', 'POST'])
 def register():
     if request.method == 'GET':
-        return {1:'register'}
+        return {1: 'register'}
     else:
         print(json.loads(request.data))
         form = RegistrationForm.from_json(json.loads(request.data))
@@ -33,7 +40,7 @@ def register():
 @bp.route("/login", methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
-        return {1:'login'}
+        return {1: 'login'}
     else:
         form = LoginForm.from_json(json.loads(request.data))
         if form.validate():
@@ -56,14 +63,62 @@ def market():
     # user name bio ,
     current_user = get_jwt_identity()
     user = UserModel.query.filter_by(email=current_user).first()
+    products = ProductModel.query.filter_by(user=current_user).all()
+    products.sort(key=lambda p: p.add_time)
+    print(products)
+    uniq_prods_name = []
+    uniq_prods_link = []
+    for prod in products:
+        if prod.name not in uniq_prods_name and prod.images:
+            uniq_prods_name.append(prod.name)
+            uniq_prods_link.append(prod.images[0])
+
+    print(uniq_prods_name)
+    print(uniq_prods_link)
     return {
-            "userID": user.id,
-            "username": user.username,
-            "userEmail": user.email,
-            "JoinTime": user.join_time,
-            "Bio": user.bio,
-            "Avatar": user.avatar
-          }
+        "userID": user.id,
+        "username": user.username,
+        "userEmail": user.email,
+        "JoinTime": user.join_time,
+        "Bio": user.bio,
+        "Avatar": user.avatar,
+        "item_names": uniq_prods_name,
+        "item_links": uniq_prods_link
+    }
+
+
+@bp.route("/upload", methods=['GET', 'POST'])
+@jwt_required()
+def upload():
+    if request.method == 'GET':
+        return {1: 'upload'}
+    else:
+        head = 'https://it-project-002.s3.ap-southeast-2.amazonaws.com'
+        current_user = get_jwt_identity()
+        form = request.form
+        user = current_user
+        name = form.get("itemName")
+        price = float(form.get("price"))
+        tags = [i["value"] for i in json.loads(form.get("tags"))]
+        images = [f"{head}/{user}/{name}/{i}" for i in range(len(request.files))]
+        s3 = boto3.client('s3',
+                          region_name='ap-southeast-2',
+                          aws_access_key_id='AKIA3V2C4OGZ2UVFEEHG',
+                          aws_secret_access_key='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')
+        bucket_name = 'it-project-002'
+        for i in range(len(request.files)):
+            s3.upload_fileobj(
+                request.files.get(str(i)),
+                bucket_name,
+                f"{user}/{name}/{i}",
+                ExtraArgs={
+                    "ContentType": request.files.get(str(i)).content_type
+                }
+            )
+        product = ProductModel(user=user, name=name, price=price, tags=tags, images=images)
+        db.session.add(product)
+        db.session.commit()
+        return {}
 
 
 @bp.route("/logout", methods=['POST'])
@@ -73,7 +128,6 @@ def logout():
         print("logout la")
         unset_jwt_cookies(response)
         return response
-
 
 # not yet ready for connect
 # @bp.route("/captcha")
