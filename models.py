@@ -11,6 +11,7 @@ class UserModel(db.Model):
     join_time = db.Column(db.DateTime, default=datetime.now)
     bio = db.Column(db.String(200), nullable=True)
     avatar = db.Column(db.String(200), nullable=False)
+    hide_email = db.Column(db.Boolean,default=False, nullable=False)
 
 
 class ProductModel(db.Model):
