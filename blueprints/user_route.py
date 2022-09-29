@@ -87,6 +87,20 @@ def market():
     }
 
 
+@bp.route("/profile", methods=['GET'])
+@jwt_required()
+def profile():
+    current_user = get_jwt_identity()
+    user = UserModel.query.filter_by(email=current_user).first()
+    return{
+        "userID": user.id,
+        "username": user.username,
+        "userEmail": user.email,
+        "JoinTime": user.join_time,
+        "Bio": user.bio,
+        "Avatar": user.avatar
+    }
+
 @bp.route("/upload", methods=['GET', 'POST'])
 @jwt_required()
 def upload():
