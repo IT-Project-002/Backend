@@ -98,8 +98,10 @@ def profile():
         "userEmail": user.email,
         "JoinTime": user.join_time,
         "Bio": user.bio,
-        "Avatar": user.avatar
+        "Avatar": user.avatar,
+        "hide_email": user.hide_email
     }
+
 
 @bp.route("/upload", methods=['GET', 'POST'])
 @jwt_required()
