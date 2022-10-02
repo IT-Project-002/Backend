@@ -76,7 +76,7 @@ def market():
     print(uniq_prods_name)
     print(uniq_prods_link)
     return {
-        "userID": user.id,
+        "userID": user.uuid,
         "username": user.username,
         "userEmail": user.email,
         "JoinTime": user.join_time,
@@ -93,7 +93,7 @@ def profile():
     current_user = get_jwt_identity()
     user = UserModel.query.filter_by(email=current_user).first()
     return{
-        "userID": user.id,
+        "userID": user.uuid,
         "username": user.username,
         "userEmail": user.email,
         "JoinTime": user.join_time,
