@@ -87,20 +87,35 @@ def market():
     }
 
 
-@bp.route("/profile", methods=['GET'])
+@bp.route("/profile", methods=['GET', 'POST'])
 @jwt_required()
 def profile():
-    current_user = get_jwt_identity()
-    user = UserModel.query.filter_by(email=current_user).first()
-    return{
-        "userID": user.uuid,
-        "username": user.username,
-        "userEmail": user.email,
-        "JoinTime": user.join_time,
-        "Bio": user.bio,
-        "Avatar": user.avatar,
-        "hide_email": user.hide_email
-    }
+    if request.method == 'GET':
+        current_user = get_jwt_identity()
+        user = UserModel.query.filter_by(email=current_user).first()
+        return{
+            "userID": user.uuid,
+            "username": user.username,
+            "userEmail": user.email,
+            "JoinTime": user.join_time,
+            "Bio": user.bio,
+            "Avatar": user.avatar,
+            "hide_email": user.hide_email
+        }
+    else:
+        data = json.loads(request.data)
+        current_user = get_jwt_identity()
+        user = UserModel.query.filter_by(email=current_user).first()
+        user.username = data['username']
+        user.bio = data['bio']
+        if data['showEmail'] == 'Public':
+            user.hide_email = False
+        else:
+            user.hide_email = True
+        if data['password'] != '':
+            user.password = generate_password_hash(data['password'])
+        db.session.commit()
+        return redirect(url_for("user.login"))
 
 
 @bp.route("/upload", methods=['GET', 'POST'])

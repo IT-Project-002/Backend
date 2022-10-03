@@ -12,7 +12,7 @@ from models import UserModel
 
 app = Flask(__name__)#, static_folder='../frontend/build', static_url_path='/')
 app.config["JWT_SECRET_KEY"] = "please-remember-to-change-me"
-app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes=10)
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes=50)
 jwt = JWTManager(app)
 cors = CORS(app)
 app.config.from_object(config)
