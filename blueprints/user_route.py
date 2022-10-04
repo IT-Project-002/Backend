@@ -157,12 +157,14 @@ def upload():
         db.session.commit()
         return {}
 
+
 @bp.route("/delete", methods=['POST'])
 @jwt_required()
 def delprod():
-    print("hi")
-    current_user = get_jwt_identity()
-    print(current_user)
+    data = json.loads(request.data)
+    product = ProductModel.query.filter_by(uuid=data['prod_id']).first()
+    db.session.delete(product)
+    db.session.commit()
     return {}
 
 @bp.route("/logout", methods=['POST'])
