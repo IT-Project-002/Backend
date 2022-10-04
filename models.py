@@ -23,5 +23,6 @@ class ProductModel(db.Model):
     name = db.Column(db.String(200), nullable=False)
     price = db.Column(db.Numeric, nullable=False)
     tags = db.Column(db.ARRAY(db.String(200)), nullable=False)
+    description = db.Column(db.String(500), nullable=False)
     images = db.Column(db.ARRAY(db.String(200)), nullable=False)
     add_time = db.Column(db.DateTime, default=datetime.now)
