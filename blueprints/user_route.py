@@ -10,7 +10,6 @@ from tokenize import Double
 import boto3
 from boto.s3.key import Key
 from werkzeug.utils import secure_filename
-import requests
 from io import BytesIO
 from flask_jwt_extended import create_access_token, get_jwt, get_jwt_identity, \
     unset_jwt_cookies, jwt_required, JWTManager
@@ -52,7 +51,7 @@ def login():
                 response = {"access_token": create_access_token(identity=email)}
                 return response
             else:
-                return redirect(url_for("user.login"))
+                return redirect(url_for("user.register"))
         else:
             return redirect(url_for("user.login"))
 
@@ -65,42 +64,64 @@ def market():
     user = UserModel.query.filter_by(email=current_user).first()
     products = ProductModel.query.filter_by(user=current_user).all()
     products.sort(key=lambda p: p.add_time)
-    print(products)
+    # print(products)
     uniq_prods_name = []
     uniq_prods_link = []
+    uniq_prods_id = []
+    uniq_prods_price = []
+    uniq_prods_tags = []
     for prod in products:
         if prod.name not in uniq_prods_name and prod.images:
             uniq_prods_name.append(prod.name)
             uniq_prods_link.append(prod.images[0])
+            uniq_prods_id.append(prod.uuid)
+            uniq_prods_price.append(prod.price)
+            uniq_prods_tags.append(prod.tags)
 
-    print(uniq_prods_name)
-    print(uniq_prods_link)
     return {
-        "userID": user.id,
+        "userID": user.uuid,
         "username": user.username,
         "userEmail": user.email,
         "JoinTime": user.join_time,
         "Bio": user.bio,
         "Avatar": user.avatar,
         "item_names": uniq_prods_name,
-        "item_links": uniq_prods_link
+        "item_links": uniq_prods_link,
+        "item_id": uniq_prods_id,
+        "item_price": uniq_prods_price,
+        "item_tags": uniq_prods_tags
     }
 
 
-@bp.route("/profile", methods=['GET'])
+@bp.route("/profile", methods=['GET', 'POST'])
 @jwt_required()
 def profile():
-    current_user = get_jwt_identity()
-    user = UserModel.query.filter_by(email=current_user).first()
-    return{
-        "userID": user.id,
-        "username": user.username,
-        "userEmail": user.email,
-        "JoinTime": user.join_time,
-        "Bio": user.bio,
-        "Avatar": user.avatar,
-        "hide_email": user.hide_email
-    }
+    if request.method == 'GET':
+        current_user = get_jwt_identity()
+        user = UserModel.query.filter_by(email=current_user).first()
+        return{
+            "userID": user.uuid,
+            "username": user.username,
+            "userEmail": user.email,
+            "JoinTime": user.join_time,
+            "Bio": user.bio,
+            "Avatar": user.avatar,
+            "hide_email": user.hide_email
+        }
+    else:
+        data = json.loads(request.data)
+        current_user = get_jwt_identity()
+        user = UserModel.query.filter_by(email=current_user).first()
+        user.username = data['username']
+        user.bio = data['bio']
+        if data['showEmail'] == 'Public':
+            user.hide_email = False
+        else:
+            user.hide_email = True
+        if data['password'] != '':
+            user.password = generate_password_hash(data['password'])
+        db.session.commit()
+        return redirect(url_for("user.login"))
 
 
 @bp.route("/upload", methods=['GET', 'POST'])
@@ -136,6 +157,15 @@ def upload():
         db.session.commit()
         return {}
 
+
+@bp.route("/delete", methods=['POST'])
+@jwt_required()
+def delprod():
+    data = json.loads(request.data)
+    product = ProductModel.query.filter_by(uuid=data['prod_id']).first()
+    db.session.delete(product)
+    db.session.commit()
+    return {}
 
 @bp.route("/logout", methods=['POST'])
 def logout():
