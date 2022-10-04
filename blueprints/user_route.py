@@ -52,7 +52,7 @@ def login():
                 response = {"access_token": create_access_token(identity=email)}
                 return response
             else:
-                return redirect(url_for("user.login"))
+                return redirect(url_for("user.register"))
         else:
             return redirect(url_for("user.login"))
 
@@ -68,13 +68,17 @@ def market():
     print(products)
     uniq_prods_name = []
     uniq_prods_link = []
+    uniq_prods_id = []
+    uniq_prods_price = []
+    uniq_prods_tags = []
     for prod in products:
         if prod.name not in uniq_prods_name and prod.images:
             uniq_prods_name.append(prod.name)
             uniq_prods_link.append(prod.images[0])
+            uniq_prods_id.append(prod.uuid)
+            uniq_prods_price.append(prod.price)
+            uniq_prods_tags.append(prod.tags)
 
-    print(uniq_prods_name)
-    print(uniq_prods_link)
     return {
         "userID": user.uuid,
         "username": user.username,
@@ -83,7 +87,10 @@ def market():
         "Bio": user.bio,
         "Avatar": user.avatar,
         "item_names": uniq_prods_name,
-        "item_links": uniq_prods_link
+        "item_links": uniq_prods_link,
+        "item_id": uniq_prods_id,
+        "item_price": uniq_prods_price,
+        "item_tags": uniq_prods_tags
     }
 
 
