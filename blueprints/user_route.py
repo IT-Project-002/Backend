@@ -10,7 +10,6 @@ from tokenize import Double
 import boto3
 from boto.s3.key import Key
 from werkzeug.utils import secure_filename
-import requests
 from io import BytesIO
 from flask_jwt_extended import create_access_token, get_jwt, get_jwt_identity, \
     unset_jwt_cookies, jwt_required, JWTManager
@@ -65,7 +64,7 @@ def market():
     user = UserModel.query.filter_by(email=current_user).first()
     products = ProductModel.query.filter_by(user=current_user).all()
     products.sort(key=lambda p: p.add_time)
-    print(products)
+    # print(products)
     uniq_prods_name = []
     uniq_prods_link = []
     uniq_prods_id = []
@@ -158,6 +157,15 @@ def upload():
         db.session.commit()
         return {}
 
+
+@bp.route("/delete", methods=['POST'])
+@jwt_required()
+def delprod():
+    data = json.loads(request.data)
+    product = ProductModel.query.filter_by(uuid=data['prod_id']).first()
+    db.session.delete(product)
+    db.session.commit()
+    return {}
 
 @bp.route("/logout", methods=['POST'])
 def logout():
