@@ -168,6 +168,25 @@ def delprod():
     db.session.commit()
     return {}
 
+
+@bp.route("/item/<uuid>",methods=['GET'])
+@jwt_required()
+def itemDetail(uuid):
+    product = ProductModel.query.filter_by(uuid=uuid).first()
+    current_user = get_jwt_identity()
+    user = UserModel.query.filter_by(email=current_user).first()
+    print(product.images)
+    return{
+        "user_name":user.username,
+        "user_email":user.email,
+        "prod_name":product.name,
+        "prod_price":product.price,
+        "prod_tags":product.tags,
+        "prod_images":product.images,
+        # "prod_desc":product.description
+    }
+
+
 @bp.route("/logout", methods=['POST'])
 def logout():
     if request.method == 'POST':
