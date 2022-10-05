@@ -138,6 +138,7 @@ def upload():
         price = float(form.get("price"))
         tags = [i["value"] for i in json.loads(form.get("tags"))]
         images = [f"{head}/{user}/{name}/{i}" for i in range(len(request.files))]
+        description = form.get("description")
         s3 = boto3.client('s3',
                           region_name='ap-southeast-2',
                           aws_access_key_id='AKIA3V2C4OGZ2UVFEEHG',
@@ -152,7 +153,7 @@ def upload():
                     "ContentType": request.files.get(str(i)).content_type
                 }
             )
-        product = ProductModel(user=user, name=name, price=price, tags=tags, images=images)
+        product = ProductModel(user=user, name=name, price=price, tags=tags, images=images, description=description)
         db.session.add(product)
         db.session.commit()
         return {}
