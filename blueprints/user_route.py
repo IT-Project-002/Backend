@@ -251,7 +251,7 @@ def editItem(uuid):
                         "ContentType": request.files.get(str(i)).content_type
                     }
                 )
-        db.session.query(ProductModel).filter(uuid==uuid).update({"name":name, "price":price, "tags":tags, "images":images, "description":description})
+        db.session.query(ProductModel).filter(ProductModel.uuid==uuid).update({"name":name, "price":price, "tags":tags, "images":images, "description":description})
         db.session.commit()
         return {}
 
