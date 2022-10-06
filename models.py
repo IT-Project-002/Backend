@@ -26,3 +26,15 @@ class ProductModel(db.Model):
     description = db.Column(db.String(500), nullable=False)
     images = db.Column(db.ARRAY(db.String(200)), nullable=False)
     add_time = db.Column(db.DateTime, default=datetime.now)
+
+    # def update(self, **kwargs):
+    #     for key, value in kwargs.items():
+    #         if hasattr(self, key):
+    #             setattr(self, key, value)
+
+
+class LikeModel(db.Model):
+    __tablename__ = "likes"
+    user = db.Column(UUID(as_uuid=True), primary_key=True)
+    product = db.Column(UUID(as_uuid=True), primary_key=True)
+    add_time = db.Column(db.DateTime, default=datetime.now)

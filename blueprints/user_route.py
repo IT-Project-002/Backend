@@ -1,3 +1,4 @@
+from concurrent.futures import process
 from flask import Blueprint, render_template, redirect, url_for, request, session, flash, jsonify
 from blueprints.forms import RegistrationForm, LoginForm
 from connections import mail, db
@@ -162,8 +163,17 @@ def upload():
 @bp.route("/delete", methods=['POST'])
 @jwt_required()
 def delprod():
+    current_user = get_jwt_identity()
     data = json.loads(request.data)
     product = ProductModel.query.filter_by(uuid=data['prod_id']).first()
+    head = 'https://it-project-002.s3.ap-southeast-2.amazonaws.com'
+    s3 = boto3.client('s3',
+                        region_name='ap-southeast-2',
+                        aws_access_key_id='AKIA3V2C4OGZ2UVFEEHG',
+                        aws_secret_access_key='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')
+    bucket_name = 'it-project-002'
+    for i in s3.list_objects(Bucket=bucket_name, Prefix=f"{current_user}/{data['title']}/").get('Contents', []):
+            s3.delete_object(Bucket=bucket_name, Key=i.get("Key"))
     db.session.delete(product)
     db.session.commit()
     return {}
@@ -183,8 +193,67 @@ def itemDetail(uuid):
         "prod_price":product.price,
         "prod_tags":product.tags,
         "prod_images":product.images,
-        # "prod_desc":product.description
+        "prod_desc":product.description
     }
+
+@bp.route("/item/edit/<uuid>",methods=['GET', 'POST'])
+@jwt_required()
+def editItem(uuid):
+    if request.method == 'GET':
+        print(uuid)
+        product = ProductModel.query.filter_by(uuid=uuid).first()
+        current_user = get_jwt_identity()
+        user = UserModel.query.filter_by(email=current_user).first()
+        print(product.images)
+        return{
+            "user_name":user.username,
+            "user_email":user.email,
+            "prod_name":product.name,
+            "prod_price":product.price,
+            "prod_tags":product.tags,
+            "prod_images":product.images,
+            "prod_desc":product.description
+        }
+    else:
+        product = ProductModel.query.filter_by(uuid=uuid).first()
+        current_user = get_jwt_identity()
+        form = request.form
+        name = form.get("itemName")
+        price = float(form.get("price"))
+        tags = [i["value"] for i in json.loads(form.get("tags"))]
+        images = json.loads(form.get("images"))
+        head = 'https://it-project-002.s3.ap-southeast-2.amazonaws.com'
+        
+        description = form.get("description")
+        s3 = boto3.client('s3',
+                          region_name='ap-southeast-2',
+                          aws_access_key_id='AKIA3V2C4OGZ2UVFEEHG',
+                          aws_secret_access_key='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')
+        bucket_name = 'it-project-002'
+        fill = [0,1,2]
+        print(images)
+        for i in s3.list_objects(Bucket=bucket_name, Prefix=f"{current_user}/{name}/").get('Contents', []):
+            if f"{head}/{i.get('Key')}" not in images:
+                print(i.get("Key"))
+                s3.delete_object(Bucket=bucket_name, Key=i.get("Key"))
+            else:
+                fill.remove(int(i.get("Key").split("/")[-1]))
+        images = [i for i in images if "blob" not in i]
+        for i in range(3):
+            if request.files.get(str(i)):
+                index = fill.pop(0)
+                images += [f"{head}/{current_user}/{name}/{index}"]
+                s3.upload_fileobj(
+                    request.files.get(str(i)),
+                    bucket_name,
+                    f"{current_user}/{name}/{index}",
+                    ExtraArgs={
+                        "ContentType": request.files.get(str(i)).content_type
+                    }
+                )
+        db.session.query(ProductModel).filter(uuid==uuid).update({"name":name, "price":price, "tags":tags, "images":images, "description":description})
+        db.session.commit()
+        return {}
 
 
 @bp.route("/logout", methods=['POST'])
