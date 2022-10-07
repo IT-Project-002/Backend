@@ -1,3 +1,4 @@
+from concurrent.futures import process
 from flask import Blueprint, render_template, redirect, url_for, request, session, flash, jsonify
 from blueprints.forms import RegistrationForm, LoginForm
 from connections import mail, db
@@ -11,6 +12,7 @@ import boto3
 from boto.s3.key import Key
 from werkzeug.utils import secure_filename
 from io import BytesIO
+import uuid
 from flask_jwt_extended import create_access_token, get_jwt, get_jwt_identity, \
     unset_jwt_cookies, jwt_required, JWTManager
 
@@ -30,7 +32,8 @@ def register():
         hash_password = generate_password_hash(password)
         bio = form.bio.data
         avatar = form.avatar.data
-        user = UserModel(email=email, username=username, password=hash_password, bio=bio, avatar=avatar)
+        randomid = uuid.uuid4()
+        user = UserModel(uuid=randomid, email=email, username=username, password=hash_password, bio=bio, avatar=avatar)
         db.session.add(user)
         db.session.commit()
         return redirect(url_for("user.login"))
@@ -71,13 +74,12 @@ def market():
     uniq_prods_price = []
     uniq_prods_tags = []
     for prod in products:
-        if prod.name not in uniq_prods_name and prod.images:
-            uniq_prods_name.append(prod.name)
-            uniq_prods_link.append(prod.images[0])
-            uniq_prods_id.append(prod.uuid)
-            uniq_prods_price.append(prod.price)
-            uniq_prods_tags.append(prod.tags)
-
+        uniq_prods_name.append(prod.name)
+        uniq_prods_link.append(prod.images[0])
+        uniq_prods_id.append(prod.uuid)
+        uniq_prods_price.append(prod.price)
+        uniq_prods_tags.append(prod.tags)
+    # print(uniq_prods_link)
     return {
         "userID": user.uuid,
         "username": user.username,
@@ -135,9 +137,10 @@ def upload():
         form = request.form
         user = current_user
         name = form.get("itemName")
-        price = float(form.get("price"))
+        price = "{:.2f}".format(float(form.get("price")))
         tags = [i["value"] for i in json.loads(form.get("tags"))]
         images = [f"{head}/{user}/{name}/{i}" for i in range(len(request.files))]
+        description = form.get("description")
         s3 = boto3.client('s3',
                           region_name='ap-southeast-2',
                           aws_access_key_id='AKIA3V2C4OGZ2UVFEEHG',
@@ -152,7 +155,8 @@ def upload():
                     "ContentType": request.files.get(str(i)).content_type
                 }
             )
-        product = ProductModel(user=user, name=name, price=price, tags=tags, images=images)
+        randomid = uuid.uuid4()
+        product = ProductModel(uuid=randomid, user=user, name=name, price=price, tags=tags, images=images, description=description)
         db.session.add(product)
         db.session.commit()
         return {}
@@ -161,11 +165,122 @@ def upload():
 @bp.route("/delete", methods=['POST'])
 @jwt_required()
 def delprod():
+    current_user = get_jwt_identity()
     data = json.loads(request.data)
     product = ProductModel.query.filter_by(uuid=data['prod_id']).first()
+    head = 'https://it-project-002.s3.ap-southeast-2.amazonaws.com'
+    s3 = boto3.client('s3',
+                        region_name='ap-southeast-2',
+                        aws_access_key_id='AKIA3V2C4OGZ2UVFEEHG',
+                        aws_secret_access_key='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')
+    bucket_name = 'it-project-002'
+    for i in s3.list_objects(Bucket=bucket_name, Prefix=f"{current_user}/{data['title']}/").get('Contents', []):
+            s3.delete_object(Bucket=bucket_name, Key=i.get("Key"))
     db.session.delete(product)
     db.session.commit()
     return {}
+
+
+@bp.route("/item/<uuid>",methods=['GET'])
+@jwt_required()
+def itemDetail(uuid):
+    product = ProductModel.query.filter_by(uuid=uuid).first()
+    current_user = get_jwt_identity()
+    user = UserModel.query.filter_by(email=current_user).first()
+    print(product.images)
+    return{
+        "user_name":user.username,
+        "user_email":user.email,
+        "prod_name":product.name,
+        "prod_price":product.price,
+        "prod_tags":product.tags,
+        "prod_images":product.images,
+        "prod_desc":product.description
+    }
+
+
+@bp.route("/item/edit/<uuid>",methods=['GET', 'POST'])
+@jwt_required()
+def editItem(uuid):
+    if request.method == 'GET':
+        print(uuid)
+        product = ProductModel.query.filter_by(uuid=uuid).first()
+        current_user = get_jwt_identity()
+        user = UserModel.query.filter_by(email=current_user).first()
+        print(product.images)
+        return{
+            "user_name":user.username,
+            "user_email":user.email,
+            "prod_name":product.name,
+            "prod_price":product.price,
+            "prod_tags":product.tags,
+            "prod_images":product.images,
+            "prod_desc":product.description
+        }
+    else:
+        product = ProductModel.query.filter_by(uuid=uuid).first()
+        current_user = get_jwt_identity()
+        form = request.form
+        name = form.get("itemName")
+        price = float(form.get("price"))
+        tags = [i["value"] for i in json.loads(form.get("tags"))]
+        images = json.loads(form.get("images"))
+        head = 'https://it-project-002.s3.ap-southeast-2.amazonaws.com'
+        
+        description = form.get("description")
+        s3 = boto3.client('s3',
+                          region_name='ap-southeast-2',
+                          aws_access_key_id='AKIA3V2C4OGZ2UVFEEHG',
+                          aws_secret_access_key='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')
+        bucket_name = 'it-project-002'
+        fill = [0,1,2]
+        print(images)
+        for i in s3.list_objects(Bucket=bucket_name, Prefix=f"{current_user}/{name}/").get('Contents', []):
+            if f"{head}/{i.get('Key')}" not in images:
+                print(i.get("Key"))
+                s3.delete_object(Bucket=bucket_name, Key=i.get("Key"))
+            else:
+                fill.remove(int(i.get("Key").split("/")[-1]))
+        images = [i for i in images if "blob" not in i]
+        for i in range(3):
+            if request.files.get(str(i)):
+                index = fill.pop(0)
+                images += [f"{head}/{current_user}/{name}/{index}"]
+                s3.upload_fileobj(
+                    request.files.get(str(i)),
+                    bucket_name,
+                    f"{current_user}/{name}/{index}",
+                    ExtraArgs={
+                        "ContentType": request.files.get(str(i)).content_type
+                    }
+                )
+        db.session.query(ProductModel).filter(ProductModel.uuid==uuid).update({"name":name, "price":price, "tags":tags, "images":images, "description":description})
+        db.session.commit()
+        return {}
+
+
+@bp.route("/landing", methods=['GET'])
+def landing():
+    products = ProductModel.query.all()
+    uuid = []
+    img = []
+    name = []
+    tags = []
+    price = []
+    for prod in products:
+        uuid.append(prod.uuid)
+        img.append(prod.images)
+        name.append(prod.name)
+        tags.append(prod.tags)
+        price.append(prod.price)
+    return {
+        "uuid":uuid,
+        "img" : img,
+        "name" : name,
+        "tags" : tags,
+        "price": price
+    }
+
 
 @bp.route("/logout", methods=['POST'])
 def logout():
