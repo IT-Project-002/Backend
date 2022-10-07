@@ -1,12 +1,12 @@
 from datetime import datetime
 from connections import db
-import uuid
+
 from sqlalchemy.dialects.postgresql import UUID
 
 
 class UserModel(db.Model):
     __tablename__ = "users"
-    uuid = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4())
+    uuid = db.Column(UUID(as_uuid=True), primary_key=True)
     username = db.Column(db.String(200), nullable=False, unique=True)
     email = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(200), nullable=False)
@@ -18,7 +18,7 @@ class UserModel(db.Model):
 
 class ProductModel(db.Model):
     __tablename__ = "products"
-    uuid = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4())
+    uuid = db.Column(UUID(as_uuid=True), primary_key=True)
     user = db.Column(db.String(200), nullable=False)
     name = db.Column(db.String(200), nullable=False)
     price = db.Column(db.Numeric, nullable=False)

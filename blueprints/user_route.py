@@ -12,6 +12,7 @@ import boto3
 from boto.s3.key import Key
 from werkzeug.utils import secure_filename
 from io import BytesIO
+import uuid
 from flask_jwt_extended import create_access_token, get_jwt, get_jwt_identity, \
     unset_jwt_cookies, jwt_required, JWTManager
 
@@ -31,7 +32,8 @@ def register():
         hash_password = generate_password_hash(password)
         bio = form.bio.data
         avatar = form.avatar.data
-        user = UserModel(email=email, username=username, password=hash_password, bio=bio, avatar=avatar)
+        randomid = uuid.uuid4()
+        user = UserModel(uuid=randomid, email=email, username=username, password=hash_password, bio=bio, avatar=avatar)
         db.session.add(user)
         db.session.commit()
         return redirect(url_for("user.login"))
@@ -65,20 +67,19 @@ def market():
     user = UserModel.query.filter_by(email=current_user).first()
     products = ProductModel.query.filter_by(user=current_user).all()
     products.sort(key=lambda p: p.add_time)
-    # print(products)
+    print(products)
     uniq_prods_name = []
     uniq_prods_link = []
     uniq_prods_id = []
     uniq_prods_price = []
     uniq_prods_tags = []
     for prod in products:
-        if prod.name not in uniq_prods_name and prod.images:
-            uniq_prods_name.append(prod.name)
-            uniq_prods_link.append(prod.images[0])
-            uniq_prods_id.append(prod.uuid)
-            uniq_prods_price.append(prod.price)
-            uniq_prods_tags.append(prod.tags)
-
+        uniq_prods_name.append(prod.name)
+        uniq_prods_link.append(prod.images[0])
+        uniq_prods_id.append(prod.uuid)
+        uniq_prods_price.append(prod.price)
+        uniq_prods_tags.append(prod.tags)
+    print(uniq_prods_link)
     return {
         "userID": user.uuid,
         "username": user.username,
@@ -154,7 +155,8 @@ def upload():
                     "ContentType": request.files.get(str(i)).content_type
                 }
             )
-        product = ProductModel(user=user, name=name, price=price, tags=tags, images=images, description=description)
+        randomid = uuid.uuid4()
+        product = ProductModel(uuid=randomid, user=user, name=name, price=price, tags=tags, images=images, description=description)
         db.session.add(product)
         db.session.commit()
         return {}
