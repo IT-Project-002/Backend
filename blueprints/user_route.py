@@ -67,7 +67,7 @@ def market():
     user = UserModel.query.filter_by(email=current_user).first()
     products = ProductModel.query.filter_by(user=current_user).all()
     products.sort(key=lambda p: p.add_time)
-    print(products)
+    # print(products)
     uniq_prods_name = []
     uniq_prods_link = []
     uniq_prods_id = []
@@ -79,7 +79,7 @@ def market():
         uniq_prods_id.append(prod.uuid)
         uniq_prods_price.append(prod.price)
         uniq_prods_tags.append(prod.tags)
-    print(uniq_prods_link)
+    # print(uniq_prods_link)
     return {
         "userID": user.uuid,
         "username": user.username,
@@ -137,7 +137,7 @@ def upload():
         form = request.form
         user = current_user
         name = form.get("itemName")
-        price = float(form.get("price"))
+        price = "{:.2f}".format(float(form.get("price")))
         tags = [i["value"] for i in json.loads(form.get("tags"))]
         images = [f"{head}/{user}/{name}/{i}" for i in range(len(request.files))]
         description = form.get("description")
@@ -198,6 +198,7 @@ def itemDetail(uuid):
         "prod_desc":product.description
     }
 
+
 @bp.route("/item/edit/<uuid>",methods=['GET', 'POST'])
 @jwt_required()
 def editItem(uuid):
@@ -256,6 +257,29 @@ def editItem(uuid):
         db.session.query(ProductModel).filter(ProductModel.uuid==uuid).update({"name":name, "price":price, "tags":tags, "images":images, "description":description})
         db.session.commit()
         return {}
+
+
+@bp.route("/landing", methods=['GET'])
+def landing():
+    products = ProductModel.query.all()
+    uuid = []
+    img = []
+    name = []
+    tags = []
+    price = []
+    for prod in products:
+        uuid.append(prod.uuid)
+        img.append(prod.images)
+        name.append(prod.name)
+        tags.append(prod.tags)
+        price.append(prod.price)
+    return {
+        "uuid":uuid,
+        "img" : img,
+        "name" : name,
+        "tags" : tags,
+        "price": price
+    }
 
 
 @bp.route("/logout", methods=['POST'])
