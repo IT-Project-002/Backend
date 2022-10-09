@@ -200,7 +200,8 @@ def itemDetail(uuid):
         "prod_price":product.price,
         "prod_tags":product.tags,
         "prod_images":product.images,
-        "prod_desc":product.description
+        "prod_desc":product.description,
+        "user_hide_email":user.hide_email
     }
 
 
