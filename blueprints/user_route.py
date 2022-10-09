@@ -51,7 +51,10 @@ def login():
             user = UserModel.query.filter_by(email=email).first()
             if user and check_password_hash(user.password, password):
                 create_access_token(identity=email)
-                response = {"access_token": create_access_token(identity=email)}
+                response = {"access_token": create_access_token(identity=email),
+                            "uuid": user.uuid
+                }
+                print(response)
                 return response
             else:
                 return redirect(url_for("user.register"))
@@ -59,13 +62,13 @@ def login():
             return redirect(url_for("user.login"))
 
 
-@bp.route("/market", methods=['GET'])
+@bp.route("/market/<uuid>", methods=['GET'])
 @jwt_required()
-def market():
+def market(uuid):
     # user name bio ,
-    current_user = get_jwt_identity()
-    user = UserModel.query.filter_by(email=current_user).first()
-    products = ProductModel.query.filter_by(user=current_user).all()
+    # current_user = get_jwt_identity()
+    user = UserModel.query.filter_by(uuid=uuid).first()
+    products = ProductModel.query.filter_by(user=user.email).all()
     products.sort(key=lambda p: p.add_time)
     # print(products)
     uniq_prods_name = []
@@ -185,17 +188,20 @@ def delprod():
 @jwt_required()
 def itemDetail(uuid):
     product = ProductModel.query.filter_by(uuid=uuid).first()
+    owner_email = product.user
     current_user = get_jwt_identity()
-    user = UserModel.query.filter_by(email=current_user).first()
+    user = UserModel.query.filter_by(email=owner_email).first()
     print(product.images)
     return{
+        "user_id":user.uuid,
         "user_name":user.username,
         "user_email":user.email,
         "prod_name":product.name,
         "prod_price":product.price,
         "prod_tags":product.tags,
         "prod_images":product.images,
-        "prod_desc":product.description
+        "prod_desc":product.description,
+        "user_hide_email":user.hide_email
     }
 
 
