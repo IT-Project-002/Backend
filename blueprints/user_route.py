@@ -193,6 +193,7 @@ def itemDetail(uuid):
     user = UserModel.query.filter_by(email=owner_email).first()
     print(product.images)
     return{
+        "user_id":user.uuid,
         "user_name":user.username,
         "user_email":user.email,
         "prod_name":product.name,
