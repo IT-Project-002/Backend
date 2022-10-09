@@ -12,6 +12,6 @@ def test_market():
 
 def test_market_401():
     client = app.test_client()
-    response = client.get("/users/market")
+    response = client.get("/users/market/ecdc86bf-ab71-478b-8ed7-478f4b563731")
     print(response)
     assert response.status_code == 401
