@@ -4,7 +4,7 @@ from blueprints.forms import RegistrationForm, LoginForm
 from connections import mail, db
 from flask_mail import Message
 from werkzeug.security import generate_password_hash, check_password_hash
-from models import UserModel, ProductModel
+from models import UserModel, ProductModel, LikeModel
 import json
 import wtforms_json
 from tokenize import Double
@@ -190,18 +190,20 @@ def itemDetail(uuid):
     product = ProductModel.query.filter_by(uuid=uuid).first()
     owner_email = product.user
     current_user = get_jwt_identity()
-    user = UserModel.query.filter_by(email=owner_email).first()
-    print(product.images)
+    user = UserModel.query.filter_by(email=current_user).first()
+    owner = UserModel.query.filter_by(email=owner_email).first()
+    like = LikeModel.query.filter_by(user=user.uuid,product=product.uuid).first()
     return{
-        "user_id":user.uuid,
-        "user_name":user.username,
-        "user_email":user.email,
+        "user_id":owner.uuid,
+        "user_name":owner.username,
+        "user_email":owner.email,
         "prod_name":product.name,
         "prod_price":product.price,
         "prod_tags":product.tags,
         "prod_images":product.images,
         "prod_desc":product.description,
-        "user_hide_email":user.hide_email
+        "user_hide_email":owner.hide_email,
+        "liked":like is not None
     }
 
 
@@ -287,6 +289,41 @@ def landing():
         "price": price
     }
 
+
+@bp.route("/like", methods=['POST'])
+@jwt_required()
+def like():
+    current_user = get_jwt_identity()
+    user = UserModel.query.filter_by(email=current_user).first().uuid
+    data = json.loads(request.data)
+    item = data["item"]
+    like = LikeModel.query.filter_by(user=user,product=item).first()
+    if like is not None:
+        db.session.delete(like)
+    else:
+        like = LikeModel(user=user,product=item)
+        db.session.add(like)
+    db.session.commit()
+    return {}
+
+@bp.route("/myfav/<uuid>", methods=['GET'])
+@jwt_required()
+def myfav(uuid):
+    current_user = get_jwt_identity()
+    if str(UserModel.query.filter_by(email=current_user).first().uuid) == uuid:
+        likes = LikeModel.query.filter_by(user=uuid).all()
+        out = []
+        for i in likes:
+            product = ProductModel.query.filter_by(uuid=i.product).first()
+            out += [{"name": product.name,
+                    "uuid": product.uuid,
+                    "price": product.price,
+                    "tags": product.tags,
+                    "image": product.images[0]}]
+        return out
+    else:
+        return redirect(url_for("user.logout"))
+        # return {}
 
 @bp.route("/logout", methods=['POST'])
 def logout():
