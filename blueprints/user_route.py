@@ -1,3 +1,5 @@
+import random
+import string
 from concurrent.futures import process
 from flask import Blueprint, render_template, redirect, url_for, request, session, flash, jsonify
 from blueprints.forms import RegistrationForm, LoginForm
@@ -330,15 +332,40 @@ def logout():
         unset_jwt_cookies(response)
         return response
 
+
 # not yet ready for connect
-# @bp.route("/captcha")
-# def get_captcha():
-#     letters = string.ascii_letters + string.digits
-#     captcha = "".join(random.sample(letters, 6))
-#     message = Message(
-#         subject="Email Verification",
-#         recipients=['dilu0828@gmail.com'],
-#         body=f"your verification code for registration is {captcha}, If u didn't request for one, please ignore"
-#     )
-#     mail.send(message)
-#     return 'success'
+@bp.route("/captcha", methods=['POST'])
+def get_captcha():
+    data = json.loads(request.data)
+    user = UserModel.query.filter_by(email=data['email']).first()
+    if user:
+        letters = string.ascii_letters + string.digits
+        captcha = "".join(random.sample(letters, 6))
+        message = Message(
+            subject="Email Verification",
+            recipients=[data['email']],
+            body=f"your verification code for registration is {captcha}, If u didn't request for one, please ignore"
+        )
+        mail.send(message)
+        return {
+            "captcha":captcha
+        }
+    else:
+        return {
+            'response': 'no user found'
+               }, 600
+
+
+@bp.route("/emailLogin", methods=['POST'])
+def emailLogin():
+    data = json.loads(request.data)
+    email = data['email']
+    if data['password'] == data.get('code'):
+        user = UserModel.query.filter_by(email=email).first()
+        create_access_token(identity=email)
+        response = {"access_token": create_access_token(identity=email),
+                    "uuid": user.uuid
+                    }
+        return response
+    else:
+        return {},601
