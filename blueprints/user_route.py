@@ -348,7 +348,8 @@ def get_captcha():
         )
         mail.send(message)
         return {
-            "captcha":captcha
+            "captcha":captcha,
+            "email":data['email']
         }
     else:
         return {
@@ -360,7 +361,7 @@ def get_captcha():
 def emailLogin():
     data = json.loads(request.data)
     email = data['email']
-    if data['password'] == data.get('code'):
+    if data['password'] == data.get('code') and data.get('emailVerify')==email:
         user = UserModel.query.filter_by(email=email).first()
         create_access_token(identity=email)
         response = {"access_token": create_access_token(identity=email),
