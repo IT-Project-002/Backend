@@ -306,21 +306,24 @@ def like():
     db.session.commit()
     return {}
 
-@bp.route("/myfav", methods=['GET'])
+@bp.route("/myfav/<uuid>", methods=['GET'])
 @jwt_required()
-def myfav():
+def myfav(uuid):
     current_user = get_jwt_identity()
-    uuid = UserModel.query.filter_by(email=current_user).first().uuid
-    likes = LikeModel.query.filter_by(user=uuid).order_by(LikeModel.add_time.desc()).all()
-    out = []
-    for i in likes:
-        product = ProductModel.query.filter_by(uuid=i.product).first()
-        out += [{"name": product.name,
-                "uuid": product.uuid,
-                "price": product.price,
-                "tags": product.tags,
-                "image": product.images[0]}]
-    return out
+    if str(UserModel.query.filter_by(email=current_user).first().uuid) == uuid:
+        likes = LikeModel.query.filter_by(user=uuid).all()
+        out = []
+        for i in likes:
+            product = ProductModel.query.filter_by(uuid=i.product).first()
+            out += [{"name": product.name,
+                    "uuid": product.uuid,
+                    "price": product.price,
+                    "tags": product.tags,
+                    "image": product.images[0]}]
+        return out
+    else:
+        return redirect(url_for("user.logout"))
+        # return {}
 
 @bp.route("/logout", methods=['POST'])
 def logout():
