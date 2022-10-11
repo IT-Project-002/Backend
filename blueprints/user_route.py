@@ -322,7 +322,7 @@ def myfav():
                 "price": product.price,
                 "tags": product.tags,
                 "image": product.images[0]}]
-    return {'out': out}
+    return out
 
 @bp.route("/logout", methods=['POST'])
 def logout():
