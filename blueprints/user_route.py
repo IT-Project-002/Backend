@@ -294,7 +294,7 @@ def search():
                     fuzz.token_sort_ratio(data["search"], i.name),
                     fuzz.token_set_ratio(data["search"], i.name),
                     fuzz.partial_ratio(data["search"], i.name)])
-        if score >= 200:
+        if score >= 170:
             out += [{"name": i.name,
                      "uuid": i.uuid,
                      "price": i.price,
