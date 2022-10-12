@@ -190,18 +190,20 @@ def itemDetail(uuid):
     product = ProductModel.query.filter_by(uuid=uuid).first()
     owner_email = product.user
     current_user = get_jwt_identity()
-    user = UserModel.query.filter_by(email=owner_email).first()
-    print(product.images)
+    user = UserModel.query.filter_by(email=current_user).first()
+    owner = UserModel.query.filter_by(email=owner_email).first()
+    like = LikeModel.query.filter_by(user=user.uuid,product=product.uuid).first()
     return{
-        "user_id":user.uuid,
-        "user_name":user.username,
-        "user_email":user.email,
+        "user_id":owner.uuid,
+        "user_name":owner.username,
+        "user_email":owner.email,
         "prod_name":product.name,
         "prod_price":product.price,
         "prod_tags":product.tags,
         "prod_images":product.images,
         "prod_desc":product.description,
-        "user_hide_email":user.hide_email
+        "user_hide_email":owner.hide_email,
+        "liked":like is not None
     }
 
 
@@ -286,6 +288,25 @@ def landing():
         "tags" : tags,
         "price": price
     }
+
+@bp.route("/like", methods=['POST'])
+@jwt_required()
+def like():
+    current_user = get_jwt_identity()
+    user = UserModel.query.filter_by(email=current_user).first().uuid
+    data = json.loads(request.data)
+    item = data["item"]
+    print(data)
+    like = LikeModel.query.filter_by(user=user,product=item).first()
+    if like is not None:
+        db.session.delete(like)
+        print("取消")
+    else:
+        print("xihuan")
+        like = LikeModel(user=user,product=item)
+        db.session.add(like)
+    db.session.commit()
+    return {}
 
 
 @bp.route("/favourite", methods=['GET'])
