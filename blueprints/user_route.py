@@ -190,20 +190,18 @@ def itemDetail(uuid):
     product = ProductModel.query.filter_by(uuid=uuid).first()
     owner_email = product.user
     current_user = get_jwt_identity()
-    user = UserModel.query.filter_by(email=current_user).first()
-    owner = UserModel.query.filter_by(email=owner_email).first()
-    like = LikeModel.query.filter_by(user=user.uuid,product=product.uuid).first()
+    user = UserModel.query.filter_by(email=owner_email).first()
+    print(product.images)
     return{
-        "user_id":owner.uuid,
-        "user_name":owner.username,
-        "user_email":owner.email,
+        "user_id":user.uuid,
+        "user_name":user.username,
+        "user_email":user.email,
         "prod_name":product.name,
         "prod_price":product.price,
         "prod_tags":product.tags,
         "prod_images":product.images,
         "prod_desc":product.description,
-        "user_hide_email":owner.hide_email,
-        "liked":like is not None
+        "user_hide_email":user.hide_email
     }
 
 
@@ -326,7 +324,6 @@ def myfav():
                 "tags": product.tags,
                 "image": product.images[0]}]
     return {"out":out}
-
 
 @bp.route("/logout", methods=['POST'])
 def logout():
