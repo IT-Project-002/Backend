@@ -4,7 +4,7 @@ from blueprints.forms import RegistrationForm, LoginForm
 from connections import mail, db
 from flask_mail import Message
 from werkzeug.security import generate_password_hash, check_password_hash
-from models import UserModel, ProductModel
+from models import UserModel, ProductModel,LikeModel
 import json
 import wtforms_json
 from tokenize import Double
@@ -286,6 +286,25 @@ def landing():
         "tags" : tags,
         "price": price
     }
+
+
+@bp.route("/favourite", methods=['GET'])
+@jwt_required()
+def myfav():
+    print("bas")
+    current_user = get_jwt_identity()
+    # if str(UserModel.query.filter_by(email=current_user).first().uuid) == uuid:
+    user = UserModel.query.filter_by(email=current_user).first()
+    likes = LikeModel.query.filter_by(user=user.uuid).all()
+    out = []
+    for i in likes:
+        product = ProductModel.query.filter_by(uuid=i.product).first()
+        out += [{"name": product.name,
+                "uuid": product.uuid,
+                "price": product.price,
+                "tags": product.tags,
+                "image": product.images[0]}]
+    return {"out":out}
 
 
 @bp.route("/logout", methods=['POST'])
