@@ -340,11 +340,18 @@ def get_captcha():
     if user:
         letters = string.ascii_letters + string.digits
         captcha = "".join(random.sample(letters, 6))
+        user_name = user.username
         message = Message(
             subject="Email Verification",
             recipients=[data['email']],
-            body=f"your verification code for registration is {captcha}, If u didn't request for one, please ignore"
+            body=f"DEAR CUSTOMER: {user_name}\n\n"
+                 f"This is an auto email from Handicraft, "
+                 f"we have recently received your request to login to your handicraft account via email. "
+                 f"If u didn't request for one, please Ignore.\n\n\n"
+                 f"your verification code is: \t {captcha} \n\n\n"
+                 f"\t\t\t\t\t -----FROM Handicraft Team"
         )
+
         mail.send(message)
         return {
             "captcha":captcha,
