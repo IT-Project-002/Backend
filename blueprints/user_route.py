@@ -2,20 +2,17 @@ import random
 import string
 from concurrent.futures import process
 from flask import Blueprint, render_template, redirect, url_for, request, session, flash, jsonify
+
 from blueprints.forms import RegistrationForm, LoginForm
 from connections import mail, db
 from flask_mail import Message
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import UserModel, ProductModel,LikeModel
 import json
-import wtforms_json
-from tokenize import Double
 import boto3
-from boto.s3.key import Key
-from werkzeug.utils import secure_filename
-from io import BytesIO
 import uuid
 from fuzzywuzzy import fuzz
+
 from flask_jwt_extended import create_access_token, get_jwt_identity, \
     unset_jwt_cookies, jwt_required, JWTManager
 
@@ -345,7 +342,6 @@ def myfav():
                     "tags": product.tags,
                     "image": product.images[0]}]
     return {"out":out}
-
 
 @bp.route("/logout", methods=['POST'])
 def logout():
