@@ -338,43 +338,6 @@ def myfav():
                 "image": product.images[0]}]
     return {"out":out}
 
-@bp.route("/like", methods=['POST'])
-@jwt_required()
-def like():
-    current_user = get_jwt_identity()
-    user = UserModel.query.filter_by(email=current_user).first().uuid
-    data = json.loads(request.data)
-    item = data["item"]
-    print(data)
-    like = LikeModel.query.filter_by(user=user,product=item).first()
-    if like is not None:
-        db.session.delete(like)
-        print("取消")
-    else:
-        print("xihuan")
-        like = LikeModel(user=user,product=item)
-        db.session.add(like)
-    db.session.commit()
-    return {}
-
-
-@bp.route("/favourite", methods=['GET'])
-@jwt_required()
-def myfav():
-    print("bas")
-    current_user = get_jwt_identity()
-    # if str(UserModel.query.filter_by(email=current_user).first().uuid) == uuid:
-    user = UserModel.query.filter_by(email=current_user).first()
-    likes = LikeModel.query.filter_by(user=user.uuid).all()
-    out = []
-    for i in likes:
-        product = ProductModel.query.filter_by(uuid=i.product).first()
-        out += [{"name": product.name,
-                "uuid": product.uuid,
-                "price": product.price,
-                "tags": product.tags,
-                "image": product.images[0]}]
-    return {"out":out}
 
 
 
