@@ -187,18 +187,20 @@ def itemDetail(uuid):
     product = ProductModel.query.filter_by(uuid=uuid).first()
     owner_email = product.user
     current_user = get_jwt_identity()
-    user = UserModel.query.filter_by(email=owner_email).first()
-    print(product.images)
+    user = UserModel.query.filter_by(email=current_user).first()
+    owner = UserModel.query.filter_by(email=owner_email).first()
+    like = LikeModel.query.filter_by(user=user.uuid,product=product.uuid).first()
     return{
-        "user_id":user.uuid,
-        "user_name":user.username,
-        "user_email":user.email,
+        "user_id":owner.uuid,
+        "user_name":owner.username,
+        "user_email":owner.email,
         "prod_name":product.name,
         "prod_price":product.price,
         "prod_tags":product.tags,
         "prod_images":product.images,
         "prod_desc":product.description,
-        "user_hide_email":user.hide_email
+        "user_hide_email":owner.hide_email,
+        "liked":like is not None
     }
 
 
@@ -316,11 +318,12 @@ def myfav():
     out = []
     for i in likes:
         product = ProductModel.query.filter_by(uuid=i.product).first()
-        out += [{"name": product.name,
-                "uuid": product.uuid,
-                "price": product.price,
-                "tags": product.tags,
-                "image": product.images[0]}]
+        if product:
+            out += [{"name": product.name,
+                    "uuid": product.uuid,
+                    "price": product.price,
+                    "tags": product.tags,
+                    "image": product.images[0]}]
     return {"out":out}
 
 
@@ -348,7 +351,7 @@ def get_captcha():
                  f"This is an auto email from Handicraft, "
                  f"we have recently received your request to login to your handicraft account via email. "
                  f"If u didn't request for one, please Ignore.\n\n\n"
-                 f"your verification code is: \t {captcha} \n\n\n"
+                 f"Your Verification Code is: \t {captcha} \n\n\n"
                  f"\t\t\t\t\t -----FROM Handicraft Team"
         )
 
