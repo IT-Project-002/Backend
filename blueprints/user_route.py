@@ -308,7 +308,7 @@ def like():
     data = json.loads(request.data)
     item = data["item"]
     print(data)
-    likes = LikeModel.query.filter_by(user=user.uuid).order_by(LikeModel.add_time.desc()).all()
+    like = LikeModel.query.filter_by(user=user,product=item).first()
     if like is not None:
         db.session.delete(like)
         print("取消")
@@ -327,7 +327,7 @@ def myfav():
     current_user = get_jwt_identity()
     # if str(UserModel.query.filter_by(email=current_user).first().uuid) == uuid:
     user = UserModel.query.filter_by(email=current_user).first()
-    likes = LikeModel.query.filter_by(user=user.uuid).all()
+    likes = LikeModel.query.filter_by(user=user.uuid).order_by(LikeModel.add_time.desc()).all()
     out = []
     for i in likes:
         product = ProductModel.query.filter_by(uuid=i.product).first()
@@ -337,7 +337,6 @@ def myfav():
                 "tags": product.tags,
                 "image": product.images[0]}]
     return {"out":out}
-
 
 
 
