@@ -348,7 +348,7 @@ def get_captcha():
                  f"This is an auto email from Handicraft, "
                  f"we have recently received your request to login to your handicraft account via email. "
                  f"If u didn't request for one, please Ignore.\n\n\n"
-                 f"your verification code is: \t {captcha} \n\n\n"
+                 f"Your Verification Code is: \t {captcha} \n\n\n"
                  f"\t\t\t\t\t -----FROM Handicraft Team"
         )
 
