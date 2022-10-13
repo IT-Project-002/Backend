@@ -308,7 +308,7 @@ def like():
     data = json.loads(request.data)
     item = data["item"]
     print(data)
-    like = LikeModel.query.filter_by(user=user,product=item).first()
+    likes = LikeModel.query.filter_by(user=user.uuid).order_by(LikeModel.add_time.desc()).all()
     if like is not None:
         db.session.delete(like)
         print("取消")
