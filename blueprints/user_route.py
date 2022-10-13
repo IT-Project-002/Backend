@@ -1,22 +1,19 @@
-from concurrent.futures import process
-from flask import Blueprint, render_template, redirect, url_for, request, session, flash, jsonify
+import random
+import string
+
+from flask import Blueprint, redirect, url_for, request, jsonify
 from blueprints.forms import RegistrationForm, LoginForm
 from connections import mail, db
 from flask_mail import Message
 from werkzeug.security import generate_password_hash, check_password_hash
-from models import UserModel, ProductModel, LikeModel
+from models import UserModel, ProductModel,LikeModel
 import json
-import wtforms_json
-from tokenize import Double
 import boto3
-from boto.s3.key import Key
-from werkzeug.utils import secure_filename
-from io import BytesIO
 import uuid
 from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
 from flask_jwt_extended import create_access_token, get_jwt, get_jwt_identity, \
-    unset_jwt_cookies, jwt_required, JWTManager
+    unset_jwt_cookies, jwt_required
 
 bp = Blueprint("user", __name__, url_prefix='/users')
 
@@ -191,20 +188,18 @@ def itemDetail(uuid):
     product = ProductModel.query.filter_by(uuid=uuid).first()
     owner_email = product.user
     current_user = get_jwt_identity()
-    user = UserModel.query.filter_by(email=current_user).first()
-    owner = UserModel.query.filter_by(email=owner_email).first()
-    like = LikeModel.query.filter_by(user=user.uuid,product=product.uuid).first()
+    user = UserModel.query.filter_by(email=owner_email).first()
+    print(product.images)
     return{
-        "user_id":owner.uuid,
-        "user_name":owner.username,
-        "user_email":owner.email,
+        "user_id":user.uuid,
+        "user_name":user.username,
+        "user_email":user.email,
         "prod_name":product.name,
         "prod_price":product.price,
         "prod_tags":product.tags,
         "prod_images":product.images,
         "prod_desc":product.description,
-        "user_hide_email":owner.hide_email,
-        "liked":like is not None
+        "user_hide_email":user.hide_email
     }
 
 
@@ -312,21 +307,27 @@ def like():
     user = UserModel.query.filter_by(email=current_user).first().uuid
     data = json.loads(request.data)
     item = data["item"]
+    print(data)
     like = LikeModel.query.filter_by(user=user,product=item).first()
     if like is not None:
         db.session.delete(like)
+        print("取消")
     else:
+        print("xihuan")
         like = LikeModel(user=user,product=item)
         db.session.add(like)
     db.session.commit()
     return {}
 
-@bp.route("/myfav", methods=['GET'])
+
+@bp.route("/favourite", methods=['GET'])
 @jwt_required()
 def myfav():
+    print("bas")
     current_user = get_jwt_identity()
-    uuid = UserModel.query.filter_by(email=current_user).first().uuid
-    likes = LikeModel.query.filter_by(user=uuid).order_by(LikeModel.add_time.desc()).all()
+    # if str(UserModel.query.filter_by(email=current_user).first().uuid) == uuid:
+    user = UserModel.query.filter_by(email=current_user).first()
+    likes = LikeModel.query.filter_by(user=user.uuid).all()
     out = []
     for i in likes:
         product = ProductModel.query.filter_by(uuid=i.product).first()
@@ -335,7 +336,8 @@ def myfav():
                 "price": product.price,
                 "tags": product.tags,
                 "image": product.images[0]}]
-    return out
+    return {"out":out}
+
 
 @bp.route("/logout", methods=['POST'])
 def logout():
@@ -345,15 +347,47 @@ def logout():
         unset_jwt_cookies(response)
         return response
 
-# not yet ready for connect
-# @bp.route("/captcha")
-# def get_captcha():
-#     letters = string.ascii_letters + string.digits
-#     captcha = "".join(random.sample(letters, 6))
-#     message = Message(
-#         subject="Email Verification",
-#         recipients=['dilu0828@gmail.com'],
-#         body=f"your verification code for registration is {captcha}, If u didn't request for one, please ignore"
-#     )
-#     mail.send(message)
-#     return 'success'
+
+@bp.route("/captcha", methods=['POST'])
+def get_captcha():
+    data = json.loads(request.data)
+    user = UserModel.query.filter_by(email=data['email']).first()
+    if user:
+        letters = string.ascii_letters + string.digits
+        captcha = "".join(random.sample(letters, 6))
+        user_name = user.username
+        message = Message(
+            subject="Email Verification",
+            recipients=[data['email']],
+            body=f"DEAR CUSTOMER: {user_name}\n\n"
+                 f"This is an auto email from Handicraft, "
+                 f"we have recently received your request to login to your handicraft account via email. "
+                 f"If u didn't request for one, please Ignore.\n\n\n"
+                 f"Your Verification Code is: \t {captcha} \n\n\n"
+                 f"\t\t\t\t\t -----FROM Handicraft Team"
+        )
+
+        mail.send(message)
+        return {
+            "captcha":captcha,
+            "email":data['email']
+        }
+    else:
+        return {
+            'response': 'no user found'
+               }, 600
+
+
+@bp.route("/emailLogin", methods=['POST'])
+def emailLogin():
+    data = json.loads(request.data)
+    email = data['email']
+    if data['password'] == data.get('code') and data.get('emailVerify')==email:
+        user = UserModel.query.filter_by(email=email).first()
+        create_access_token(identity=email)
+        response = {"access_token": create_access_token(identity=email),
+                    "uuid": user.uuid
+                    }
+        return response
+    else:
+        return {},601
