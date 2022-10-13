@@ -9,11 +9,13 @@ on:
       - main
       - green
       - prod
+      - green2
   push:
     branches:
       - main
       - green
       - prod
+      - green2
 
 permissions:
   contents: read

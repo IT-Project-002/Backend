@@ -27,7 +27,6 @@ class ProductModel(db.Model):
     images = db.Column(db.ARRAY(db.String(200)), nullable=False)
     add_time = db.Column(db.DateTime, default=datetime.now)
 
-
 class LikeModel(db.Model):
     __tablename__ = "likes"
     user = db.Column(UUID(as_uuid=True), primary_key=True)

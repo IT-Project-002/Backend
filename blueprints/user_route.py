@@ -1,7 +1,8 @@
 import random
 import string
+from concurrent.futures import process
+from flask import Blueprint, render_template, redirect, url_for, request, session, flash, jsonify
 
-from flask import Blueprint, redirect, url_for, request, jsonify
 from blueprints.forms import RegistrationForm, LoginForm
 from connections import mail, db
 from flask_mail import Message
@@ -11,9 +12,9 @@ import json
 import boto3
 import uuid
 from fuzzywuzzy import fuzz
-from fuzzywuzzy import process
+
 from flask_jwt_extended import create_access_token, get_jwt_identity, \
-    unset_jwt_cookies, jwt_required
+    unset_jwt_cookies, jwt_required, JWTManager
 
 bp = Blueprint("user", __name__, url_prefix='/users')
 
@@ -68,6 +69,7 @@ def market(uuid):
     # current_user = get_jwt_identity()
     user = UserModel.query.filter_by(uuid=uuid).first()
     products = ProductModel.query.filter_by(user=user.email).order_by(ProductModel.add_time.desc()).all()
+    products.sort(key=lambda p: p.add_time)
     # print(products)
     uniq_prods_name = []
     uniq_prods_link = []
@@ -188,18 +190,20 @@ def itemDetail(uuid):
     product = ProductModel.query.filter_by(uuid=uuid).first()
     owner_email = product.user
     current_user = get_jwt_identity()
-    user = UserModel.query.filter_by(email=owner_email).first()
-    print(product.images)
+    user = UserModel.query.filter_by(email=current_user).first()
+    owner = UserModel.query.filter_by(email=owner_email).first()
+    like = LikeModel.query.filter_by(user=user.uuid,product=product.uuid).first()
     return{
-        "user_id":user.uuid,
-        "user_name":user.username,
-        "user_email":user.email,
+        "user_id":owner.uuid,
+        "user_name":owner.username,
+        "user_email":owner.email,
         "prod_name":product.name,
         "prod_price":product.price,
         "prod_tags":product.tags,
         "prod_images":product.images,
         "prod_desc":product.description,
-        "user_hide_email":user.hide_email
+        "user_hide_email":owner.hide_email,
+        "liked":like is not None
     }
 
 
@@ -331,14 +335,13 @@ def myfav():
     out = []
     for i in likes:
         product = ProductModel.query.filter_by(uuid=i.product).first()
-        out += [{"name": product.name,
-                "uuid": product.uuid,
-                "price": product.price,
-                "tags": product.tags,
-                "image": product.images[0]}]
+        if product:
+            out += [{"name": product.name,
+                    "uuid": product.uuid,
+                    "price": product.price,
+                    "tags": product.tags,
+                    "image": product.images[0]}]
     return {"out":out}
-
-
 
 @bp.route("/logout", methods=['POST'])
 def logout():
