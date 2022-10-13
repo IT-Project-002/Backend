@@ -1,17 +1,21 @@
-import random
-import string
-
-from flask import Blueprint, redirect, url_for, request, jsonify
+from concurrent.futures import process
+from flask import Blueprint, render_template, redirect, url_for, request, session, flash, jsonify
 from blueprints.forms import RegistrationForm, LoginForm
 from connections import mail, db
 from flask_mail import Message
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import UserModel, ProductModel,LikeModel
 import json
+import wtforms_json
+from tokenize import Double
 import boto3
+from boto.s3.key import Key
+from werkzeug.utils import secure_filename
+from io import BytesIO
 import uuid
+from fuzzywuzzy import fuzz
 from flask_jwt_extended import create_access_token, get_jwt_identity, \
-    unset_jwt_cookies, jwt_required
+    unset_jwt_cookies, jwt_required, JWTManager
 
 bp = Blueprint("user", __name__, url_prefix='/users')
 
@@ -65,7 +69,7 @@ def market(uuid):
     # user name bio ,
     # current_user = get_jwt_identity()
     user = UserModel.query.filter_by(uuid=uuid).first()
-    products = ProductModel.query.filter_by(user=user.email).all()
+    products = ProductModel.query.filter_by(user=user.email).order_by(ProductModel.add_time.desc()).all()
     products.sort(key=lambda p: p.add_time)
     # print(products)
     uniq_prods_name = []
@@ -264,27 +268,40 @@ def editItem(uuid):
         return {}
 
 
-@bp.route("/landing", methods=['GET'])
 def landing():
-    products = ProductModel.query.all()
-    uuid = []
-    img = []
-    name = []
-    tags = []
-    price = []
-    for prod in products:
-        uuid.append(prod.uuid)
-        img.append(prod.images)
-        name.append(prod.name)
-        tags.append(prod.tags)
-        price.append(prod.price)
-    return {
-        "uuid":uuid,
-        "img" : img,
-        "name" : name,
-        "tags" : tags,
-        "price": price
-    }
+    products = ProductModel.query.order_by(ProductModel.add_time.desc()).all()
+    out = [{"name": i.name,
+            "uuid": i.uuid,
+            "price": i.price,
+            "tags": i.tags,
+            "img": i.images[0]} for i in products]
+    print(out)
+    return out
+
+
+@bp.route("/search", methods=['POST'])
+def search():
+    data = json.loads(request.data)
+    products = ProductModel.query.order_by(ProductModel.add_time.desc()).all()
+    out = []
+    for i in products:
+        # print(i.name, fuzz.ratio(data["search"], i.name),
+        #             fuzz.token_sort_ratio(data["search"], i.name),
+        #             fuzz.token_set_ratio(data["search"], i.name),
+        #             fuzz.partial_ratio(data["search"], i.name))
+        score = sum([fuzz.ratio(data["search"], i.name),
+                    fuzz.token_sort_ratio(data["search"], i.name),
+                    fuzz.token_set_ratio(data["search"], i.name),
+                    fuzz.partial_ratio(data["search"], i.name)])
+        if score >= 170:
+            out += [{"name": i.name,
+                     "uuid": i.uuid,
+                     "price": i.price,
+                     "tags": i.tags,
+                     "img": i.images[0],
+                     "score": score}]
+    out = sorted(out, key=lambda d: d['score'], reverse=True)
+    return out
 
 
 @bp.route("/like", methods=['POST'])
@@ -314,7 +331,7 @@ def myfav():
     current_user = get_jwt_identity()
     # if str(UserModel.query.filter_by(email=current_user).first().uuid) == uuid:
     user = UserModel.query.filter_by(email=current_user).first()
-    likes = LikeModel.query.filter_by(user=user.uuid).all()
+    likes = LikeModel.query.filter_by(user=user.uuid).order_by(LikeModel.add_time.desc()).all()
     out = []
     for i in likes:
         product = ProductModel.query.filter_by(uuid=i.product).first()
