@@ -270,6 +270,7 @@ def editItem(uuid):
         return {}
 
 
+@bp.route("/landing", methods=['GET'])
 def landing():
     products = ProductModel.query.order_by(ProductModel.add_time.desc()).all()
     out = [{"name": i.name,
