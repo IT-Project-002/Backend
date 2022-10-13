@@ -1,3 +1,5 @@
+import random
+import string
 from concurrent.futures import process
 from flask import Blueprint, render_template, redirect, url_for, request, session, flash, jsonify
 from blueprints.forms import RegistrationForm, LoginForm
